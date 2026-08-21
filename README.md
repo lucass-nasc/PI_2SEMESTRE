@@ -58,7 +58,7 @@ O sistema contempla três etapas principais:
 | Camada | Tecnologia |
 |---|---|
 | Front-end | HTML, CSS, JavaScript |
-| Back-end | *[a definir conforme decisão da equipe]* |
+| Back-end | Python |
 | Banco de Dados | MySQL |
 | Versionamento | GitHub |
 | Gestão do Projeto | Trello |
