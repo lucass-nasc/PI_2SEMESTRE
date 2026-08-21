@@ -105,8 +105,6 @@ saps/
 
 ## Como Executar o Projeto
 
-*[Preencher após a definição da stack final de back-end — instruções de instalação e execução]*
-
 ```bash
 git clone [url-do-repositorio]
 ```
