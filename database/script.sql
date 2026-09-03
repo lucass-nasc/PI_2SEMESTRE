@@ -1,10 +1,8 @@
 -- ============================================================
 -- Sistema de Atendimento de Pronto Socorro (SAPS)
--- Versao para rodar DENTRO do schema BD240226132 ja existente
--- (use esta versao se a faculdade nao permitir CREATE DATABASE)
---
--- Antes de rodar: clique com o botao direito em BD240226132
--- no painel Schemas do Workbench > "Set as Default Schema"
+-- Script de criacao das tabelas do banco de dados
+-- Antes de rodar: selecione o SEU schema no MySQL Workbench 
+-- (botao direito no schema > "Set as Default Schema")
 -- ============================================================
 
 -- ------------------------------------------------------------
