@@ -57,7 +57,7 @@ O sistema contempla três etapas principais:
 
 | Camada | Tecnologia |
 |---|---|
-| Front-end | HTML, CSS |
+| Front-end | HTML, CSS, JavaScript |
 | Back-end | JavaScript |
 | Banco de Dados | MySQL |
 | Versionamento | GitHub |
@@ -68,7 +68,7 @@ O sistema contempla três etapas principais:
 | Nome | RA | GitHub |
 |------|--------|------|
 | Lucas Nascimento | 26006120 | [@lucass-nasc](https://github.com/lucass-nasc) |
-| Miguel Trentini | 26011070 | [@migueltortella](https://github.com/MiguelTTortella) |
+| Miguel Trentini | 26011070 | [@MiguelTTortella](https://github.com/MiguelTTortella) |
 | Miguel Souza | 26024756 | [@miguelsrmoura12](https://github.com/miguelsrmoura12) |
 | Pablo André Valentim | 26006967 | [@pabloandre285](https://github.com/pabloandre285-jpg) |
 | William Rocha | 26006208 | [@williamsrocha](https://github.com/williamsrocha) |
