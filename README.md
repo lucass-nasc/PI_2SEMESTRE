@@ -1,114 +1,115 @@
-# Sistema de Atendimento de Pronto Socorro (SAPS)
+# Sistema de Atendimento de Pronto-Socorro (SAPS)
 
-Projeto Integrador II — PUC-Campinas — 2º Semestre de 2026
+Projeto Integrador II — PUC-Campinas — 2º semestre de 2026.
 
-## Sobre o Projeto
+## Sobre o projeto
 
-O SAPS (Sistema de Atendimento de Pronto Socorro) é um sistema web desenvolvido como parte do componente curricular Projeto Integrador II, que tem como objetivo integrar os conhecimentos adquiridos nas disciplinas do semestre: Programação para Web, Banco de Dados, Processos de Engenharia e Estrutura de Dados e Algoritmos.
+O SAPS é um sistema web desenvolvido para organizar o fluxo de atendimento de um pronto-socorro, desde a chegada do paciente à recepção até a finalização do atendimento médico.
 
-O sistema tem como finalidade controlar os atendimentos realizados em um Pronto Socorro, desde a chegada do paciente na recepção até sua saída após a alta médica, contemplando as etapas de Recepção, Triagem e Atendimento Médico.
+O projeto integra os conhecimentos das disciplinas de Programação para Web, Banco de Dados, Processos de Engenharia de Software e Estrutura de Dados e Algoritmos.
 
 ## Objetivo
 
-Digitalizar e organizar o fluxo de atendimento hospitalar de emergência, garantindo que os pacientes sejam atendidos de acordo com a gravidade do seu quadro clínico, seguindo o Protocolo de Manchester, e permitindo o acompanhamento de todo o processo por parte da recepção, enfermagem e corpo médico.
+Digitalizar e organizar o atendimento hospitalar de emergência, garantindo que os pacientes sejam atendidos de acordo com a gravidade do quadro clínico, seguindo o Protocolo de Manchester.
 
-## Processo de Atendimento
-
-O sistema contempla três etapas principais:
+## Fluxo de atendimento
 
 ### 1. Recepção
 
-- Cadastro do paciente com dados pessoais (nome completo, endereço, RG, CPF, nome do pai, nome da mãe, data de nascimento, etc.)
-- Geração automática de número de atendimento (ex: AT0001)
-- Inclusão, alteração, consulta e cancelamento de atendimentos (enquanto não confirmados pelo médico)
+- Cadastro e consulta dos dados do paciente;
+- geração automática do número de atendimento, como `AT0001`;
+- inclusão, alteração, consulta e cancelamento de atendimentos enquanto não finalizados pelo médico;
+- encaminhamento do paciente para a triagem.
 
-### 2. Triagem (Enfermagem)
+### 2. Triagem
 
-- Registro de sinais vitais: pressão arterial, temperatura corporal, batimentos cardíacos
-- Registro das principais queixas do paciente (dor de cabeça, náusea, dor muscular, etc.)
-- Classificação de risco conforme o Protocolo de Manchester
+- Registro da pressão arterial, temperatura e batimentos cardíacos;
+- registro das principais queixas;
+- classificação de risco segundo o Protocolo de Manchester;
+- encaminhamento para a fila de atendimento médico.
 
-### 3. Atendimento Médico
+### 3. Atendimento médico
 
-- Acesso ao atendimento e registro de medicações
-- Confirmação do atendimento
-- Painel de Atendimento: exibe a fila de pacientes ordenada pela classificação de Manchester, com número do atendimento, nome do paciente, data de nascimento e demais dados relevantes
+- Visualização da fila ordenada pela prioridade de Manchester;
+- consulta dos dados do paciente e da triagem;
+- registro das medicações;
+- confirmação e finalização do atendimento.
 
-## Funcionalidades por Módulo
-
-### Front-End
-
-- Interface da Recepção — inclusão, alteração, consulta e cancelamento de atendimentos
-- Interface da Triagem — registro dos dados coletados pela enfermagem
-- Interface do Médico — Painel de Atendimentos + lançamento de medicações e confirmação da consulta
-
-### Back-End
-
-- Integração de todas as interfaces (Recepção, Triagem, Médico)
-- Regras de negócio do fluxo de atendimento (classificação, ordenação da fila, status do atendimento)
-- Comunicação com o banco de dados
-
-### Banco de Dados
-
-- Modelagem relacional contemplando pacientes, atendimentos, triagens, classificações e medicações
-- Estrutura definida pela equipe conforme as necessidades do processo
-
-## Tecnologias Utilizadas
+## Tecnologias
 
 | Camada | Tecnologia |
 |---|---|
-| Front-end | HTML, CSS, JavaScript |
+| Front-end | HTML, CSS e JavaScript |
 | Back-end | JavaScript |
-| Banco de Dados | MySQL |
-| Versionamento | GitHub |
-| Gestão do Projeto | Trello |
+| Banco de dados | MySQL |
+| Versionamento | Git e GitHub |
+| Gestão do projeto | Trello |
 
 ## Integrantes
 
-| Nome | RA | GitHub |
-|------|--------|------|
-| Lucas Nascimento | 26006120 | [@lucass-nasc](https://github.com/lucass-nasc) |
-| Miguel Trentini | 26011070 | [@MiguelTTortella](https://github.com/MiguelTTortella) |
-| Miguel Souza | 26024756 | [@miguelsrmoura12](https://github.com/miguelsrmoura12) |
-| Pablo André Valentim | 26006967 | [@pabloandre285](https://github.com/pabloandre285-jpg) |
-| William Rocha | 26006208 | [@williamsrocha](https://github.com/williamsrocha) |
+| Nome | GitHub |
+|---|---|
+| Lucas Nascimento | [@lucass-nasc](https://github.com/lucass-nasc) |
+| Miguel Trentini | [@MiguelTTortella](https://github.com/MiguelTTortella) |
+| Miguel Souza | [@miguelsrmoura12](https://github.com/miguelsrmoura12) |
+| Pablo André Valentim | [@pabloandre285](https://github.com/pabloandre285-jpg) |
+| William Rocha | [@williamsrocha](https://github.com/williamsrocha) |
 
-**Professor Orientador:** Fernando Henrique Carvalho Silva
+**Professor orientador:** Fernando Henrique Carvalho Silva
 
-## Status do Projeto
+## Status do projeto
 
-Em desenvolvimento — Projeto Integrador II, 2º Semestre de 2026
+| Etapa | Situação |
+|---|---|
+| Levantamento inicial de requisitos | ✅ Concluído |
+| Modelagem e script do banco de dados | 🟡 Em andamento |
+| Desenvolvimento do front-end | 🟡 Em andamento |
+| Desenvolvimento do back-end | ⏳ Pendente |
+| Integração dos módulos | ⏳ Pendente |
+| Testes | ⏳ Pendente |
+| Preparação da apresentação | ⏳ Pendente |
 
-- [ ] Levantamento de requisitos
-- [ ] Modelagem do banco de dados
-- [ ] Desenvolvimento do Front-end
-- [ ] Desenvolvimento do Back-end
-- [ ] Integração
-- [ ] Testes
-- [ ] Apresentação final
+As atividades detalhadas são acompanhadas no [Trello do Projeto Integrador](https://trello.com/b/6rn6A1Q0/projeto-integrador-2-semestre).
 
-Acompanhamento das tarefas via Trello: *[link do board]*
+## Estrutura planejada
 
-## Estrutura do Repositório
-
-```
-saps/
+```text
+PI_2SEMESTRE/
 ├── frontend/
+│   ├── inicio/
 │   ├── recepcao/
 │   ├── triagem/
 │   └── medico/
 ├── backend/
 ├── database/
 │   └── script.sql
+├── .gitignore
+├── CONTRIBUTING.md
 └── README.md
 ```
 
-## Como Executar o Projeto
+As pastas serão adicionadas à `main` conforme os respectivos módulos forem revisados e aprovados.
+
+## Como executar o projeto
+
+### 1. Clonar o repositório
 
 ```bash
-git clone [url-do-repositorio]
+git clone https://github.com/lucass-nasc/PI_2SEMESTRE.git
+cd PI_2SEMESTRE
 ```
 
-## Sobre a Disciplina
+### 2. Preparar o banco de dados
 
-O componente curricular de Projeto Integrador II tem como objetivo unir os conhecimentos das disciplinas do semestre, promovendo o desenvolvimento de habilidades de planejamento, documentação, apresentação e trabalho em equipe. O professor orientador acompanha a gestão do projeto, sem prestar suporte técnico direto — cabendo à equipe ser auto gerenciável na resolução de dúvidas técnicas.
+1. Abra o MySQL Workbench;
+2. crie um schema para o projeto, por exemplo `saps`;
+3. defina esse schema como padrão com **Set as Default Schema**;
+4. abra e execute o arquivo `database/script.sql`.
+
+> A aplicação ainda está em desenvolvimento. Os comandos para iniciar o front-end e o back-end serão acrescentados quando os módulos forem integrados ao repositório.
+
+## Como contribuir
+
+As alterações devem ser feitas em uma branch própria e enviadas por Pull Request para a `main`.
+
+Leia o [guia de contribuição](CONTRIBUTING.md) antes de começar uma tarefa.
