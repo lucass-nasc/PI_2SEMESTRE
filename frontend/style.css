@@ -1,0 +1,255 @@
+* {
+    box-sizing: border-box;                          /* FAZ WIDTH E HEIGHT INCLUÍREM O PADDING E A BORDA NO TAMANHO TOTAL DO ELEMENTO */
+}
+
+body {
+    display: flex;                                   /* COLOCA OS BLOCOS DA PAGINA UM AO LADO DO OUTRO */
+    margin: 0;                                       /* TIRA O ESPACO BRANCO QUE FICA NAS BORDAS DA TELA */
+    font-family: Arial, sans-serif;                  /* DEFINE O TIPO DE LETRA USADO NA PAGINA */
+    background-color: #f4f6f9;                     /* PINTA O FUNDO DA PAGINA DE CINZA CLARO */
+}
+
+.barra-esquerda {
+    width: 220px;                                    /* DEFINE A LARGURA DA BARRA */
+    min-height: 100vh;                               /* FAZ A BARRA OCUPAR A ALTURA INTEIRA DA TELA */
+    background-color: #ffffff;                     /* PINTA O FUNDO DA BARRA DE BRANCO */
+    border-right: 1px solid #e0e0e0;               /* DESENHA UMA LINHA CINZA FINA NO LADO DIREITO */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);     /* CRIA UMA SOMBRA LEVE NO LADO DIREITO */
+    padding-top: 20px;                               /* EMPURRA O CONTEUDO DA BARRA UM POUCO PARA BAIXO */
+}
+
+/* --- LOGO --- */
+
+.logo {
+    display: flex;                                   /* COLOCA A IMAGEM E O BLOCO DE TEXTO LADO A LADO */
+    align-items: center;                             /* ALINHA A IMAGEM E O TEXTO NO MEIO VERTICALMENTE */
+    gap: 10px;                                       /* DA UM ESPACO ENTRE A IMAGEM E O TEXTO */
+    padding-left: 15px;                              /* EMPURRA TODO O CONJUNTO PARA A DIREITA */
+    margin-bottom: 30px;                             /* EMPURRA O MENU PARA BAIXO */
+    padding-top: 5px;
+}
+
+.logo-img {
+    width: 45px;                                     /* DEFINE A LARGURA DA IMAGEM PEQUENA */
+    height: auto;                                    /* MANTEM A PROPORCAO DA ALTURA DA IMAGEM */
+}
+
+/* --- TITULO E SUBTITULO --- */
+
+.titulo {
+    color: #1c68b6;                                /* PINTA O TEXTO DE AZUL */
+    letter-spacing: 5px;                             /* AFASTA AS LETRAS UMAS DAS OUTRAS */
+    margin: 0;                                       /* ZERA OS ESPAÇOS DE FORA DO TEXTO */
+    line-height: 1;                                  /* TIRA A CAIXA INVISIVEL DE ALTURA DA LETRA */
+    font-size: 34px;                                 /* DEFINE O TAMANHO DA LETRA */
+}
+
+.subtitulo {
+    color: #1c68b6;                                /* PINTA O TEXTO DE AZUL */
+    font-size: 11px;                                 /* DEIXA A LETRA BEM PEQUENA */
+    letter-spacing: -0.6px;                          /* JUNTA AS LETRAS SO UM POUQUINHO */
+    line-height: 1.1;                                /* DEIXA AS DUAS LINHAS BEM JUNTINHAS */
+    margin: 2px 0 0 0;                               /* CRIA UM ESPACO DE 30PX EM BAIXO PARA EMPURRAR O MENU */
+}
+
+/* --- MENU --- */
+
+.menu {
+    display: flex;                                   /* ATIVA O MODO DE ALINHAMENTO */
+    flex-direction: column;                          /* COLOCA OS BOTOES UM EMBAIXO DO OUTRO */
+    padding-left: 10px;
+}
+
+.item-menu {
+    display: flex;                                   /* COLOCA O ICONE E O TEXTO NA MESMA LINHA */
+    align-items: center;                             /* ALINHA O ICONE E O TEXTO NO MEIO VERTICALMENTE */
+    gap: 12px;                                       /* DA UM ESPACO ENTRE O ICONE E O TEXTO */
+    padding: 12px 20px;                              /* CRIA UMA AREA CLICAVEL CONFORTAVEL EM VOLTA */
+    color: #333333;                                /* PINTA O TEXTO DE CINZA ESCURO */
+    text-decoration: none;                           /* TIRA O SUBLINHADO AZUL DE LINK */
+    font-size: 15px;                                 /* DEFINE O TAMANHO DA LETRA */
+}
+
+.item-menu i {
+    font-size: 16px;                                 /* DEFINE O TAMANHO DO ICONE */
+    color: #555555;                                /* PINTA O ICONE DE CINZA */
+    width: 20px;                                     /* DA UMA LARGURA IGUAL PARA TODOS OS ICONES */
+    text-align: center;                              /* CENTRALIZA O ICONE DENTRO DESSA LARGURA */
+}
+
+.item-menu:hover {                                   /* HOVER SÓ APLICA QUANDO O MOUSE ESTÁ SOBRE O ITEM */
+    background-color: #eef6ff;
+    color: #1c68b6;
+    border-radius: 8px;
+}
+
+.item-menu.ativo {
+    background-color: #e3f0ff;
+    color: #1c68b6;
+    font-weight: bold;
+    border-left: 4px solid #1c68b6;                 /* !!!!!!!!! TALVEZ ARRUMAR ISSO, ELE FICA TORTO NO MENU */
+}
+
+.area-conteudo {
+    padding: 30px;
+}
+
+/* --- CONTEUDO PRINCIPAL --- */
+
+.conteudo-principal {
+    flex: 1;                                          /* OCUPA TODO O ESPACO RESTANTE DA TELA */
+}
+
+.barra-topo {
+    background-color: #ffffff;
+    height: 70px;
+    padding: 0 30px;
+    padding-top: 0px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.barra-topo h2 {
+    color: #333333;
+    margin: 0;
+    font-size: 24px;
+}
+
+/* --- CARDS DA TELA INICIAL --- */
+
+.cards-resumo {
+    display: flex;                                     /* ATIVA O FLEXBOX NO ELEMENTO PAI, FAZENDO OS CARDS SEREM ORGANIZADOS LADO A LADO */
+    gap: 20px;                                         /* CRIA UM ESPAÇO DE 20PX ENTRE OS CARDS, SEM PRECISAR COLOCAR MARGEM EM CADA UM */
+    flex-wrap: wrap;                                   /* PERMITE QUE OS CARDS DESÇAM PARA OUTRA LINHA QUANDO NÃO HOUVER ESPAÇO NA TELA */
+}
+
+.card {
+    width: 250px;                                      /* DETERMINA A LARGURA DO CARD */
+    background-color: #ffffff;                       
+    padding: 20px;                                     /* CRIA ESPAÇO ENTRE O CONTEÚDO E AS BORDAS */
+    border-radius: 10px;                               /* ARREDONDA OS CANTOS */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);       /* ADICIONA UMA SOMBRA AO REDOR DO CARD */
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;    /* FAZ AS MUDANÇAS DE POSIÇÃO E SOMBRA ACONTECEREM SUAVEMENTE EM 0,2 SEGUNDO */
+}
+
+.card:hover {                                                 /* :HOVER APLICA ESTAS REGRAS SOMENTE ENQUANTO O PONTEIRO DO MOUSE ESTIVER SOBRE O CARD */
+    transform: translateY(-3px);                              /* MOVE O CARD 3PX PARA CIMA; O VALOR NEGATIVO INDICA MOVIMENTO PARA CIMA */
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);             /* AUMENTA LEVEMENTE A SOMBRA PARA CRIAR A SENSAÇÃO DE QUE O CARD SE ELEVOU */
+}
+
+.card-titulo {
+    margin: 0 0 8px 0;
+    color: #666666;
+    font-size: 14px;
+}
+
+.card-numero {
+    margin: 0;
+    color: #222222;
+    font-size: 30px;
+}
+
+.card-icone {
+    width: 50px;                                        /* WIDTH E HEIGHT COM O MESMO VALOR CRIAM UMA ÁREA QUADRADA DE 50PX POR 50PX */
+    height: 50px;
+    background-color: #e3f0ff;
+    color: #1c68b6;
+
+    border-radius: 50%;                                 /* EM UM ELEMENTO QUADRADO, BORDER-RADIUS DE 50% TRANSFORMA A ÁREA EM UM CÍRCULO */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+.card-concluido .card-icone {
+    background-color: #dcfce7;
+    color: #16803c;
+}
+
+/* --- ATENDIMENTOS RECENTES --- */
+
+.atendimentos-recentes {
+    margin-top: 25px;                                   /* CRIA UM ESPAÇO ENTRE OS CARDS E A TABELA PARA AS DUAS ÁREAS NÃO FICAREM ENCOSTADAS */
+    background-color: #ffffff;                        
+    padding: 20px;                                      /* CRIA UM ESPAÇO INTERNO ENTRE O CONTEÚDO E AS BORDAS DA CAIXA */
+    border-radius: 10px;                                /* ARREDONDA OS QUATRO CANTOS DA CAIXA */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.titulo-tabela {
+    margin-top: 0;                                       /* REMOVE A MARGEM AUTOMÁTICA QUE O NAVEGADOR COLOCA ACIMA DO H3 */
+    margin-bottom: 20px;                                 /* MANTÉM 20PX ABAIXO DO TÍTULO PARA SEPARÁ-LO DA TABELA */
+    color: #333333;
+    font-size: 18px;
+}
+
+.tabela-atendimentos {
+    width: 100%;                                         /* FAZ A TABELA OCUPAR 100% DA LARGURA DISPONÍVEL DENTRO DA CAIXA BRANCA */
+    border-collapse: collapse;                           /* UNE AS BORDAS DAS CÉLULAS PARA EVITAR ESPAÇOS DUPLOS ENTRE ELAS */
+}
+
+.tabela-atendimentos th,
+.tabela-atendimentos td {
+    padding: 12px 10px;                                  /* CRIA ESPAÇO DENTRO DE CADA CÉLULA, AUMENTANDO A DISTÂNCIA ENTRE OS TEXTOS */
+    text-align: left;
+}
+
+.tabela-atendimentos thead {
+    background-color: #f4f6f9;
+}
+
+.tabela-atendimentos th {
+    color: #555555;
+    font-size: 14px;
+    border-bottom: 1px solid #dddddd;                  /* CRIA UMA LINHA NA PARTE INFERIOR DE CADA CÉLULA DO CABEÇALHO */
+}
+
+.tabela-atendimentos td {
+    color: #333333;
+    font-size: 14px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.tabela-atendimentos tbody tr:hover {
+    background-color: #f8fbff;                         /* ALTERA O FUNDO DA LINHA QUANDO O MOUSE PASSA SOBRE ELA */
+}
+
+.status {
+    display: inline-block;                               /* INLINE-BLOCK PERMITE QUE O SPAN CONTINUE NA MESMA LINHA, MAS ACEITE PADDING */
+    padding: 5px 10px;                                   /* CRIA ESPAÇO INTERNO: 5PX EM CIMA/BAIXO E 10PX NAS LATERAIS */
+    border-radius: 20px;                                 /* ARREDONDA BASTANTE AS BORDAS PARA CRIAR O FORMATO DE ETIQUETA */
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-atendimento {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-aguardando {
+    background-color: #f1f3f5;
+    color: #555555;
+}
+
+.status-finalizado {
+    background-color: #dcfce7;
+    color: #16803c;
+}
+
+.tabela-atendimentos tbody tr:last-child td {
+    border-bottom: none;                                /* REMOVE A BORDA SOMENTE DAS CÉLULAS QUE PERTENCEM À ÚLTIMA LINHA DO CORPO DA TABELA */
+}
