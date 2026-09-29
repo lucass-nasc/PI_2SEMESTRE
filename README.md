@@ -8,6 +8,8 @@ O SAPS (Sistema de Atendimento de Pronto Socorro) é um sistema web desenvolvido
 
 O sistema tem como finalidade controlar os atendimentos realizados em um Pronto Socorro, desde a chegada do paciente na recepção até sua saída após a alta médica, contemplando as etapas de Recepção, Triagem e Atendimento Médico.
 
+**O SAPS é de uso exclusivo dos colaboradores do Pronto Socorro** (recepção, enfermagem e corpo médico), com controle de acesso próprio — o paciente não acessa o sistema diretamente em nenhuma etapa.
+
 ## Objetivo
 
 Digitalizar e organizar o fluxo de atendimento hospitalar de emergência, garantindo que os pacientes sejam atendidos de acordo com a gravidade do seu quadro clínico, seguindo o Protocolo de Manchester, e permitindo o acompanhamento de todo o processo por parte da recepção, enfermagem e corpo médico.
@@ -55,23 +57,23 @@ O sistema contempla três etapas principais:
 
 ## Tecnologias Utilizadas
 
-| Camada | Tecnologia |
-|---|---|
-| Front-end | HTML, CSS |
-| Back-end | JavaScript |
-| Banco de Dados | MySQL |
-| Versionamento | GitHub |
-| Gestão do Projeto | Trello |
+| Camada             | Tecnologia             |
+| ------------------ | ----------------------- |
+| Front-end          | HTML, CSS, JavaScript  |
+| Back-end           | JavaScript              |
+| Banco de Dados     | MySQL                   |
+| Versionamento      | GitHub                  |
+| Gestão do Projeto  | Trello                  |
 
 ## Integrantes
 
-| Nome | RA | GitHub |
-|------|--------|------|
-| Lucas Nascimento | 26006120 | [@lucass-nasc](https://github.com/lucass-nasc) |
-| Miguel Trentini | 26011070 | [@migueltortella](https://github.com/MiguelTTortella) |
-| Miguel Souza | 26024756 | [@miguelsrmoura12](https://github.com/miguelsrmoura12) |
+| Nome                 | RA       | GitHub                                                 |
+| -------------------- | -------- | ------------------------------------------------------ |
+| Lucas Nascimento     | 26006120 | [@lucass-nasc](https://github.com/lucass-nasc)         |
+| Miguel Trentini      | 26011070 | [@migueltortella](https://github.com/MiguelTTortella)  |
+| Miguel Souza         | 26024756 | [@miguelsrmoura12](https://github.com/miguelsrmoura12) |
 | Pablo André Valentim | 26006967 | [@pabloandre285](https://github.com/pabloandre285-jpg) |
-| William Rocha | 26006208 | [@williamsrocha](https://github.com/williamsrocha) |
+| William Rocha        | 26006208 | [@williamsrocha](https://github.com/williamsrocha)     |
 
 **Professor Orientador:** Fernando Henrique Carvalho Silva
 
@@ -79,15 +81,15 @@ O sistema contempla três etapas principais:
 
 Em desenvolvimento — Projeto Integrador II, 2º Semestre de 2026
 
-- [ ] Levantamento de requisitos
-- [ ] Modelagem do banco de dados
-- [ ] Desenvolvimento do Front-end
-- [ ] Desenvolvimento do Back-end
+- [x] Levantamento de requisitos
+- [x] Modelagem do banco de dados
+- [ ] Desenvolvimento do Front-end *(em andamento)*
+- [ ] Desenvolvimento do Back-end *(em andamento)*
 - [ ] Integração
 - [ ] Testes
 - [ ] Apresentação final
 
-Acompanhamento das tarefas via Trello: *[link do board]*
+Acompanhamento das tarefas via Trello: [PROJETO INTEGRADOR - 2° SEMESTRE](https://trello.com/b/6rn6A1Q0/projeto-integrador-2-semestre)
 
 ## Estrutura do Repositório
 
@@ -105,7 +107,7 @@ saps/
 
 ## Como Executar o Projeto
 
-```bash
+```
 git clone [url-do-repositorio]
 ```
 
