@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAPS - Visão Geral</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--IMPORTA UMA BIBLIOTECA DE ÍCONES: FONT-AWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <aside class="barra-esquerda">
+        <div class="logo">
+            <!-- IMAGEM LOGO -->
+            <img src="LOGO_SAPS_V1.png" alt="Logo SAPS" class="logo-img">
+
+            <!-- TEXTOS -->
+            <div class="logo-texto">
+                <h1 class="titulo">SAPS</h1>
+                <p class="subtitulo">Sistema de Atendimento<br>de Pronto Socorro</p>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <!-- PRIMEIRO BOTÃO -->
+            <a href="index.html" class="item-menu ativo">
+                <i class="fa-solid fa-house"></i>
+                <span>Início</span>
+            </a>
+
+            <!-- SEGUNDO BOTÃO -->
+            <a href="#" class="item-menu">
+                <i class="fa-solid fa-clipboard-user"></i>
+                <span>Recepção</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ÁREA DE CONTEÚDO DA PÁGINA -->
+    <main class="conteudo-principal">
+
+        <!-- BARRA SUPERIOR -->
+        <header class="barra-topo">
+            <h2>Visão Geral do Pronto Socorro</h2>
+        </header>
+
+        <!-- CONTEÚDO DA TELA INICIAL -->
+        <section class="area-conteudo">
+
+            <!-- ÁREA DOS CARDS -->
+            <div class="cards-resumo">
+
+                <!-- CARD: AGUARDANDO RECEPÇÃO -->
+                <div class="card">
+                    <div class="card-informacoes">
+                        <p class="card-titulo">Aguardando recepção</p>
+                        <h3 class="card-numero">3</h3>
+                    </div>
+
+                    <div class="card-icone">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+                </div>
+
+                <!-- CARD: AGUARDANDO TRIAGEM -->
+                <div class="card">
+                    <div class="card-informacoes">
+                        <p class="card-titulo">Aguardando triagem</p>
+                        <h3 class="card-numero">8</h3>
+                    </div>
+
+                    <div class="card-icone">
+                        <i class="fa-solid fa-user-clock"></i>
+                    </div>
+                </div>
+
+                <!-- CARD: AGUARDANDO MÉDICO -->
+                <div class="card">
+                    <div class="card-informacoes">
+                        <p class="card-titulo">Aguardando médico</p>
+                        <h3 class="card-numero">5</h3>
+                    </div>
+
+                    <div class="card-icone">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                </div>
+
+                <!-- CARD: EM ATENDIMENTO -->
+                <div class="card">
+                    <div class="card-informacoes">
+                        <p class="card-titulo">Em atendimento</p>
+                        <h3 class="card-numero">2</h3>
+                    </div>
+
+                    <div class="card-icone">
+                        <i class="fa-solid fa-stethoscope"></i>
+                    </div>
+                </div>
+
+                <!-- CARD: ATENDIDOS HOJE -->
+                <div class="card card-concluido">
+                    <div class="card-informacoes">
+                        <p class="card-titulo">Atendidos hoje</p>
+                        <h3 class="card-numero">14</h3>
+                    </div>
+
+                    <div class="card-icone">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- ATENDIMENTOS RECENTES -->
+            <div class="atendimentos-recentes">
+
+                <h3 class="titulo-tabela">Atendimentos recentes</h3>
+
+                <table class="tabela-atendimentos">
+
+                    <!-- CABEÇALHO DA TABELA -->
+                    <thead>
+                        <tr>
+                            <th>Atendimento</th>
+                            <th>Paciente</th>
+                            <th>Horário</th>
+                            <th>Etapa atual</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+
+                    <!-- CORPO DA TABELA -->
+                    <tbody>
+
+                        <!-- PRIMEIRO ATENDIMENTO -->
+                        <tr>
+                            <td>AT0014</td>
+                            <td>Maria Silva</td>
+                            <td>15:20</td>
+                            <td>Médico</td>
+                            <td>
+                                <span class="status status-atendimento">Em atendimento</span>
+                            </td>
+                        </tr>
+
+                        <!-- SEGUNDO ATENDIMENTO -->
+                        <tr>
+                            <td>AT0013</td>
+                            <td>João Santos</td>
+                            <td>15:05</td>
+                            <td>Triagem</td>
+                            <td>
+                                <span class="status status-aguardando">Aguardando</span>
+                            </td>
+                        </tr>
+
+                        <!-- TERCEIRO ATENDIMENTO -->
+                        <tr>
+                            <td>AT0012</td>
+                            <td>Ana Souza</td>
+                            <td>14:48</td>
+                            <td>Recepção</td>
+                            <td>
+                                <span class="status status-finalizado">Finalizado</span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>  
+
+        </section>
+
+    </main>
+</body>
+</html>
