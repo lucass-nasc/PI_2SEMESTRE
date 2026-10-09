@@ -1,0 +1,214 @@
+/* --- BASE DA PÁGINA --- */
+
+* {
+    /* COM BORDER-BOX, PADDING E BORDAS CABEM DENTRO DA LARGURA DEFINIDA
+       ASSIM, UM ELEMENTO COM WIDTH DE 100% NÃO CRESCE ALÉM DO PAI POR CAUSA DO PADDING*/
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    /* GRID COM PLACE-ITEMS CENTRALIZA O CARTÃO NOS DOIS EIXOS */
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+
+    /* DOIS VALORES: 32PX ACIMA/ABAIXO E 20PX NAS LATERAIS EVITA QUE O CARTÃO ENCOSTE NAS BORDAS DA TELA */
+    padding: 32px 20px;
+    font-family: Arial, sans-serif;
+    color: #333333;
+
+    background-color: #f4f6f9;
+}
+
+/* --- CAIXA CENTRAL --- */
+
+.cartao-login {
+    /* OCUPA O ESPAÇO DISPONÍVEL, MAS NUNCA ULTRAPASSA 460PX.
+       ESSA COMBINAÇÃO EVITA UMA LARGURA FIXA QUE NÃO CABERIA NO CELULAR. */
+    width: 100%;
+    max-width: 460px;
+    padding: 24px;
+    background-color: #ffffff;
+    border: 1px solid #e0e7ef;
+    border-radius: 16px;
+
+    /* SOMBRA: SEM DESLOCAMENTO HORIZONTAL, 8PX PARA BAIXO, 28PX DE DESFOQUE.
+       O ÚLTIMO VALOR DO RGBA (0.07) DEIXA A COR COM APENAS 7% DE OPACIDADE. */
+    box-shadow: 0 8px 28px rgba(20, 50, 80, 0.07);
+}
+
+.marca {
+    /* FLEX ATIVA O ALINHAMENTO; COLUMN COLOCA A LOGO ACIMA DO TEXTO.
+       NESSA DIREÇÃO, ALIGN-ITEMS CENTRALIZA OS DOIS NO EIXO HORIZONTAL. */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.logo-login {
+    width: 64px;
+    height: 64px;
+
+    /* CONTAIN PRESERVA A PROPORÇÃO DA IMAGEM SEM CORTAR O DESENHO.
+       FLEX-SHRINK: 0 IMPEDE QUE O FLEXBOX APERTE A LOGO SE FALTAR ESPAÇO. */
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.nome-sistema {
+    margin: 0;
+    color: #1c68b6;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    line-height: 1;
+}
+
+.cabecalho-login {
+    text-align: center;
+}
+
+.marca-texto {
+    /* CENTRALIZA O TEXTO SAPS DENTRO DO BLOCO QUE FICA ABAIXO DA LOGO. */
+    text-align: center;
+}
+
+.cabecalho-login h1 {
+    margin: 0;
+    font-size: 26px;
+    line-height: 1.25;
+}
+
+.introducao {
+    margin: 10px 0 16px;
+    color: #626b76;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* --- CAMPOS DO FORMULÁRIO --- */
+
+.formulario-login {
+    /* COLUMN MUDA A DIREÇÃO DO FLEXBOX: OS FILHOS FICAM UM ABAIXO DO OUTRO.
+       GAP CRIA ESPAÇO ENTRE ELES SEM ADICIONAR MARGEM EM CADA FILHO. */
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo {
+    /* ESTE FLEXBOX É INTERNO: ORGANIZA O RÓTULO E O INPUT, NÃO O FORMULÁRIO INTEIRO. */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.campo input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #b9c5d2;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #222222;
+
+    /* INPUTS PODEM TER UMA FONTE PADRÃO PRÓPRIA DO NAVEGADOR.
+       INHERIT FAZ O CAMPO USAR A FONTE DO PAI; 16PX MANTÉM A LEITURA CONFORTÁVEL. */
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.campo input::placeholder {
+    /* ::PLACEHOLDER SELECIONA SOMENTE A DICA EXIBIDA NO CAMPO VAZIO.
+       A DICA NÃO SUBSTITUI O LABEL, POIS DESAPARECE QUANDO A PESSOA DIGITA. */
+    color: #737d89;
+    opacity: 1;
+}
+
+.campo input:focus {
+    /* :FOCUS É ATIVADO QUANDO O CAMPO RECEBE FOCO POR CLIQUE OU PELO TECLADO.
+       O CONTORNO VISÍVEL AJUDA A IDENTIFICAR EM QUAL CAMPO A PESSOA ESTÁ DIGITANDO. */
+    border-color: #1c68b6;
+    outline: 3px solid #dbeafe;
+    outline-offset: 2px;
+}
+
+/* --- BOTÃO --- */
+
+.botao-entrar {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1c68b6;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.botao-entrar:hover {
+    background-color: #155293; /* Azul ligeiramente mais escuro */
+    transform: translateY(-2px); /* Subida leve de 2 pixéis */
+    box-shadow: 0 4px 12px rgba(28, 104, 182, 0.35); /* Sombra azulada suave abaixo */
+}
+
+.aviso-prototipo {
+    margin: 0;
+    color: #626b76;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* --- RODAPÉ --- */
+
+.rodape-login {
+    /* MARGIN SEPARA POR FORA; PADDING SEPARA POR DENTRO, ABAIXO DA BORDA. */
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #e6ebf1;
+    text-align: center;
+    color: #626b76;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.rodape-login p {
+    margin: 0;
+}
+
+.rodape-login .nota-academica {
+    margin-top: 10px;
+}
+
+/* --- ADAPTAÇÃO PARA TELAS PEQUENAS --- */
+
+@media (max-width: 480px) {
+    /* MEDIA QUERY APLICA ESTAS ALTERAÇÕES SOMENTE QUANDO A JANELA TEM ATÉ 480PX.
+       REDUZIMOS O PADDING PARA SOBRAR MAIS ESPAÇO PARA OS CAMPOS NO CELULAR. */
+    body {
+        padding: 20px 16px;
+    }
+
+    .cartao-login {
+        padding: 28px 22px;
+    }
+
+    .cabecalho-login h1 {
+        font-size: 24px;
+    }
+}

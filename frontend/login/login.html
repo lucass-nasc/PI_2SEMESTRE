@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAPS — Acesso ao sistema</title>
+
+    <!-- ESTE CSS É EXCLUSIVO DO LOGIN: NÃO É NECESSÁRIO ALTERAR O STYLE.CSS DO PAINEL -->
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <main class="cartao-login">
+
+        <!-- IDENTIDADE DO SISTEMA E A APRESENTAÇÃO DO FORMULÁRIO -->
+        <header class="cabecalho-login">
+            <div class="marca">
+                <!-- A LOGO VEM ANTES DO NOME NO HTML; O CSS ORGANIZA OS DOIS EM COLUNA.
+                     ALT VAZIO EVITA REPETIR A MARCA: SAPS JÁ ESTÁ ESCRITO ABAIXO. -->
+                <img src="LOGO_SAPS_V1.png" alt="" class="logo-login" width="64" height="64">
+                <div class="marca-texto">
+                    <p class="nome-sistema">SAPS</p>
+                </div>
+            </div>
+
+            <!-- TÍTULO PRINCIPAL -->
+            <h1>Acesse o sistema</h1>
+            <p class="introducao">Informe suas credenciais para continuar.</p>
+        </header>
+
+        <!-- ENVIA PARA A TELA DE INÍCIO -->
+        <form class="formulario-login" action="../recepcao/index.html" aria-describedby="aviso-prototipo">
+            <div class="campo">
+                <!-- FOR APONTA PARA O ID DO INPUT: CLICAR NO RÓTULO SELECIONA O CAMPO CORRETO. -->
+                <label for="usuario">Usuário</label>
+                <!-- TEXT ACEITA TEXTO; NESTE PROTOTIPO, OS CAMPOS NAO SAO ENVIADOS NA URL.
+                     AUTOCOMPLETE AJUDA O GERENCIADOR DE SENHAS A RECONHECER O LOGIN.
+                     REQUIRED INDICA CAMPO OBRIGATÓRIO, MAS NÃO VERIFICA SE O USUÁRIO EXISTE. -->
+                <input type="text" id="usuario"
+                       placeholder="Digite seu usuário" autocomplete="username"
+                       autocapitalize="none" spellcheck="false" required>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <!-- PASSWORD OCULTA OS CARACTERES NA TELA; NÃO CRIPTOGRAFA NEM VALIDA A SENHA.
+                     CURRENT-PASSWORD INDICA UMA SENHA JÁ CADASTRADA, NÃO UMA NOVA SENHA. -->
+                <input type="password" id="senha"
+                       placeholder="Digite sua senha" autocomplete="current-password" required>
+            </div>
+
+            <!-- BOTÃO
+                 HTML E CSS SOZINHOS NÃO CONFEREM CREDENCIAIS NEM CRIAM UMA SESSÃO SEGURA -->
+            <button class="botao-entrar" type="submit">Entrar</button>
+            <p class="aviso-prototipo" id="aviso-prototipo">Esqueci minha senha</p>
+        </form>
+
+        <footer class="rodape-login">
+            <p>Blá blá blá blá blá.</p>
+            <p class="nota-academica">Projeto Integrador · PUC-Campinas</p>
+        </footer>
+    </main>
+</body>
+</html>

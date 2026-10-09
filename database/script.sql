@@ -1,276 +1,224 @@
--- ============================================================
--- Sistema de Atendimento de Pronto Socorro (SAPS)
--- Script de criacao das tabelas do banco de dados
--- Versao atualizada em 18/09/2026
--- Compatibilidade: MySQL 8.0
---
--- Antes de executar:
--- 1. Crie ou selecione o schema do projeto no MySQL Workbench.
--- 2. Clique com o botao direito no schema e escolha
---    "Set as Default Schema".
---
--- Este script nao apaga tabelas ou dados existentes.
--- Para testar do zero, utilize um schema vazio.
--- ============================================================
+-- SAPS - projeto basico do segundo semestre
+-- MySQL 8.0.16 ou superior (CHECK precisa ser aplicado pelo banco).
+-- Execute UMA VEZ em um schema NOVO e vazio selecionado no Workbench.
+-- Este script nao migra nem apaga um banco existente.
+-- Cinco tabelas. Prescricoes/documentos sao descritos, nao emitidos ou executados.
 
 SET NAMES utf8mb4;
 
--- ------------------------------------------------------------
--- Tabela: paciente
--- Dados pessoais cadastrados ou localizados pela Recepcao.
--- Um paciente pode possuir varios atendimentos ao longo do tempo.
--- ------------------------------------------------------------
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_completo VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    senha_hash VARCHAR(255) NOT NULL,
+    perfil ENUM('recepcionista', 'enfermeiro', 'medico') NOT NULL,
+    registro_profissional VARCHAR(30),      -- VER QUESTÃO DA OBRIGATORIEDADE
+    ativo BOOLEAN NOT NULL DEFAULT TRUE,    -- ??????????
+    UNIQUE (perfil, registro_profissional),
+    CONSTRAINT ck_registro_profissional CHECK (
+        (perfil = 'recepcionista' AND registro_profissional IS NULL)
+        OR (perfil IN ('enfermeiro', 'medico')
+            AND registro_profissional IS NOT NULL
+            AND CHAR_LENGTH(TRIM(registro_profissional)) > 0)
+    )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Medico: CRM; enfermeiro: COREN; recepcionista: NULL.
+-- Guardar conselho, UF e numero, por exemplo CRM-SP 123456.
+-- O CHECK exige preenchimento; o back-end valida formato e conselho do perfil.
+-- senha_hash guarda o hash produzido pelo back-end, nunca a senha em texto puro.
+-- E-mail permite identificar a conta para recuperacao. O link de recuperacao
+-- precisara de token temporario de uso unico, implementado no back-end depois.
+
 CREATE TABLE paciente (
-    id                  INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nome_completo       VARCHAR(150) NOT NULL,
-    cpf                 VARCHAR(14)  NOT NULL,
-    rg                  VARCHAR(20),
-    endereco            VARCHAR(200),
-    nome_pai            VARCHAR(150),
-    nome_mae            VARCHAR(150),
-    data_nascimento     DATE NOT NULL,
-    criado_em           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    atualizado_em       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-                        ON UPDATE CURRENT_TIMESTAMP,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_completo VARCHAR(150),
+    cpf VARCHAR(11) UNIQUE,
+    data_nascimento DATE,
+    telefone VARCHAR(20),
+    endereco VARCHAR(200),
+    nome_pai VARCHAR(150),
+    nome_mae VARCHAR(150),
+    cadastro_completo BOOLEAN NOT NULL DEFAULT FALSE,
+    observacao_cadastro VARCHAR(255),
+    criado_por INT NOT NULL,
+    criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (criado_por) REFERENCES usuario(id),
+    CONSTRAINT ck_cadastro_completo CHECK (
+        cadastro_completo = FALSE
+        OR (nome_completo IS NOT NULL
+            AND CHAR_LENGTH(TRIM(nome_completo)) > 0
+            AND data_nascimento IS NOT NULL)
+    )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-    CONSTRAINT uq_paciente_cpf UNIQUE (cpf)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+-- Emergencia: cadastrar apenas o que se sabe e manter cadastro_completo = FALSE.
+-- Dados desconhecidos ficam NULL; nao inventar CPF ou nascimento.
+-- Depois, completar o MESMO registro. Buscar cadastro existente antes de criar.
+-- Para este projeto, nome e nascimento sao o minimo para marcar completo.
+-- CPF e demais dados podem nao estar disponiveis, mesmo ao concluir o cadastro.
+-- CPF: somente 11 digitos; o back-end valida e converte campo vazio em NULL.
 
--- ------------------------------------------------------------
--- Tabela: classificacao_manchester
--- Tabela de apoio com as cinco cores do Protocolo de Manchester.
--- A coluna prioridade evita depender da ordem dos IDs nas consultas.
--- Quanto menor a prioridade, mais urgente e o atendimento.
--- ------------------------------------------------------------
-CREATE TABLE classificacao_manchester (
-    id                  TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    prioridade          TINYINT UNSIGNED NOT NULL,
-    cor                 VARCHAR(20) NOT NULL,
-    nivel               VARCHAR(30) NOT NULL,
-    tempo_max_minutos   SMALLINT UNSIGNED NOT NULL,
+CREATE TABLE atendimento ( -- alterar para prontuário
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    paciente_id INT,
+    recepcionista_id INT,
+    data_hora_chegada DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_hora_recepcao DATETIME,
+    data_hora_finalizacao DATETIME,
+    status ENUM(
+        'aguardando_recepcao', 'em_recepcao',
+        'aguardando_triagem', 'em_triagem',
+        'aguardando_medico', 'em_atendimento',
+        'finalizado', 'cancelado'
+    ) NOT NULL DEFAULT 'aguardando_recepcao',
+    motivo_cancelamento VARCHAR(255),
+    FOREIGN KEY (paciente_id) REFERENCES paciente(id),
+    FOREIGN KEY (recepcionista_id) REFERENCES usuario(id),
+    CONSTRAINT ck_atendimento_paciente CHECK (
+        status IN ('aguardando_recepcao', 'em_recepcao', 'cancelado')
+        OR paciente_id IS NOT NULL
+    ),
+    CONSTRAINT ck_atendimento_finalizado CHECK (
+        status <> 'finalizado' OR data_hora_finalizacao IS NOT NULL
+    ),
+    CONSTRAINT ck_atendimento_cancelado CHECK (
+        status <> 'cancelado'
+        OR (motivo_cancelamento IS NOT NULL
+            AND CHAR_LENGTH(TRIM(motivo_cancelamento)) > 0)
+    ),
+    INDEX idx_fila (status, data_hora_chegada)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-    CONSTRAINT uq_manchester_prioridade UNIQUE (prioridade),
-    CONSTRAINT uq_manchester_cor UNIQUE (cor),
-    CONSTRAINT ck_manchester_prioridade
-        CHECK (prioridade BETWEEN 1 AND 5)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+-- O id e a senha e o numero de atendimento: 1 aparece como AT0001.
+-- Numeracao unica e crescente, sem reinicio diario. Nao gerar com MAX(id)+1.
+-- Uma chegada simulada cria o atendimento ainda sem paciente vinculado.
+-- Ao cadastrar/localizar o paciente, vincular seu id a esse atendimento.
+-- Cadastro provisório pode seguir: cadastro_completo nao bloqueia atendimento.
 
--- Dados iniciais das classificacoes de Manchester.
-INSERT INTO classificacao_manchester
-    (id, prioridade, cor, nivel, tempo_max_minutos)
-VALUES
-    (1, 1, 'Vermelho', 'Emergencia',       0),
-    (2, 2, 'Laranja',  'Muito urgente',    10),
-    (3, 3, 'Amarelo',  'Urgente',          60),
-    (4, 4, 'Verde',    'Pouco urgente',    120),
-    (5, 5, 'Azul',     'Nao urgente',      240);
-
--- ------------------------------------------------------------
--- Tabela: atendimento
--- Representa todo o fluxo, desde a retirada do numero ate a
--- finalizacao pelo medico.
---
--- paciente_id aceita NULL apenas porque o atendimento pode existir
--- antes do cadastro na Recepcao, no estado aguardando_recepcao.
--- O numero exibido (AT0001, AT0002...) e calculado a partir do id
--- pela view vw_atendimento.
--- ------------------------------------------------------------
-CREATE TABLE atendimento (
-    id                          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    paciente_id                 INT UNSIGNED NULL,
-    status                      ENUM(
-                                    'aguardando_recepcao',
-                                    'aguardando_triagem',
-                                    'em_triagem',
-                                    'aguardando_medico',
-                                    'em_atendimento',
-                                    'finalizado',
-                                    'cancelado'
-                                ) NOT NULL DEFAULT 'aguardando_recepcao',
-    data_hora_chegada           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    data_hora_recepcao          DATETIME NULL,
-    data_hora_inicio_medico     DATETIME NULL,
-    data_hora_finalizacao       DATETIME NULL,
-    motivo_cancelamento         VARCHAR(255) NULL,
-    criado_em                   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    atualizado_em               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-                                ON UPDATE CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_atendimento_paciente
-        FOREIGN KEY (paciente_id)
-        REFERENCES paciente(id)
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT,
-
-    INDEX idx_atendimento_status_chegada (status, data_hora_chegada),
-    INDEX idx_atendimento_paciente (paciente_id)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
-
--- ------------------------------------------------------------
--- Tabela: triagem
--- Uma triagem pertence a um unico atendimento.
--- O UNIQUE em atendimento_id garante a relacao 1:1.
--- ------------------------------------------------------------
 CREATE TABLE triagem (
-    id                      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    atendimento_id          INT UNSIGNED NOT NULL,
-    classificacao_id        TINYINT UNSIGNED NOT NULL,
-    pressao_arterial        VARCHAR(10) NOT NULL,
-    temperatura             DECIMAL(4,1) NOT NULL,
-    batimentos_cardiacos    SMALLINT UNSIGNED NOT NULL,
-    queixas                 VARCHAR(500) NOT NULL,
-    observacoes             VARCHAR(500) NULL,
-    data_hora_inicio        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    data_hora_fim           DATETIME NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    atendimento_id INT NOT NULL UNIQUE,
+    enfermeiro_id INT NOT NULL,
+    classificacao ENUM('vermelho', 'laranja', 'amarelo', 'verde', 'azul') NOT NULL,
+    pressao_arterial VARCHAR(15),
+    temperatura DECIMAL(4,1),
+    batimentos_cardiacos INT,
+    queixas TEXT NOT NULL,
+    observacoes TEXT,
+    data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (atendimento_id) REFERENCES atendimento(id),
+    FOREIGN KEY (enfermeiro_id) REFERENCES usuario(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-    CONSTRAINT uq_triagem_atendimento UNIQUE (atendimento_id),
+-- Manchester faz parte da triagem, sem tabela separada.
+-- A enfermagem informa a classificacao; o sistema apenas ordena a fila.
+-- UNIQUE limita o projeto a uma triagem por atendimento.
 
-    CONSTRAINT fk_triagem_atendimento
-        FOREIGN KEY (atendimento_id)
-        REFERENCES atendimento(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
+CREATE TABLE consulta (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    atendimento_id INT NOT NULL UNIQUE,
+    medico_id INT NOT NULL,
+    diagnostico TEXT,
+    observacoes TEXT,
+    conduta TEXT,
+    data_hora_inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_hora_finalizacao DATETIME,
+    FOREIGN KEY (atendimento_id) REFERENCES atendimento(id),
+    FOREIGN KEY (medico_id) REFERENCES usuario(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-    CONSTRAINT fk_triagem_classificacao
-        FOREIGN KEY (classificacao_id)
-        REFERENCES classificacao_manchester(id)
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT,
+-- conduta descreve o resultado: medicacao prescrita, receita, atestado,
+-- pedido de exame, encaminhamento e/ou orientacoes. Pode reunir varios itens.
+-- TEXT evita um limite curto para a descricao; NULL significa sem registro.
+-- Nao ha tabela de medicacao, controle de aplicacao ou emissao de documentos.
+-- Confirmacao encerra a consulta e finaliza o atendimento, na mesma transacao.
+-- O medico acessa a triagem pelo atendimento_id, sem copiar seus dados.
 
-    CONSTRAINT ck_triagem_temperatura
-        CHECK (temperatura > 0),
-    CONSTRAINT ck_triagem_batimentos
-        CHECK (batimentos_cardiacos > 0),
+-- PRONTUARIO: uma consulta de leitura reunindo o historico do paciente.
+-- Cada linha representa um atendimento. Nao duplica dados em outra tabela.
+CREATE VIEW prontuario AS
+SELECT p.id AS paciente_id, p.nome_completo, p.data_nascimento,
+       p.cadastro_completo, a.id AS atendimento_id,
+       a.data_hora_chegada, a.status, a.data_hora_finalizacao,
+       t.id AS triagem_id, t.enfermeiro_id, t.classificacao,
+       t.pressao_arterial, t.temperatura, t.batimentos_cardiacos,
+       t.queixas, t.observacoes AS observacoes_triagem,
+       c.id AS consulta_id, c.medico_id, c.diagnostico,
+       c.observacoes AS observacoes_consulta, c.conduta,
+       c.data_hora_finalizacao AS data_hora_finalizacao_consulta
+FROM paciente p
+JOIN atendimento a ON a.paciente_id = p.id
+LEFT JOIN triagem t ON t.atendimento_id = a.id
+LEFT JOIN consulta c ON c.atendimento_id = a.id;
 
-    INDEX idx_triagem_classificacao (classificacao_id)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+-- RELACIONAMENTOS PARA O DER (nomes descritivos, em vez de repetir "possui"):
+-- Usuario cadastra paciente: usuario 1 -> paciente 0..N; paciente tem 1 autor.
+-- Paciente recebe prontuário: paciente 1 -> prontuário 0..N;
+--   prontuário tem 0..1 paciente antes do cadastro e 1 apos a recepcao.
+-- Recepcionista registra prontuário: usuario 1 -> prontuário 0..N;
+--   prontuário tem 0..1 recepcionista antes de ser assumido.
+-- Prontuário passa por triagem: prontuário 1 -> triagem 0..1.
+-- Enfermeiro realiza triagem: usuario 1 -> triagem 0..N.
+-- Prontuário origina consulta: prontuário 1 -> consulta 0..1.
+-- Medico realiza consulta: usuario 1 -> consulta 0..N.
+-- Prontuario e uma VIEW, nao uma nova entidade armazenada.
 
--- ------------------------------------------------------------
--- Tabela: medicacao
--- Medicacoes prescritas durante o atendimento medico.
--- Um atendimento pode possuir varias medicacoes.
--- ------------------------------------------------------------
-CREATE TABLE medicacao (
-    id                      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    atendimento_id          INT UNSIGNED NOT NULL,
-    nome_medicacao          VARCHAR(150) NOT NULL,
-    dosagem                 VARCHAR(50) NOT NULL,
-    observacoes             VARCHAR(255) NULL,
-    data_hora_prescricao    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- REGRAS DO BACK-END (nao implementadas somente por estas FKs/CHECKs):
+-- 1. Autenticar pelo hash, exigir conta ativa e validar o perfil em cada acao.
+--    FKs verificam existencia do usuario, nao se ele e medico/enfermeiro etc.
+-- 2. Recepcao consulta e altera dados cadastrais, nao registros clinicos.
+-- 3. Impedir alteracao/cancelamento do atendimento apos confirmacao medica.
+--    Completar dados cadastrais do paciente e uma operacao separada.
+-- 4. Confirmar consulta preenchendo consulta.data_hora_finalizacao e, na mesma transacao,
+--    definir atendimento.status = 'finalizado' e data_hora_finalizacao.
+-- 5. Chamar a proxima senha em transacao para dois funcionarios nao assumirem
+--    o mesmo atendimento. Definir recepcionista, horario e status em_recepcao.
+-- 6. Validar transicoes de status e salvar a etapa junto da mudanca de status.
+-- 7. Cancelar preserva os registros, com motivo; nao apaga o historico.
+-- 8. Desativar contas em vez de apagar profissionais vinculados ao historico.
+-- 9. No fluxo normal, exigir triagem antes da consulta. Eventual excecao de
+--    emergencia deve ser definida explicitamente, nunca deduzida pelo SQL.
 
-    CONSTRAINT fk_medicacao_atendimento
-        FOREIGN KEY (atendimento_id)
-        REFERENCES atendimento(id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
+-- CONSULTAS DE EXEMPLO (somente leitura)
 
-    INDEX idx_medicacao_atendimento (atendimento_id)
-) ENGINE=InnoDB
-  DEFAULT CHARSET=utf8mb4
-  COLLATE=utf8mb4_unicode_ci;
+-- Fila da recepcao. Formatacao com pelo menos quatro digitos, sem truncar 10000.
+SELECT id, CONCAT('AT', LPAD(CAST(id AS CHAR),
+       GREATEST(4, CHAR_LENGTH(CAST(id AS CHAR))), '0')) AS senha,
+       data_hora_chegada
+FROM atendimento
+WHERE status = 'aguardando_recepcao'
+ORDER BY data_hora_chegada, id;
 
--- ------------------------------------------------------------
--- View: vw_atendimento
--- Centraliza o numero formatado do atendimento e permite listar
--- registros que ainda nao possuem um paciente cadastrado.
--- ------------------------------------------------------------
-CREATE OR REPLACE VIEW vw_atendimento AS
-SELECT
-    a.id,
-    CONCAT('AT', LPAD(CAST(a.id AS CHAR), 4, '0')) AS numero_atendimento,
-    a.paciente_id,
-    p.nome_completo,
-    p.data_nascimento,
-    a.status,
-    a.data_hora_chegada,
-    a.data_hora_recepcao,
-    a.data_hora_inicio_medico,
-    a.data_hora_finalizacao,
-    a.motivo_cancelamento,
-    a.atualizado_em
+-- Fila medica: classificacao, depois chegada e id como desempate.
+SELECT a.id AS atendimento, p.nome_completo, p.data_nascimento,
+       t.classificacao, a.data_hora_chegada
 FROM atendimento a
-LEFT JOIN paciente p ON p.id = a.paciente_id;
+JOIN paciente p ON p.id = a.paciente_id
+JOIN triagem t ON t.atendimento_id = a.id
+WHERE a.status = 'aguardando_medico'
+ORDER BY CASE t.classificacao
+    WHEN 'vermelho' THEN 1 WHEN 'laranja' THEN 2 WHEN 'amarelo' THEN 3
+    WHEN 'verde' THEN 4 WHEN 'azul' THEN 5 END,
+    a.data_hora_chegada, a.id;
 
--- ============================================================
--- CONSULTAS PRINCIPAIS DO SISTEMA
--- ============================================================
+-- Cadastros que precisam ser complementados.
+SELECT id, nome_completo, observacao_cadastro
+FROM paciente WHERE cadastro_completo = FALSE ORDER BY criado_em;
 
--- Ver as classificacoes na ordem correta de prioridade.
-SELECT
-    prioridade,
-    cor,
-    nivel,
-    tempo_max_minutos
-FROM classificacao_manchester
-ORDER BY prioridade;
+-- Historico de um paciente. Trocar 1 pelo id escolhido no sistema.
+SELECT * FROM prontuario WHERE paciente_id = 1
+ORDER BY data_hora_chegada DESC, atendimento_id DESC;
 
--- Numeros dos cards exibidos na tela inicial.
-SELECT
-    COALESCE(SUM(status = 'aguardando_recepcao'), 0) AS aguardando_recepcao,
-    COALESCE(SUM(status = 'aguardando_triagem'), 0)  AS aguardando_triagem,
-    COALESCE(SUM(status = 'aguardando_medico'), 0)   AS aguardando_medico,
-    COALESCE(SUM(status = 'em_atendimento'), 0)      AS em_atendimento,
-    COALESCE(SUM(
-        status = 'finalizado'
-        AND DATE(data_hora_finalizacao) = CURRENT_DATE
-    ), 0) AS atendidos_hoje
-FROM atendimento;
+-- Cards: estados ausentes no resultado devem aparecer como zero na interface.
+SELECT status, COUNT(*) AS quantidade FROM atendimento
+WHERE status NOT IN ('finalizado', 'cancelado') GROUP BY status;
 
--- Listar os atendimentos recentes do dashboard.
-SELECT
-    numero_atendimento,
-    COALESCE(nome_completo, 'Cadastro pendente') AS paciente,
-    data_hora_chegada,
-    status
-FROM vw_atendimento
-ORDER BY data_hora_chegada DESC
-LIMIT 10;
+SELECT COUNT(*) AS atendidos_hoje FROM atendimento
+WHERE status = 'finalizado'
+  AND data_hora_finalizacao >= CURRENT_DATE
+  AND data_hora_finalizacao < CURRENT_DATE + INTERVAL 1 DAY;
 
--- Fila do medico: primeiro a prioridade de Manchester e, em caso
--- de empate, o paciente que terminou a triagem ha mais tempo.
-SELECT
-    va.id AS atendimento_id,
-    va.numero_atendimento,
-    va.nome_completo,
-    va.data_nascimento,
-    cm.cor,
-    cm.nivel,
-    cm.prioridade,
-    cm.tempo_max_minutos,
-    t.queixas,
-    t.data_hora_fim AS entrada_na_fila,
-    TIMESTAMPDIFF(
-        MINUTE,
-        COALESCE(t.data_hora_fim, t.data_hora_inicio),
-        CURRENT_TIMESTAMP
-    ) AS minutos_aguardando
-FROM vw_atendimento va
-JOIN triagem t
-    ON t.atendimento_id = va.id
-JOIN classificacao_manchester cm
-    ON cm.id = t.classificacao_id
-WHERE va.status = 'aguardando_medico'
-ORDER BY
-    cm.prioridade ASC,
-    COALESCE(t.data_hora_fim, t.data_hora_inicio) ASC;
-
--- Ver todas as medicacoes registradas em um atendimento.
--- Substitua 1 pelo id real do atendimento procurado.
-SELECT
-    va.numero_atendimento,
-    m.nome_medicacao,
-    m.dosagem,
-    m.observacoes,
-    m.data_hora_prescricao
-FROM medicacao m
-JOIN vw_atendimento va ON va.id = m.atendimento_id
-WHERE m.atendimento_id = 1
-ORDER BY m.data_hora_prescricao;
+SELECT a.id AS atendimento, p.nome_completo, a.data_hora_chegada, a.status
+FROM atendimento a LEFT JOIN paciente p ON p.id = a.paciente_id
+ORDER BY a.data_hora_chegada DESC, a.id DESC LIMIT 10;

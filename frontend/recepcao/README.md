@@ -1,7 +1,8 @@
 # Módulo de Recepção
 
-Esta pasta está reservada para a interface de Recepção do SAPS.
+- `index.html`: visão geral e indicadores de exemplo.
+- `recepcao.html`: chamada de senhas e fila da recepção.
+- `index.css`: estilos compartilhados pelas duas páginas.
+- `LOGO_SAPS_V1.png`: logo utilizada pelo módulo.
 
-O módulo será responsável pelo cadastro e pela consulta de pacientes, pela geração do número de atendimento e pela alteração ou pelo cancelamento de atendimentos enquanto não estiverem finalizados.
-
-**Status:** em desenvolvimento.
+Abra `../login/login.html` para iniciar a navegação. O login apenas demonstra a navegação; não autentica usuários. A chamada de senhas ainda é estática, sem JavaScript ou integração com o banco. Busca e cadastro de pacientes serão implementados nas próximas etapas.

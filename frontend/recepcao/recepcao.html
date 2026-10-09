@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAPS — Recepção</title>
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <aside class="barra-esquerda">
+        <div class="logo">
+            <!-- IMAGEM LOGO -->
+            <img src="LOGO_SAPS_V1.png" alt="Logo SAPS" class="logo-img">
+
+            <!-- TEXTOS -->
+            <div class="logo-texto">
+                <h1 class="titulo">SAPS</h1>
+                <p class="subtitulo">Sistema de Atendimento<br>de Pronto Socorro</p>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <!-- PRIMEIRO BOTÃO -->
+            <a href="index.html" class="item-menu">
+                <i class="fa-solid fa-house"></i>
+                <span>Início</span>
+            </a>
+
+            <!-- SEGUNDO BOTÃO -->
+            <a href="recepcao.html" class="item-menu ativo">
+                <i class="fa-solid fa-clipboard-user"></i>
+                <span>Recepção</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ÁREA DE CONTEÚDO DA PÁGINA -->
+    <main class="conteudo-principal">
+
+        <!-- BARRA SUPERIOR -->
+        <header class="barra-topo">
+            <h2>Chamada de Senhas e Cadastro de Pacientes</h2>
+        </header>
+
+        <!-- CONTEÚDO DA TELA INICIAL -->
+        <section class="area-conteudo">
+            <div class="painel-chamada">
+                <div>
+                    <h3 class="chamada-titulo">Chamada de Senhas</h3>
+                    <p class="chamada-descricao">
+                        Chame o próximo paciente para iniciar o cadastro.
+                    </p>
+                </div>
+
+                <!-- Valores de exemplo enquanto a fila ainda não está integrada. -->
+                <div class="chamada-resumo">
+                    <div>
+                        <p class="chamada-rotulo">Senha em atendimento</p>
+                        <p class="chamada-senha">AT0001</p>
+                    </div>
+
+                    <div>
+                        <p class="chamada-rotulo">Aguardando recepção</p>
+                        <p class="chamada-quantidade">2</p>
+                    </div>
+                </div>
+
+                <button type="button" class="botao-primario">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    Chamar próxima senha
+                </button>
+            </div>
+
+            <div class="atendimentos-recentes">
+                <h3 class="titulo-tabela">Fila da recepção</h3>
+
+                <table class="tabela-atendimentos">
+                    <thead>
+                        <tr>
+                            <th scope="col">Senha</th>
+                            <th scope="col">Horário de chegada</th>
+                            <th scope="col">Situação</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Senhas fictícias para montar a interface. -->
+                        <tr>
+                            <td>AT0002</td>
+                            <td>14:03</td>
+                            <td>
+                                <span class="status status-aguardando">
+                                    Aguardando recepção
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>AT0003</td>
+                            <td>14:05</td>
+                            <td>
+                                <span class="status status-aguardando">
+                                    Aguardando recepção
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
