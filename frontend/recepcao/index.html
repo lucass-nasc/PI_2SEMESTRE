@@ -1,178 +1,865 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAPS - Visão Geral</title>
-    <link rel="stylesheet" href="index.css">
-
-    <!--IMPORTA UMA BIBLIOTECA DE ÍCONES: FONT-AWESOME-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <aside class="barra-esquerda">
-        <div class="logo">
-            <!-- IMAGEM LOGO -->
-            <img src="LOGO_SAPS_V1.png" alt="Logo SAPS" class="logo-img">
-
-            <!-- TEXTOS -->
-            <div class="logo-texto">
-                <h1 class="titulo">SAPS</h1>
-                <p class="subtitulo">Sistema de Atendimento<br>de Pronto Socorro</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAPS — Recepção</title>
+        <link rel="stylesheet" href="index.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        >
+    </head>
+    <body>
+        <aside class="barra-esquerda">
+            <div class="logo">
+                <img src="LOGO_SAPS_V1.png" class="logo-img" alt="" width="45" height="45">
+                <div class="logo-texto">
+                    <p class="titulo">SAPS</p>
+                    <p class="subtitulo">
+                        Sistema de Atendimento
+                        <br>
+                        de Pronto Socorro
+                    </p>
+                </div>
             </div>
-        </div>
-
-        <nav class="menu">
-            <!-- PRIMEIRO BOTÃO -->
-            <a href="index.html" class="item-menu ativo">
-                <i class="fa-solid fa-house"></i>
-                <span>Início</span>
-            </a>
-
-            <!-- SEGUNDO BOTÃO -->
-            <a href="recepcao.html" class="item-menu">
-                <i class="fa-solid fa-clipboard-user"></i>
-                <span>Recepção</span>
-            </a>
-        </nav>
-    </aside>
-
-    <!-- ÁREA DE CONTEÚDO DA PÁGINA -->
-    <main class="conteudo-principal">
-
-        <!-- BARRA SUPERIOR -->
-        <header class="barra-topo">
-            <h2>Visão Geral do Pronto Socorro</h2>
-        </header>
-
-        <!-- CONTEÚDO DA TELA INICIAL -->
-        <section class="area-conteudo">
-
-            <!-- ÁREA DOS CARDS -->
-            <div class="cards-resumo">
-
-                <!-- CARD: AGUARDANDO RECEPÇÃO -->
-                <div class="card">
-                    <div class="card-informacoes">
-                        <p class="card-titulo">Aguardando recepção</p>
-                        <h3 class="card-numero">3</h3>
-                    </div>
-
-                    <div class="card-icone">
-                        <i class="fa-solid fa-ticket"></i>
-                    </div>
-                </div>
-
-                <!-- CARD: AGUARDANDO TRIAGEM -->
-                <div class="card">
-                    <div class="card-informacoes">
-                        <p class="card-titulo">Aguardando triagem</p>
-                        <h3 class="card-numero">8</h3>
-                    </div>
-
-                    <div class="card-icone">
-                        <i class="fa-solid fa-user-clock"></i>
-                    </div>
-                </div>
-
-                <!-- CARD: AGUARDANDO MÉDICO -->
-                <div class="card">
-                    <div class="card-informacoes">
-                        <p class="card-titulo">Aguardando médico</p>
-                        <h3 class="card-numero">5</h3>
-                    </div>
-
-                    <div class="card-icone">
-                        <i class="fa-solid fa-user-doctor"></i>
-                    </div>
-                </div>
-
-                <!-- CARD: EM ATENDIMENTO -->
-                <div class="card">
-                    <div class="card-informacoes">
-                        <p class="card-titulo">Em atendimento</p>
-                        <h3 class="card-numero">2</h3>
-                    </div>
-
-                    <div class="card-icone">
-                        <i class="fa-solid fa-stethoscope"></i>
-                    </div>
-                </div>
-
-                <!-- CARD: ATENDIDOS HOJE -->
-                <div class="card card-concluido">
-                    <div class="card-informacoes">
-                        <p class="card-titulo">Atendidos hoje</p>
-                        <h3 class="card-numero">14</h3>
-                    </div>
-
-                    <div class="card-icone">
-                        <i class="fa-solid fa-circle-check"></i>
-                    </div>
-                </div>
-                
+            <p class="rotulo-area">ÁREA DA RECEPÇÃO</p>
+            <nav class="menu" aria-label="Seções da recepção">
+                <a href="#visao-geral" class="item-menu menu-visao-geral">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    <span>Visão geral</span>
+                </a>
+                <a href="#senhas" class="item-menu menu-senhas">
+                    <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                    <span>Senhas</span>
+                </a>
+                <a href="#pacientes" class="item-menu menu-pacientes">
+                    <i class="fa-solid fa-address-card" aria-hidden="true"></i>
+                    <span>Pacientes</span>
+                </a>
+                <a href="#atendimentos" class="item-menu menu-atendimentos">
+                    <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+                    <span>Atendimentos</span>
+                </a>
+            </nav>
+            <div class="rodape-menu">
+                <p>Recepcionista</p>
+                <button type="button" class="botao-secundario" id="sair" disabled>Sair</button>
             </div>
+        </aside>
+        <main class="conteudo-principal">
+            <header class="barra-topo">
+                <h1>Recepção</h1>
+                <span class="perfil">SAPS · Atendimento de Pronto Socorro</span>
+            </header>
+            <div class="area-conteudo">
+                <section
+                    class="secao"
+                    id="visao-geral"
+                    tabindex="-1"
+                    aria-labelledby="titulo-visao-geral"
+                >
+                    <div class="cabecalho-secao">
+                        <h2 id="titulo-visao-geral">Visão geral</h2>
+                    </div>
+                    <!-- Os números serão calculados a partir do status dos atendimentos. -->
+                    <div class="cards-resumo">
+                        <div class="card">
+                            <div class="card-informacoes">
+                                <p class="card-titulo">Aguardando recepção</p>
+                                <p class="card-numero">2</p>
+                            </div>
+                            <div class="card-icone">
+                                <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-informacoes">
+                                <p class="card-titulo">Aguardando triagem</p>
+                                <p class="card-numero">1</p>
+                            </div>
+                            <div class="card-icone">
+                                <i class="fa-solid fa-user-clock" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-informacoes">
+                                <p class="card-titulo">Aguardando médico</p>
+                                <p class="card-numero">1</p>
+                            </div>
+                            <div class="card-icone">
+                                <i class="fa-solid fa-user-doctor" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-informacoes">
+                                <p class="card-titulo">Em atendimento médico</p>
+                                <p class="card-numero">0</p>
+                            </div>
+                            <div class="card-icone">
+                                <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="card card-concluido">
+                            <div class="card-informacoes">
+                                <p class="card-titulo">Atendidos hoje</p>
+                                <p class="card-numero">1</p>
+                            </div>
+                            <div class="card-icone">
+                                <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- ATENDIMENTOS RECENTES -->
-            <div class="atendimentos-recentes">
+                    <section class="painel" id="recentes" aria-labelledby="titulo-recentes">
+                        <h3 class="titulo-tabela" id="titulo-recentes">Atendimentos recentes</h3>
+                        <div
+                            class="rolagem-tabela"
+                            tabindex="0"
+                            role="region"
+                            aria-label="Atendimentos recentes"
+                        >
+                            <table class="tabela-atendimentos">
+                                <caption class="somente-leitor">Atendimentos recentes</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Atendimento</th>
+                                        <th scope="col">Paciente</th>
+                                        <th scope="col">Chegada</th>
+                                        <th scope="col">Situação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AT0003</td>
+                                        <td>Ainda não identificado</td>
+                                        <td>14:05</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando recepção
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AT0002</td>
+                                        <td>Ainda não identificado</td>
+                                        <td>14:03</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando recepção
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AT0001</td>
+                                        <td>Ainda não identificado</td>
+                                        <td>14:00</td>
+                                        <td>
+                                            <span class="status status-atendimento">
+                                                Em recepção
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AT0006</td>
+                                        <td>Ana Souza</td>
+                                        <td>13:55</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando triagem
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AT0005</td>
+                                        <td>João Santos</td>
+                                        <td>13:45</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando médico
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AT0004</td>
+                                        <td>Maria Silva</td>
+                                        <td>13:40</td>
+                                        <td>
+                                            <span class="status status-atendimento">
+                                                Em triagem
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AT0007</td>
+                                        <td>Carlos Lima</td>
+                                        <td>12:20</td>
+                                        <td>
+                                            <span class="status status-finalizado">Finalizado</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+                <section class="secao" id="senhas" tabindex="-1" aria-labelledby="titulo-senhas">
+                    <div class="cabecalho-secao">
+                        <h2 id="titulo-senhas">Senhas e chamada</h2>
+                    </div>
+                    <div class="duas-colunas">
+                        <section class="painel" id="chamada" aria-labelledby="titulo-chamada">
+                            <h3 class="titulo-tabela" id="titulo-chamada">Chamada de senhas</h3>
 
-                <h3 class="titulo-tabela">Atendimentos recentes</h3>
+                            <div class="chamada-resumo">
+                                <div>
+                                    <p class="chamada-rotulo">Senha em atendimento</p>
+                                    <p class="chamada-senha">AT0001</p>
+                                </div>
+                                <div>
+                                    <p class="chamada-rotulo">Aguardando recepção</p>
+                                    <p class="chamada-quantidade">2</p>
+                                </div>
+                            </div>
+                            <div class="acoes">
+                                <a class="botao-primario" href="#pacientes">Identificar paciente</a>
+                                <button
+                                    type="button"
+                                    class="botao-primario"
+                                    id="chamar-proxima"
+                                    disabled
+                                >
+                                    Chamar próxima senha
+                                </button>
+                            </div>
+                        </section>
+                        <section class="painel" id="fila" aria-labelledby="titulo-fila">
+                            <h3 class="titulo-tabela" id="titulo-fila">Fila da recepção</h3>
+                            <div
+                                class="rolagem-tabela"
+                                tabindex="0"
+                                role="region"
+                                aria-label="Fila da recepção"
+                            >
+                                <table class="tabela-atendimentos">
+                                    <caption class="somente-leitor">Fila da recepção</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Senha</th>
+                                            <th scope="col">Chegada</th>
+                                            <th scope="col">Situação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>AT0002</td>
+                                            <td>14:03</td>
+                                            <td>
+                                                <span class="status status-aguardando">
+                                                    Aguardando recepção
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>AT0003</td>
+                                            <td>14:05</td>
+                                            <td>
+                                                <span class="status status-aguardando">
+                                                    Aguardando recepção
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section
+                    class="secao"
+                    id="pacientes"
+                    tabindex="-1"
+                    aria-labelledby="titulo-pacientes"
+                >
+                    <div class="cabecalho-secao">
+                        <h2 id="titulo-pacientes">Pacientes e cadastro</h2>
+                    </div>
+                    <section
+                        class="painel"
+                        id="localizar-paciente"
+                        aria-labelledby="titulo-localizar-paciente"
+                    >
+                        <h3 class="titulo-tabela" id="titulo-localizar-paciente">
+                            Localizar paciente
+                        </h3>
+                        <!-- Rotas propostas: os envios ficam bloqueados até existir backend. -->
+                        <form id="form-busca-paciente" action="/pacientes/buscar" method="get">
+                            <div class="linha-busca">
+                                <div class="campo">
+                                    <label for="busca-busca">Nome ou CPF</label>
+                                    <input
+                                        type="search"
+                                        id="busca-busca"
+                                        name="busca"
+                                        placeholder="Digite o nome ou CPF"
+                                    >
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="botao-primario"
+                                    id="buscar-paciente"
+                                    disabled
+                                >
+                                    Buscar paciente
+                                </button>
+                            </div>
+                        </form>
 
-                <table class="tabela-atendimentos">
+                        <div
+                            class="rolagem-tabela"
+                            tabindex="0"
+                            role="region"
+                            aria-label="Resultado da busca"
+                        >
+                            <table class="tabela-atendimentos">
+                                <caption class="somente-leitor">Resultado da busca</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Paciente</th>
+                                        <th scope="col">Nascimento</th>
+                                        <th scope="col">Cadastro</th>
+                                        <th scope="col">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ana Souza</td>
+                                        <td>12/04/1995</td>
+                                        <td>
+                                            <span class="status status-pendente">Pendente</span>
+                                        </td>
+                                        <td>
+                                            <button
+                                                type="button"
+                                                class="botao-secundario"
+                                                id="carregar-paciente"
+                                                disabled
+                                            >
+                                                Carregar cadastro
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <details class="detalhe-interno">
+                            <summary>Consultar cadastro — Ana Souza</summary>
+                            <dl class="dados">
+                                <div>
+                                    <dt>Nome completo</dt>
+                                    <dd>Ana Souza</dd>
+                                </div>
+                                <div>
+                                    <dt>Nascimento</dt>
+                                    <dd>12/04/1995</dd>
+                                </div>
+                                <div>
+                                    <dt>CPF e RG</dt>
+                                    <dd>Não informados</dd>
+                                </div>
+                                <div>
+                                    <dt>Telefone</dt>
+                                    <dd>Não informado</dd>
+                                </div>
+                                <div>
+                                    <dt>Endereço</dt>
+                                    <dd>Não informado</dd>
+                                </div>
+                                <div>
+                                    <dt>Filiação</dt>
+                                    <dd>Não informada</dd>
+                                </div>
+                                <div>
+                                    <dt>Situação do cadastro</dt>
+                                    <dd>Provisório</dd>
+                                </div>
+                                <div>
+                                    <dt>Atendimento atual</dt>
+                                    <dd>AT0006</dd>
+                                </div>
+                            </dl>
+                            <p>Observação cadastral: documentação e contato pendentes.</p>
+                            <div class="acoes">
+                                <button
+                                    type="button"
+                                    class="botao-secundario"
+                                    id="editar-cadastro-ana"
+                                    disabled
+                                >
+                                    Editar este cadastro
+                                </button>
+                            </div>
+                        </details>
+                    </section>
+                    <section class="painel" id="cadastro" aria-labelledby="titulo-cadastro">
+                        <h3 class="titulo-tabela" id="titulo-cadastro">
+                            Cadastrar ou completar dados
+                        </h3>
+                        <p>
+                            <strong>Atendimento AT0001</strong>
+                            · paciente ainda não identificado.
+                        </p>
 
-                    <!-- CABEÇALHO DA TABELA -->
-                    <thead>
-                        <tr>
-                            <th>Atendimento</th>
-                            <th>Paciente</th>
-                            <th>Horário</th>
-                            <th>Etapa atual</th>
-                            <th>Situação</th>
-                        </tr>
-                    </thead>
+                        <!-- O backend reutiliza este formulário para criação e edição. paciente_id vazio significa novo cadastro. -->
+                        <form
+                            id="form-paciente"
+                            autocomplete="off"
+                            action="/pacientes/salvar"
+                            method="post"
+                        >
+                            <input type="hidden" name="atendimento_id" value="1">
+                            <input type="hidden" name="paciente_id" value="">
+                            <div class="grade-formulario">
+                                <div class="campo">
+                                    <label for="paciente-nome_completo">Nome completo</label>
+                                    <input
+                                        type="text"
+                                        id="paciente-nome_completo"
+                                        name="nome_completo"
+                                        maxlength="150"
+                                        autocomplete="name"
+                                    >
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-data_nascimento">Data de nascimento</label>
+                                    <input
+                                        type="date"
+                                        id="paciente-data_nascimento"
+                                        name="data_nascimento"
+                                    >
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-cpf">CPF, se disponível</label>
+                                    <input
+                                        type="text"
+                                        id="paciente-cpf"
+                                        name="cpf"
+                                        inputmode="numeric"
+                                        maxlength="11"
+                                        pattern="[0-9]{11}"
+                                        placeholder="11 dígitos, sem pontuação"
+                                    >
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-rg">RG, se disponível</label>
+                                    <input type="text" id="paciente-rg" name="rg" maxlength="20">
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-telefone">Telefone</label>
+                                    <input
+                                        type="tel"
+                                        id="paciente-telefone"
+                                        name="telefone"
+                                        maxlength="20"
+                                        autocomplete="tel"
+                                    >
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-endereco">Endereço</label>
+                                    <input
+                                        type="text"
+                                        id="paciente-endereco"
+                                        name="endereco"
+                                        maxlength="200"
+                                        autocomplete="street-address"
+                                    >
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-nome_mae">Nome da mãe</label>
+                                    <input
+                                        type="text"
+                                        id="paciente-nome_mae"
+                                        name="nome_mae"
+                                        maxlength="150"
+                                    >
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-nome_pai">Nome do pai</label>
+                                    <input
+                                        type="text"
+                                        id="paciente-nome_pai"
+                                        name="nome_pai"
+                                        maxlength="150"
+                                    >
+                                </div>
+                                <div class="campo">
+                                    <label for="paciente-cadastro_completo">
+                                        Situação do cadastro
+                                    </label>
+                                    <select
+                                        id="paciente-cadastro_completo"
+                                        name="cadastro_completo"
+                                    >
+                                        <option value="0">Provisório — completar depois</option>
+                                        <option value="1">Completo</option>
+                                    </select>
+                                </div>
+                                <div class="campo largura-total">
+                                    <label for="paciente-observacao_cadastro">
+                                        Observações do cadastro
+                                    </label>
+                                    <textarea
+                                        id="paciente-observacao_cadastro"
+                                        name="observacao_cadastro"
+                                        rows="3"
+                                        maxlength="255"
+                                        placeholder="Informe quais dados ainda precisam ser complementados."
+                                    ></textarea>
+                                </div>
+                            </div>
+                            <div class="acoes">
+                                <button
+                                    type="submit"
+                                    class="botao-primario"
+                                    id="salvar-paciente"
+                                    name="acao"
+                                    value="salvar"
+                                    disabled
+                                >
+                                    Salvar cadastro
+                                </button>
+                                <button
+                                    type="submit"
+                                    class="botao-primario"
+                                    id="encaminhar-triagem"
+                                    name="acao"
+                                    value="encaminhar_triagem"
+                                    disabled
+                                >
+                                    Salvar e encaminhar à triagem
+                                </button>
+                                <button type="reset" class="botao-secundario">
+                                    Restaurar campos
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                </section>
+                <section
+                    class="secao"
+                    id="atendimentos"
+                    tabindex="-1"
+                    aria-labelledby="titulo-atendimentos"
+                >
+                    <div class="cabecalho-secao">
+                        <h2 id="titulo-atendimentos">Consultar atendimentos</h2>
+                    </div>
+                    <section
+                        class="painel"
+                        id="consulta-atendimentos"
+                        aria-labelledby="titulo-consulta-atendimentos"
+                    >
+                        <h3 class="titulo-tabela" id="titulo-consulta-atendimentos">
+                            Buscar atendimentos
+                        </h3>
+                        <form id="form-filtros" action="/atendimentos" method="get">
+                            <div class="grade-formulario">
+                                <div class="campo">
+                                    <label for="atendimento-busca">Atendimento, nome ou CPF</label>
+                                    <input type="search" id="atendimento-busca" name="busca">
+                                </div>
+                                <div class="campo">
+                                    <label for="filtro-status">Situação</label>
+                                    <select name="status" id="filtro-status">
+                                        <option value="">Todas</option>
+                                        <option value="aguardando_recepcao">
+                                            Aguardando recepção
+                                        </option>
+                                        <option value="em_recepcao">Em recepção</option>
+                                        <option value="aguardando_triagem">
+                                            Aguardando triagem
+                                        </option>
+                                        <option value="em_triagem">Em triagem</option>
+                                        <option value="aguardando_medico">Aguardando médico</option>
+                                        <option value="em_atendimento">
+                                            Em atendimento médico
+                                        </option>
+                                        <option value="finalizado">Finalizado</option>
+                                        <option value="cancelado">Cancelado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="acoes">
+                                <button
+                                    type="submit"
+                                    class="botao-primario"
+                                    id="filtrar-atendimentos"
+                                    disabled
+                                >
+                                    Filtrar
+                                </button>
+                            </div>
+                        </form>
 
-                    <!-- CORPO DA TABELA -->
-                    <tbody>
+                        <div
+                            class="rolagem-tabela"
+                            tabindex="0"
+                            role="region"
+                            aria-label="Consulta administrativa de atendimentos"
+                        >
+                            <table class="tabela-atendimentos">
+                                <caption class="somente-leitor">
+                                    Consulta administrativa de atendimentos
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Selecionar</th>
+                                        <th scope="col">Atendimento</th>
+                                        <th scope="col">Paciente</th>
+                                        <th scope="col">Chegada</th>
+                                        <th scope="col">Situação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="radio"
+                                                form="form-consulta"
+                                                name="atendimento_id"
+                                                value="1"
+                                                aria-label="Selecionar AT0001"
+                                                checked
+                                            >
+                                        </td>
+                                        <td>AT0001</td>
+                                        <td>Não identificado</td>
+                                        <td>14:00</td>
+                                        <td>
+                                            <span class="status status-atendimento">
+                                                Em recepção
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="radio"
+                                                form="form-consulta"
+                                                name="atendimento_id"
+                                                value="2"
+                                                aria-label="Selecionar AT0002"
+                                            >
+                                        </td>
+                                        <td>AT0002</td>
+                                        <td>Não identificado</td>
+                                        <td>14:03</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando recepção
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="radio"
+                                                form="form-consulta"
+                                                name="atendimento_id"
+                                                value="3"
+                                                aria-label="Selecionar AT0003"
+                                            >
+                                        </td>
+                                        <td>AT0003</td>
+                                        <td>Não identificado</td>
+                                        <td>14:05</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando recepção
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="radio"
+                                                form="form-consulta"
+                                                name="atendimento_id"
+                                                value="4"
+                                                aria-label="Selecionar AT0004"
+                                            >
+                                        </td>
+                                        <td>AT0004</td>
+                                        <td>Maria Silva</td>
+                                        <td>13:40</td>
+                                        <td>
+                                            <span class="status status-atendimento">
+                                                Em triagem
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="radio"
+                                                form="form-consulta"
+                                                name="atendimento_id"
+                                                value="6"
+                                                aria-label="Selecionar AT0006"
+                                            >
+                                        </td>
+                                        <td>AT0006</td>
+                                        <td>Ana Souza</td>
+                                        <td>13:55</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando triagem
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="radio"
+                                                form="form-consulta"
+                                                name="atendimento_id"
+                                                value="5"
+                                                aria-label="Selecionar AT0005"
+                                            >
+                                        </td>
+                                        <td>AT0005</td>
+                                        <td>João Santos</td>
+                                        <td>13:45</td>
+                                        <td>
+                                            <span class="status status-aguardando">
+                                                Aguardando médico
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="radio"
+                                                form="form-consulta"
+                                                name="atendimento_id"
+                                                value="7"
+                                                aria-label="Selecionar AT0007"
+                                            >
+                                        </td>
+                                        <td>AT0007</td>
+                                        <td>Carlos Lima</td>
+                                        <td>12:20</td>
+                                        <td>
+                                            <span class="status status-finalizado">Finalizado</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <form id="form-consulta" action="/atendimentos/consultar" method="get">
+                            <div class="acoes">
+                                <button
+                                    type="submit"
+                                    class="botao-primario"
+                                    id="consultar-atendimento"
+                                    disabled
+                                >
+                                    Consultar selecionado
+                                </button>
+                                <button
+                                    type="button"
+                                    class="botao-secundario"
+                                    id="alterar-atendimento"
+                                    disabled
+                                >
+                                    Alterar selecionado
+                                </button>
+                            </div>
+                        </form>
+                    </section>
 
-                        <!-- PRIMEIRO ATENDIMENTO -->
-                        <tr>
-                            <td>AT0014</td>
-                            <td>Maria Silva</td>
-                            <td>15:20</td>
-                            <td>Médico</td>
-                            <td>
-                                <span class="status status-atendimento">Em atendimento</span>
-                            </td>
-                        </tr>
-
-                        <!-- SEGUNDO ATENDIMENTO -->
-                        <tr>
-                            <td>AT0013</td>
-                            <td>João Santos</td>
-                            <td>15:05</td>
-                            <td>Triagem</td>
-                            <td>
-                                <span class="status status-aguardando">Aguardando</span>
-                            </td>
-                        </tr>
-
-                        <!-- TERCEIRO ATENDIMENTO -->
-                        <tr>
-                            <td>AT0012</td>
-                            <td>Ana Souza</td>
-                            <td>14:48</td>
-                            <td>Recepção</td>
-                            <td>
-                                <span class="status status-finalizado">Finalizado</span>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>  
-
-        </section>
-
-    </main>
-</body>
+                    <details class="painel">
+                        <summary>Solicitar cancelamento</summary>
+                        <div class="conteudo-detalhes">
+                            <form
+                                id="form-cancelamento"
+                                action="/atendimentos/cancelar"
+                                method="post"
+                            >
+                                <div class="grade-formulario">
+                                    <div class="campo largura-total">
+                                        <label for="cancelar-atendimento-id">
+                                            Atendimento a cancelar
+                                        </label>
+                                        <select
+                                            name="atendimento_id"
+                                            id="cancelar-atendimento-id"
+                                            required
+                                        >
+                                            <option value="">
+                                                Selecione um atendimento não finalizado
+                                            </option>
+                                            <option value="1">
+                                                AT0001 — Não identificado — Em recepção
+                                            </option>
+                                            <option value="2">
+                                                AT0002 — Não identificado — Aguardando recepção
+                                            </option>
+                                            <option value="3">
+                                                AT0003 — Não identificado — Aguardando recepção
+                                            </option>
+                                            <option value="4">
+                                                AT0004 — Maria Silva — Em triagem
+                                            </option>
+                                            <option value="6">
+                                                AT0006 — Ana Souza — Aguardando triagem
+                                            </option>
+                                            <option value="5">
+                                                AT0005 — João Santos — Aguardando médico
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="campo largura-total">
+                                        <label for="cancelar-motivo_cancelamento">
+                                            Motivo do cancelamento
+                                        </label>
+                                        <textarea
+                                            id="cancelar-motivo_cancelamento"
+                                            name="motivo_cancelamento"
+                                            rows="3"
+                                            maxlength="255"
+                                            required
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                <label class="opcao-check">
+                                    <input
+                                        type="checkbox"
+                                        name="confirmar_cancelamento"
+                                        value="1"
+                                        required
+                                    >
+                                    Conferi a senha selecionada e confirmo a solicitação de
+                                    cancelamento.
+                                </label>
+                                <div class="acoes">
+                                    <button
+                                        type="submit"
+                                        class="botao-perigo"
+                                        id="cancelar-atendimento"
+                                        disabled
+                                    >
+                                        Confirmar cancelamento
+                                    </button>
+                                    <button type="reset" class="botao-secundario">
+                                        Limpar solicitação
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </details>
+                </section>
+            </div>
+        </main>
+    </body>
 </html>

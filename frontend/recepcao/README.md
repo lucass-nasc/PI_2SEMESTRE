@@ -1,8 +1,11 @@
-# Módulo de Recepção
+# Recepção
 
-- `index.html`: visão geral e indicadores de exemplo.
-- `recepcao.html`: chamada de senhas e fila da recepção.
-- `index.css`: estilos compartilhados pelas duas páginas.
-- `LOGO_SAPS_V1.png`: logo utilizada pelo módulo.
+Abra `index.html` para acessar as quatro seções: Visão geral, Senhas, Pacientes e Atendimentos. Toda a recepção está neste único HTML; `recepcao.html` foi substituído.
 
-Abra `../login/login.html` para iniciar a navegação. O login apenas demonstra a navegação; não autentica usuários. A chamada de senhas ainda é estática, sem JavaScript ou integração com o banco. Busca e cadastro de pacientes serão implementados nas próximas etapas.
+- `index.css`: estilos e navegação entre seções.
+- `LOGO_SAPS_V1.png`: logo do SAPS.
+- Os ícones são importados do Font Awesome 6.4.0 pelo HTML.
+
+A interface utiliza HTML e CSS. As ações de busca, chamada, gravação, alteração e cancelamento serão conectadas ao backend.
+
+Veja [o guia de integração](../../docs/recepcao.md) para os campos e as operações previstas.

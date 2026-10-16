@@ -1,338 +1,559 @@
+/* 1. Base e identidade visual do projeto original. */
 * {
-    box-sizing: border-box;                          /* FAZ WIDTH E HEIGHT INCLUÍREM O PADDING E A BORDA NO TAMANHO TOTAL DO ELEMENTO */
-}
-
-body {
-    display: flex;                                   /* COLOCA OS BLOCOS DA PAGINA UM AO LADO DO OUTRO */
-    margin: 0;                                       /* TIRA O ESPACO BRANCO QUE FICA NAS BORDAS DA TELA */
-    font-family: Arial, sans-serif;                  /* DEFINE O TIPO DE LETRA USADO NA PAGINA */
-    background-color: #f4f6f9;                     /* PINTA O FUNDO DA PAGINA DE CINZA CLARO */
-}
-
-.barra-esquerda {
-    width: 220px;                                    /* DEFINE A LARGURA DA BARRA */
-    min-height: 100vh;                               /* FAZ A BARRA OCUPAR A ALTURA INTEIRA DA TELA */
-    background-color: #ffffff;                     /* PINTA O FUNDO DA BARRA DE BRANCO */
-    border-right: 1px solid #e0e0e0;               /* DESENHA UMA LINHA CINZA FINA NO LADO DIREITO */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);     /* CRIA UMA SOMBRA LEVE NO LADO DIREITO */
-    padding-top: 20px;                               /* EMPURRA O CONTEUDO DA BARRA UM POUCO PARA BAIXO */
-}
-
-/* --- LOGO --- */
-
-.logo {
-    display: flex;                                   /* COLOCA A IMAGEM E O BLOCO DE TEXTO LADO A LADO */
-    align-items: center;                             /* ALINHA A IMAGEM E O TEXTO NO MEIO VERTICALMENTE */
-    gap: 10px;                                       /* DA UM ESPACO ENTRE A IMAGEM E O TEXTO */
-    padding-left: 15px;                              /* EMPURRA TODO O CONJUNTO PARA A DIREITA */
-    margin-bottom: 30px;                             /* EMPURRA O MENU PARA BAIXO */
-    padding-top: 5px;
-}
-
-.logo-img {
-    width: 45px;                                     /* DEFINE A LARGURA DA IMAGEM PEQUENA */
-    height: auto;                                    /* MANTEM A PROPORCAO DA ALTURA DA IMAGEM */
-}
-
-/* --- TITULO E SUBTITULO --- */
-
-.titulo {
-    color: #1c68b6;                                /* PINTA O TEXTO DE AZUL */
-    letter-spacing: 5px;                             /* AFASTA AS LETRAS UMAS DAS OUTRAS */
-    margin: 0;                                       /* ZERA OS ESPAÇOS DE FORA DO TEXTO */
-    line-height: 1;                                  /* TIRA A CAIXA INVISIVEL DE ALTURA DA LETRA */
-    font-size: 34px;                                 /* DEFINE O TAMANHO DA LETRA */
-}
-
-.subtitulo {
-    color: #1c68b6;                                /* PINTA O TEXTO DE AZUL */
-    font-size: 11px;                                 /* DEIXA A LETRA BEM PEQUENA */
-    letter-spacing: -0.6px;                          /* JUNTA AS LETRAS SO UM POUQUINHO */
-    line-height: 1.1;                                /* DEIXA AS DUAS LINHAS BEM JUNTINHAS */
-    margin: 2px 0 0 0;                               /* CRIA UM ESPACO DE 30PX EM BAIXO PARA EMPURRAR O MENU */
-}
-
-/* --- MENU --- */
-
-.menu {
-    display: flex;                                   /* ATIVA O MODO DE ALINHAMENTO */
-    flex-direction: column;                          /* COLOCA OS BOTOES UM EMBAIXO DO OUTRO */
-    padding-left: 10px;
-}
-
-.item-menu {
-    display: flex;                                   /* COLOCA O ICONE E O TEXTO NA MESMA LINHA */
-    align-items: center;                             /* ALINHA O ICONE E O TEXTO NO MEIO VERTICALMENTE */
-    gap: 12px;                                       /* DA UM ESPACO ENTRE O ICONE E O TEXTO */
-    padding: 12px 20px;                              /* CRIA UMA AREA CLICAVEL CONFORTAVEL EM VOLTA */
-    color: #333333;                                /* PINTA O TEXTO DE CINZA ESCURO */
-    text-decoration: none;                           /* TIRA O SUBLINHADO AZUL DE LINK */
-    font-size: 15px;                                 /* DEFINE O TAMANHO DA LETRA */
-    border-left: 4px solid transparent;
-}
-
-.item-menu i {
-    font-size: 16px;                                 /* DEFINE O TAMANHO DO ICONE */
-    color: #555555;                                /* PINTA O ICONE DE CINZA */
-    width: 20px;                                     /* DA UMA LARGURA IGUAL PARA TODOS OS ICONES */
-    text-align: center;                              /* CENTRALIZA O ICONE DENTRO DESSA LARGURA */
-}
-
-.item-menu:hover {                                   /* HOVER SÓ APLICA QUANDO O MOUSE ESTÁ SOBRE O ITEM */
-    background-color: #eef6ff;
-    color: #1c68b6;
-    border-radius: 8px;
-}
-
-.item-menu.ativo {
-    background-color: #e3f0ff;
-    color: #1c68b6;
-    font-weight: bold;
-    border-left: 4px solid #1c68b6;                 /* !!!!!!!!! TALVEZ ARRUMAR ISSO, ELE FICA TORTO NO MENU */
-}
-
-.area-conteudo {
-    padding: 30px;
-}
-
-/* --- CONTEUDO PRINCIPAL --- */
-
-.conteudo-principal {
-    flex: 1;                                          /* OCUPA TODO O ESPACO RESTANTE DA TELA */
-}
-
-.barra-topo {
-    background-color: #ffffff;
-    height: 70px;
-    padding: 0 30px;
-    padding-top: 0px;
     box-sizing: border-box;
+}
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f4f6f9;
+    line-height: 1.5;
+}
+a {
+    color: #165b9f;
+    text-underline-offset: 3px;
+}
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+:focus-visible {
+    outline: 3px solid #1c68b6;
+    outline-offset: 3px;
+}
+[id] {
+    scroll-margin-top: 20px;
+}
+.somente-leitor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
 
+/* 2. Menu lateral e cabeçalho. min-width evita que tabelas alarguem a página. */
+.barra-esquerda {
+    width: 220px;
+    flex: 0 0 220px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #e0e0e0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    padding-top: 25px;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.logo {
     display: flex;
     align-items: center;
-
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    gap: 10px;
+    padding-left: 15px;
+    margin-bottom: 30px;
 }
-
-.barra-topo h2 {
-    color: #333333;
+.logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+.titulo {
+    color: #1c68b6;
+    letter-spacing: 5px;
     margin: 0;
-    font-size: 24px;
+    line-height: 1;
+    font-size: 34px;
+    font-weight: bold;
+}
+.subtitulo {
+    color: #1c68b6;
+    font-size: 11px;
+    letter-spacing: -0.6px;
+    line-height: 1.1;
+    margin: 4px 0 0;
+}
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+.item-menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    border-left: 4px solid transparent;
+    padding-left: 14px;
+    padding-right: 10px;
+}
+.item-menu i {
+    width: 20px;
+    text-align: center;
+    color: #555;
+}
+.item-menu:hover {
+    background: #eef6ff;
+    color: #1c68b6;
 }
 
-/* --- CARDS DA TELA INICIAL --- */
-
-.cards-resumo {
-    display: flex;                                     /* ATIVA O FLEXBOX NO ELEMENTO PAI, FAZENDO OS CARDS SEREM ORGANIZADOS LADO A LADO */
-    gap: 20px;                                         /* CRIA UM ESPAÇO DE 20PX ENTRE OS CARDS, SEM PRECISAR COLOCAR MARGEM EM CADA UM */
-    flex-wrap: wrap;                                   /* PERMITE QUE OS CARDS DESÇAM PARA OUTRA LINHA QUANDO NÃO HOUVER ESPAÇO NA TELA */
+.conteudo-principal {
+    flex: 1;
+    min-width: 0;
 }
-
-.card {
-    width: 250px;                                      /* DETERMINA A LARGURA DO CARD */
-    background-color: #ffffff;                       
-    padding: 20px;                                     /* CRIA ESPAÇO ENTRE O CONTEÚDO E AS BORDAS */
-    border-radius: 10px;                               /* ARREDONDA OS CANTOS */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);       /* ADICIONA UMA SOMBRA AO REDOR DO CARD */
-
+.barra-topo {
+    min-height: 70px;
+    padding: 18px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    transition: transform 0.2s ease, box-shadow 0.2s ease;    /* FAZ AS MUDANÇAS DE POSIÇÃO E SOMBRA ACONTECEREM SUAVEMENTE EM 0,2 SEGUNDO */
+    gap: 20px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+.barra-topo h1 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.3;
+}
+.perfil {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+}
+.area-conteudo {
+    padding: 30px;
+    max-width: 1500px;
+    margin: auto;
 }
 
-.card:hover {                                                 /* :HOVER APLICA ESTAS REGRAS SOMENTE ENQUANTO O PONTEIRO DO MOUSE ESTIVER SOBRE O CARD */
-    transform: translateY(-3px);                              /* MOVE O CARD 3PX PARA CIMA; O VALOR NEGATIVO INDICA MOVIMENTO PARA CIMA */
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);             /* AUMENTA LEVEMENTE A SOMBRA PARA CRIAR A SENSAÇÃO DE QUE O CARD SE ELEVOU */
+/* 3. Cards, painéis e chamada de senhas. */
+.cards-resumo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
 }
-
+.card {
+    width: auto;
+    max-width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
 .card-titulo {
-    margin: 0 0 8px 0;
-    color: #666666;
+    margin: 0 0 8px;
+    color: #666;
     font-size: 14px;
 }
-
 .card-numero {
     margin: 0;
-    color: #222222;
+    color: #222;
     font-size: 30px;
+    font-weight: bold;
 }
-
 .card-icone {
-    width: 50px;                                        /* WIDTH E HEIGHT COM O MESMO VALOR CRIAM UMA ÁREA QUADRADA DE 50PX POR 50PX */
+    width: 50px;
     height: 50px;
-    background-color: #e3f0ff;
+    flex: 0 0 50px;
+    border-radius: 50%;
+    background: #e3f0ff;
     color: #1c68b6;
-
-    border-radius: 50%;                                 /* EM UM ELEMENTO QUADRADO, BORDER-RADIUS DE 50% TRANSFORMA A ÁREA EM UM CÍRCULO */
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 20px;
 }
-
 .card-concluido .card-icone {
-    background-color: #dcfce7;
+    background: #dcfce7;
     color: #16803c;
 }
-
-/* --- ATENDIMENTOS RECENTES --- */
-
-.atendimentos-recentes {
-    margin-top: 25px;                                   /* CRIA UM ESPAÇO ENTRE OS CARDS E A TABELA PARA AS DUAS ÁREAS NÃO FICAREM ENCOSTADAS */
-    background-color: #ffffff;                        
-    padding: 20px;                                      /* CRIA UM ESPAÇO INTERNO ENTRE O CONTEÚDO E AS BORDAS DA CAIXA */
-    border-radius: 10px;                                /* ARREDONDA OS QUATRO CANTOS DA CAIXA */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.titulo-tabela {
-    margin-top: 0;                                       /* REMOVE A MARGEM AUTOMÁTICA QUE O NAVEGADOR COLOCA ACIMA DO H3 */
-    margin-bottom: 20px;                                 /* MANTÉM 20PX ABAIXO DO TÍTULO PARA SEPARÁ-LO DA TABELA */
-    color: #333333;
-    font-size: 18px;
-}
-
-.tabela-atendimentos {
-    width: 100%;                                         /* FAZ A TABELA OCUPAR 100% DA LARGURA DISPONÍVEL DENTRO DA CAIXA BRANCA */
-    border-collapse: collapse;                           /* UNE AS BORDAS DAS CÉLULAS PARA EVITAR ESPAÇOS DUPLOS ENTRE ELAS */
-}
-
-.tabela-atendimentos th,
-.tabela-atendimentos td {
-    padding: 12px 10px;                                  /* CRIA ESPAÇO DENTRO DE CADA CÉLULA, AUMENTANDO A DISTÂNCIA ENTRE OS TEXTOS */
-    text-align: left;
-}
-
-.tabela-atendimentos thead {
-    background-color: #f4f6f9;
-}
-
-.tabela-atendimentos th {
-    color: #555555;
-    font-size: 14px;
-    border-bottom: 1px solid #dddddd;                  /* CRIA UMA LINHA NA PARTE INFERIOR DE CADA CÉLULA DO CABEÇALHO */
-}
-
-.tabela-atendimentos td {
-    color: #333333;
-    font-size: 14px;
-    border-bottom: 1px solid #eeeeee;
-}
-
-.tabela-atendimentos tbody tr:hover {
-    background-color: #f8fbff;                         /* ALTERA O FUNDO DA LINHA QUANDO O MOUSE PASSA SOBRE ELA */
-}
-
-.status {
-    display: inline-block;                               /* INLINE-BLOCK PERMITE QUE O SPAN CONTINUE NA MESMA LINHA, MAS ACEITE PADDING */
-    padding: 5px 10px;                                   /* CRIA ESPAÇO INTERNO: 5PX EM CIMA/BAIXO E 10PX NAS LATERAIS */
-    border-radius: 20px;                                 /* ARREDONDA BASTANTE AS BORDAS PARA CRIAR O FORMATO DE ETIQUETA */
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.status-atendimento {
-    background-color: #dbeafe;
-    color: #1d4ed8;
-}
-
-.status-aguardando {
-    background-color: #f1f3f5;
-    color: #555555;
-}
-
-.status-finalizado {
-    background-color: #dcfce7;
-    color: #16803c;
-}
-
-.tabela-atendimentos tbody tr:last-child td {
-    border-bottom: none;                                /* REMOVE A BORDA SOMENTE DAS CÉLULAS QUE PERTENCEM À ÚLTIMA LINHA DO CORPO DA TABELA */
-}
-
-
-
-
-
-
-
-/* ------- RECEPÇÃO ------- */
-/* --- CHAMADA DE SENHAS DA RECEPÇÃO --- */
-
-.painel-chamada {
-    background-color: #ffffff;
+.painel {
+    margin: 0 0 24px;
+    background: white;
     padding: 24px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    min-width: 0;
 }
-
-.chamada-titulo {
-    margin: 0 0 8px;
-    color: #333333;
+.titulo-tabela {
+    margin: 0 0 20px;
+    color: #333;
     font-size: 20px;
 }
-
-.chamada-descricao {
-    margin: 0;
-    color: #666666;
-    line-height: 1.5;
+.duas-colunas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
 }
-
 .chamada-resumo {
     display: flex;
     gap: 40px;
-    flex-wrap: wrap;                                    /* Se os dois blocos não couberem, o segundo desce. */
+    flex-wrap: wrap;
     margin: 24px 0;
 }
-
 .chamada-rotulo {
     margin: 0 0 8px;
-    color: #666666;
+    color: #666;
     font-size: 14px;
 }
-
 .chamada-senha,
-.chamada-quantidade {                                   /* A vírgula aplica as mesmas propriedades às duas classes. */
+.chamada-quantidade {
     margin: 0;
     font-size: 32px;
     font-weight: bold;
 }
-
 .chamada-senha {
     color: #1c68b6;
 }
 
-.chamada-quantidade {
-    color: #333333;
+/* 4. Tabelas e estados. A rolagem fica na tabela, não na página inteira. */
+.rolagem-tabela {
+    overflow-x: auto;
+}
+.tabela-atendimentos {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tabela-atendimentos th,
+.tabela-atendimentos td {
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 14px;
+}
+.tabela-atendimentos th {
+    color: #555;
+    background: #f4f6f9;
+    border-bottom: 1px solid #ddd;
+}
+.tabela-atendimentos td {
+    border-bottom: 1px solid #eee;
+}
+.tabela-atendimentos tbody tr:last-child td {
+    border-bottom: 0;
+}
+.tabela-atendimentos tbody tr:hover {
+    background: #f8fbff;
+}
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.status-aguardando {
+    background: #f1f3f5;
+    color: #555;
+}
+.status-atendimento {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+.status-finalizado {
+    background: #dcfce7;
+    color: #16803c;
+}
+.status-pendente {
+    background: #fff4cf;
+    color: #745306;
 }
 
-.botao-primario {
+/* 5. Formulários compartilhados pela recepção e pela triagem. */
+.grade-formulario {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+.campo label {
+    font-size: 14px;
+    font-weight: bold;
+}
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #b9c5d2;
+    border-radius: 8px;
+    background: white;
+    color: #222;
+    min-height: 44px;
+}
+.campo textarea {
+    resize: vertical;
+}
+.largura-total {
+    grid-column: 1 / -1;
+}
+.linha-busca {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.linha-busca .campo {
+    flex: 1 1 240px;
+}
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+.botao-primario,
+.botao-secundario,
+.botao-perigo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-
-    padding: 12px 18px;
-    border: none;
+    padding: 11px 16px;
+    min-height: 44px;
+    border: 1px solid transparent;
     border-radius: 8px;
-    background-color: #1c68b6;
-    color: #ffffff;
-
-    font: inherit;                                       /* Faz o botão usar a fonte definida na página. */
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
 }
-
+.botao-primario {
+    background: #1c68b6;
+    color: white;
+}
 .botao-primario:hover {
-    background-color: #15528f;
+    background: #15528f;
+}
+.botao-secundario {
+    background: white;
+    border-color: #b9c5d2;
+    color: #165b9f;
+}
+.botao-secundario:hover {
+    background: #eef6ff;
+}
+.botao-perigo {
+    background: #fff1f2;
+    color: #9f2533;
+    border-color: #e3b9bf;
+}
+button:disabled {
+    background: #eef1f5;
+    color: #626b76;
+    border-color: #d4dbe3;
+    cursor: not-allowed;
+}
+.opcao-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 16px;
+    font-size: 14px;
+}
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: #1c68b6;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
-.botao-primario:focus-visible {
-    outline: 3px solid #15528f;                        /* Destaca o botão quando ele é selecionado pelo teclado. */
-    outline-offset: 3px;
+/* details/summary abre e fecha o conteúdo sem JavaScript. */
+summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+.painel > summary {
+    font-size: 20px;
+}
+.conteudo-detalhes {
+    margin-top: 24px;
+}
+.detalhe-interno {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid #e0e7ef;
+    border-radius: 8px;
+}
+.detalhe-interno[open] > summary {
+    margin-bottom: 16px;
+}
+.dados {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+.dados dt {
+    font-size: 13px;
+    color: #626b76;
+}
+.dados dd {
+    margin: 5px 0 0;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+/* Seções no mesmo arquivo: :target identifica o destino do link clicado.
+   :has verifica se alguma seção foi escolhida; sem escolha, aparece a visão geral. */
+.secao {
+    display: none;
+}
+#visao-geral {
+    display: block;
+}
+body:has(.secao:target:not(#visao-geral)) #visao-geral {
+    display: none;
+}
+body:has(.secao:target) .secao:target {
+    display: block;
+}
+body:not(:has(.secao:target)) .menu-visao-geral,
+body:has(#visao-geral:target) .menu-visao-geral,
+body:has(#senhas:target) .menu-senhas,
+body:has(#pacientes:target) .menu-pacientes,
+body:has(#atendimentos:target) .menu-atendimentos {
+    background: #e3f0ff;
+    color: #1c68b6;
+    font-weight: bold;
+    border-left-color: #1c68b6;
+}
+
+.rotulo-area {
+    margin: 0 20px 16px;
+    font-size: 11px;
+    color: #626b76;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.rodape-menu {
+    padding: 24px 20px;
+    margin-top: auto;
+    font-size: 12px;
+    color: #626b76;
+}
+.rodape-menu .botao-secundario {
+    width: 100%;
+}
+.cabecalho-secao {
+    margin-bottom: 24px;
+}
+.cabecalho-secao h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+}
+
+/* Responsividade: menus acessíveis e formulários em uma coluna no celular. */
+@media (max-width: 1100px) {
+    .duas-colunas {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .barra-topo {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .cards-resumo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 760px) {
+    body {
+        display: block;
+    }
+    .barra-esquerda {
+        width: 100%;
+        min-height: 0;
+        padding-top: 20px;
+    }
+    .logo {
+        margin-bottom: 20px;
+    }
+    .menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0 10px;
+    }
+    .item-menu {
+        padding: 12px;
+        font-size: 14px;
+    }
+    .barra-topo {
+        padding: 18px 20px;
+    }
+    .barra-topo h1 {
+        font-size: 22px;
+    }
+    .area-conteudo {
+        padding: 20px;
+    }
+
+    .dados {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .barra-esquerda {
+        position: static;
+        height: auto;
+    }
+    .rotulo-area {
+        display: none;
+    }
+    .rodape-menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 0;
+        padding: 12px 20px;
+    }
+    .rodape-menu p {
+        margin: 0;
+    }
+    .rodape-menu .botao-secundario {
+        width: auto;
+    }
+}
+@media (max-width: 520px) {
+    .grade-formulario {
+        grid-template-columns: 1fr;
+    }
+    .painel {
+        padding: 18px;
+    }
+    .area-conteudo {
+        padding: 16px;
+    }
+    .acoes > * {
+        flex: 1 1 100%;
+    }
+    .chamada-resumo {
+        gap: 20px;
+    }
+    .cards-resumo {
+        grid-template-columns: 1fr;
+    }
 }
