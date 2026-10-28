@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SAPS — Triagem</title>
+        <link rel="stylesheet" href="index.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        >
+    </head>
+    <body>
+        <aside class="barra-esquerda">
+            <div class="logo">
+                <img src="LOGO_SAPS_V1.png" class="logo-img" alt="" width="45" height="45">
+                <div class="logo-texto">
+                    <p class="titulo">SAPS</p>
+                    <p class="subtitulo">
+                        Sistema de Atendimento
+                        <br>
+                        de Pronto Socorro
+                    </p>
+                </div>
+            </div>
+
+            <p class="rotulo-area">ÁREA DA ENFERMAGEM</p>
+            <nav class="menu" aria-label="Menu da triagem">
+                <a href="#fila" class="item-menu menu-fila">
+                    <i class="fa-solid fa-user-nurse" aria-hidden="true"></i>
+                    <span>Fila de triagem</span>
+                </a>
+                <a href="#atendimento-atual" class="item-menu menu-atual">
+                    <i class="fa-solid fa-clipboard-user" aria-hidden="true"></i>
+                    <span>Atendimento atual</span>
+                </a>
+            </nav>
+
+            <div class="rodape-menu">
+                <!-- Nome e COREN serão preenchidos a partir do usuário autenticado. -->
+                <p>
+                    <strong id="nome-enfermeiro">Enfermeiro</strong>
+                    <br>
+                    <span id="coren-enfermeiro">COREN: —</span>
+                </p>
+                <button type="button" class="botao-secundario" id="sair" disabled>Sair</button>
+            </div>
+        </aside>
+
+        <main class="conteudo-principal">
+            <header class="barra-topo">
+                <h1>Triagem</h1>
+                <span class="perfil">SAPS · Atendimento de Pronto Socorro</span>
+            </header>
+
+            <div class="area-conteudo">
+                <section class="painel secao" id="fila" tabindex="-1" aria-labelledby="titulo-fila">
+                    <h2 class="titulo-tabela" id="titulo-fila">Fila de triagem</h2>
+
+                    <!-- A tabela recebe os atendimentos encaminhados pela recepção. -->
+                    <div
+                        class="rolagem-tabela"
+                        tabindex="0"
+                        role="region"
+                        aria-label="Fila de triagem"
+                    >
+                        <table class="tabela-atendimentos">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Atendimento</th>
+                                    <th scope="col">Paciente</th>
+                                    <th scope="col">Horário de chegada</th>
+                                    <th scope="col">Situação</th>
+                                    <th scope="col">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>AT0004</td>
+                                    <td>Maria Silva</td>
+                                    <td><time datetime="13:40">13:40</time></td>
+                                    <td>
+                                        <span class="status status-atendimento">Em triagem</span>
+                                    </td>
+                                    <td>
+                                        <a
+                                            href="#atendimento-atual"
+                                            class="botao-primario"
+                                            aria-label="Continuar triagem de Maria Silva, AT0004"
+                                        >
+                                            Continuar triagem
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT0006</td>
+                                    <td>Ana Souza</td>
+                                    <td><time datetime="13:55">13:55</time></td>
+                                    <td>
+                                        <span class="status status-aguardando">
+                                            Aguardando triagem
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button
+                                            type="button"
+                                            class="botao-primario"
+                                            data-atendimento-id="6"
+                                            data-acao="iniciar-triagem"
+                                            aria-label="Iniciar triagem de Ana Souza, AT0006"
+                                            disabled
+                                        >
+                                            Iniciar triagem
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section
+                    class="secao"
+                    id="atendimento-atual"
+                    tabindex="-1"
+                    aria-labelledby="titulo-atual"
+                >
+                    <div class="cabecalho-atendimento">
+                        <h2 id="titulo-atual">Atendimento atual</h2>
+                        <span class="status status-atendimento">Em triagem</span>
+                    </div>
+
+                    <section class="painel" aria-labelledby="titulo-paciente">
+                        <h3 class="titulo-tabela" id="titulo-paciente">
+                            Identificação do paciente
+                        </h3>
+                        <dl class="dados-paciente">
+                            <div>
+                                <dt>Atendimento</dt>
+                                <dd>AT0004</dd>
+                            </div>
+                            <div>
+                                <dt>Paciente</dt>
+                                <dd>Maria Silva</dd>
+                            </div>
+                            <div>
+                                <dt>Data de nascimento</dt>
+                                <dd><time datetime="1988-08-21">21/08/1988</time></dd>
+                            </div>
+                            <div>
+                                <dt>Idade</dt>
+                                <dd>38 anos</dd>
+                            </div>
+                            <div>
+                                <dt>Horário de chegada</dt>
+                                <dd><time datetime="13:40">13:40</time></dd>
+                            </div>
+                            <div>
+                                <dt>Cadastro</dt>
+                                <dd><span class="status status-completo">Completo</span></dd>
+                            </div>
+                        </dl>
+                    </section>
+
+                    <section class="painel" aria-labelledby="titulo-ficha">
+                        <h3 class="titulo-tabela" id="titulo-ficha">Ficha de triagem</h3>
+                        <!-- A ficha usa o mesmo atendimento da recepção. O autor vem da sessão. -->
+                        <form id="form-triagem" action="/triagens/concluir" method="post">
+                            <input type="hidden" name="atendimento_id" value="4">
+
+                            <fieldset>
+                                <legend>Sinais vitais</legend>
+                                <div class="grade-sinais">
+                                    <div class="campo">
+                                        <label for="pressao-arterial">
+                                            Pressão arterial (mmHg)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="pressao-arterial"
+                                            name="pressao_arterial"
+                                            maxlength="15"
+                                            pattern="[0-9]{2,3}/[0-9]{2,3}"
+                                            title="Informe a pressão no formato 120/80"
+                                            required
+                                        >
+                                    </div>
+                                    <div class="campo">
+                                        <label for="temperatura">Temperatura (°C)</label>
+                                        <input
+                                            type="number"
+                                            id="temperatura"
+                                            name="temperatura"
+                                            step="0.1"
+                                            required
+                                        >
+                                    </div>
+                                    <div class="campo">
+                                        <label for="batimentos">Batimentos cardíacos (bpm)</label>
+                                        <input
+                                            type="number"
+                                            id="batimentos"
+                                            name="batimentos_cardiacos"
+                                            min="0"
+                                            step="1"
+                                            required
+                                        >
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Avaliação de enfermagem</legend>
+                                <div class="campo">
+                                    <label for="queixas">Principais queixas</label>
+                                    <textarea
+                                        id="queixas"
+                                        name="queixas"
+                                        rows="4"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <div class="campo">
+                                    <label for="observacoes">Observações da triagem</label>
+                                    <textarea
+                                        id="observacoes"
+                                        name="observacoes"
+                                        rows="4"
+                                    ></textarea>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Classificação de Manchester</legend>
+                                <!-- O mesmo name faz os botões permitirem apenas uma classificação. -->
+                                <div class="classificacoes">
+                                    <label class="opcao-risco risco-vermelho">
+                                        <input
+                                            type="radio"
+                                            name="classificacao"
+                                            value="vermelho"
+                                            required
+                                        >
+                                        <span>
+                                            <strong>Vermelho</strong>
+                                            <small>Emergência</small>
+                                        </span>
+                                    </label>
+                                    <label class="opcao-risco risco-laranja">
+                                        <input
+                                            type="radio"
+                                            name="classificacao"
+                                            value="laranja"
+                                            required
+                                        >
+                                        <span>
+                                            <strong>Laranja</strong>
+                                            <small>Muito urgente</small>
+                                        </span>
+                                    </label>
+                                    <label class="opcao-risco risco-amarelo">
+                                        <input
+                                            type="radio"
+                                            name="classificacao"
+                                            value="amarelo"
+                                            required
+                                        >
+                                        <span>
+                                            <strong>Amarelo</strong>
+                                            <small>Urgente</small>
+                                        </span>
+                                    </label>
+                                    <label class="opcao-risco risco-verde">
+                                        <input
+                                            type="radio"
+                                            name="classificacao"
+                                            value="verde"
+                                            required
+                                        >
+                                        <span>
+                                            <strong>Verde</strong>
+                                            <small>Pouco urgente</small>
+                                        </span>
+                                    </label>
+                                    <label class="opcao-risco risco-azul">
+                                        <input
+                                            type="radio"
+                                            name="classificacao"
+                                            value="azul"
+                                            required
+                                        >
+                                        <span>
+                                            <strong>Azul</strong>
+                                            <small>Não urgente</small>
+                                        </span>
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <div class="acoes-ficha">
+                                <button
+                                    type="submit"
+                                    class="botao-primario"
+                                    id="concluir-triagem"
+                                    disabled
+                                >
+                                    Concluir triagem e encaminhar ao médico
+                                </button>
+                                <a href="#fila" class="botao-secundario">Voltar à fila</a>
+                            </div>
+                        </form>
+                    </section>
+                </section>
+            </div>
+        </main>
+    </body>
+</html>
