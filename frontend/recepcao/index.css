@@ -10,20 +10,24 @@ body {
     background-color: #f4f6f9;
     line-height: 1.5;
 }
+
 a {
     color: #165b9f;
     text-underline-offset: 3px;
 }
+
 button,
 input,
 select,
 textarea {
     font: inherit;
 }
+
 :focus-visible {
     outline: 3px solid #1c68b6;
     outline-offset: 3px;
 }
+
 [id] {
     scroll-margin-top: 20px;
 }
