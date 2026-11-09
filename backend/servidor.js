@@ -4,6 +4,9 @@ const banco = require("./banco");
 const app = express();
 const porta = 3000;
 
+const rotasMedico = require("./rotas/medico");
+app.use("/medico", rotasMedico);
+
 app.get("/", (requisicao, resposta) => {
     resposta.send("Backend do SAPS funcionando!");
 });
