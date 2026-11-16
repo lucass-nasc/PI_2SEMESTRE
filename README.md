@@ -62,10 +62,10 @@ Digitalizar e organizar o atendimento hospitalar de emergência, garantindo que 
 | Etapa | Situação |
 |---|---|
 | Levantamento inicial de requisitos | ✅ Concluído |
-| Modelagem e script do banco de dados | 🟡 Em andamento |
-| Desenvolvimento do front-end | 🟡 Em andamento |
-| Desenvolvimento do back-end | ⏳ Pendente |
-| Integração dos módulos | ⏳ Pendente |
+| Modelagem e script do banco de dados | ✅ Concluído |
+| Desenvolvimento do front-end | ✅ Concluído |
+| Desenvolvimento do back-end | 🟡 Em andamento |
+| Integração dos módulos | 🟡 Em andamento |
 | Testes | ⏳ Pendente |
 | Preparação da apresentação | ⏳ Pendente |
 
