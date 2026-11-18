@@ -10,17 +10,18 @@ const CLASSIFICACOES = {
     laranja: { texto: "Laranja · Muito urgente", classe: "risco-laranja" },
     amarelo: { texto: "Amarelo · Urgente", classe: "risco-amarelo" },
     verde: { texto: "Verde · Pouco urgente", classe: "risco-verde" },
-    azul: { texto: "Azul · Não urgente", classe: "risco-azul" }
+    azul: { texto: "Azul · Não urgente", classe: "risco-azul" },
 };
 
 const STATUS = {
     aguardando_medico: "Aguardando médico",
     em_atendimento: "Em atendimento",
-    finalizado: "Finalizado"
+    finalizado: "Finalizado",
 };
 
 // "2026-11-18" -> "18/11/2026" (separando o texto, sem criar Date, para não mudar o dia por fuso).
 function formatarData(texto) {
+    if (!texto) return "—";
     const [ano, mes, dia] = texto.split("-");
     return `${dia}/${mes}/${ano}`;
 }
@@ -41,13 +42,13 @@ function criarSelo(classificacao) {
 
 // Monta uma linha da tabela. Usamos textContent (e não innerHTML)
 // para que nenhum texto vindo do banco seja interpretado como HTML.
-function criarLinha(item) {
+function criarLinha(item, primeiro) {
     const linha = document.createElement("tr");
 
     const colunas = [
         item.senha,
-        item.paciente,
-        formatarData(item.data_nascimento)
+        item.paciente || "Não identificado",
+        formatarData(item.data_nascimento),
     ];
     for (const valor of colunas) {
         const celula = document.createElement("td");
@@ -70,19 +71,11 @@ function criarLinha(item) {
     botaoFicha.className = "botao-secundario";
     botaoFicha.textContent = "Ver ficha";
     botaoFicha.setAttribute("aria-label", `Ver ficha de ${item.paciente}, ${item.senha}`);
-    botaoFicha.addEventListener("click", () => carregarFicha(item.atendimento_id));
+    botaoFicha.disabled = Boolean(atual);
+    botaoFicha.addEventListener("click", () => executar(() => carregarFicha(item.atendimento_id)));
     celulaAcao.appendChild(botaoFicha);
 
-    // Ainda desativado: iniciar a consulta depende da rota PATCH e do login.
-    const botaoIniciar = document.createElement("button");
-    botaoIniciar.type = "button";
-    botaoIniciar.className = "botao-primario";
-    botaoIniciar.textContent = "Iniciar atendimento";
-    botaoIniciar.dataset.atendimentoId = item.atendimento_id;
-    botaoIniciar.dataset.acao = "iniciar-consulta";
-    botaoIniciar.disabled = true;
-    celulaAcao.appendChild(botaoIniciar);
-
+    if (primeiro && !atual) celulaAcao.appendChild(botaoIniciar(item.atendimento_id));
     linha.appendChild(celulaAcao);
     return linha;
 }
@@ -97,25 +90,6 @@ function mostrarMensagemFila(mensagem) {
     corpoFila.replaceChildren(linha);
 }
 
-async function carregarFila() {
-    try {
-        const resposta = await fetch("/api/medico/fila");
-        if (!resposta.ok) {
-            throw new Error(`Resposta ${resposta.status}`);
-        }
-        const fila = await resposta.json();
-
-        if (fila.length === 0) {
-            mostrarMensagemFila("Nenhum paciente aguardando atendimento médico.");
-            return;
-        }
-        corpoFila.replaceChildren(...fila.map(criarLinha));
-    } catch (erro) {
-        console.error("Erro ao carregar a fila:", erro);
-        mostrarMensagemFila("Não foi possível carregar a fila. Tente novamente.");
-    }
-}
-
 // Preenche o elemento que tem data-campo="nome" com o texto recebido.
 function preencher(nome, texto) {
     document.querySelector(`[data-campo="${nome}"]`).textContent = texto;
@@ -123,17 +97,12 @@ function preencher(nome, texto) {
 
 async function carregarFicha(id) {
     try {
-        const resposta = await fetch(`/api/medico/atendimentos/${id}`);
-        if (!resposta.ok) {
-            throw new Error(`Resposta ${resposta.status}`);
-        }
-        const d = await resposta.json();
-
+        const d = await pedir("/atendimentos/" + id);
         preencher("status", STATUS[d.status] || d.status);
         preencher("senha", d.senha);
-        preencher("paciente", d.paciente);
+        preencher("paciente", d.paciente || "Não identificado");
         preencher("data_nascimento", formatarData(d.data_nascimento));
-        preencher("idade", d.idade === 1 ? "1 ano" : `${d.idade} anos`);
+        preencher("idade", d.idade === null ? "—" : d.idade === 1 ? "1 ano" : `${d.idade} anos`);
         preencher("chegada", formatarHora(d.data_hora_chegada));
         preencher("cadastro", d.cadastro_completo ? "Completo" : "Incompleto");
 
@@ -146,23 +115,23 @@ async function carregarFicha(id) {
         preencher("pressao_arterial", d.pressao_arterial ? `${d.pressao_arterial} mmHg` : "—");
         preencher(
             "temperatura",
-            d.temperatura === null ? "—" : `${d.temperatura.toFixed(1).replace(".", ",")} °C`
+            d.temperatura === null ? "—" : `${d.temperatura.toFixed(1).replace(".", ",")} °C`,
         );
         preencher(
             "batimentos_cardiacos",
-            d.batimentos_cardiacos === null ? "—" : `${d.batimentos_cardiacos} bpm`
+            d.batimentos_cardiacos === null ? "—" : `${d.batimentos_cardiacos} bpm`,
         );
         preencher("queixas", d.queixas || "—");
         preencher("observacoes_triagem", d.observacoes_triagem || "—");
 
         campoAtendimentoId.value = d.atendimento_id;
+        ativarFormulario(atual?.id === id);
+        await mostrarHistorico(atual?.id === id);
         // O CSS mostra o painel quando o endereço termina em #atendimento-atual.
         window.location.hash = "atendimento-atual";
     } catch (erro) {
         console.error("Erro ao carregar a ficha:", erro);
-        preencher("status", "Erro ao carregar");
+        ativarFormulario(false);
+        avisar(erro.message);
     }
 }
-
-carregarFila();
-

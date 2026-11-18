@@ -43,7 +43,7 @@
                     <br>
                     <span id="coren-enfermeiro">COREN: —</span>
                 </p>
-                <button type="button" class="botao-secundario" id="sair" disabled>Sair</button>
+                <button type="button" class="botao-secundario" id="sair">Sair</button>
             </div>
         </aside>
 
@@ -54,9 +54,11 @@
             </header>
 
             <div class="area-conteudo">
+                <p id="mensagem" role="status" hidden></p>
                 <section class="painel secao" id="fila" tabindex="-1" aria-labelledby="titulo-fila">
                     <h2 class="titulo-tabela" id="titulo-fila">Fila de triagem</h2>
 
+                    <button id="atualizar-fila" type="button" class="botao-secundario">Atualizar fila</button>
                     <!-- A tabela recebe os atendimentos encaminhados pela recepção. -->
                     <div
                         class="rolagem-tabela"
@@ -74,47 +76,7 @@
                                     <th scope="col">Ação</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>AT0004</td>
-                                    <td>Maria Silva</td>
-                                    <td><time datetime="13:40">13:40</time></td>
-                                    <td>
-                                        <span class="status status-atendimento">Em triagem</span>
-                                    </td>
-                                    <td>
-                                        <a
-                                            href="#atendimento-atual"
-                                            class="botao-primario"
-                                            aria-label="Continuar triagem de Maria Silva, AT0004"
-                                        >
-                                            Continuar triagem
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>AT0006</td>
-                                    <td>Ana Souza</td>
-                                    <td><time datetime="13:55">13:55</time></td>
-                                    <td>
-                                        <span class="status status-aguardando">
-                                            Aguardando triagem
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button
-                                            type="button"
-                                            class="botao-primario"
-                                            data-atendimento-id="6"
-                                            data-acao="iniciar-triagem"
-                                            aria-label="Iniciar triagem de Ana Souza, AT0006"
-                                            disabled
-                                        >
-                                            Iniciar triagem
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody id="corpo-fila"></tbody>
                         </table>
                     </div>
                 </section>
@@ -127,7 +89,7 @@
                 >
                     <div class="cabecalho-atendimento">
                         <h2 id="titulo-atual">Atendimento atual</h2>
-                        <span class="status status-atendimento">Em triagem</span>
+                        <span class="status status-atendimento" data-campo="status">—</span>
                     </div>
 
                     <section class="painel" aria-labelledby="titulo-paciente">
@@ -137,27 +99,27 @@
                         <dl class="dados-paciente">
                             <div>
                                 <dt>Atendimento</dt>
-                                <dd>AT0004</dd>
+                                <dd data-campo="senha">—</dd>
                             </div>
                             <div>
                                 <dt>Paciente</dt>
-                                <dd>Maria Silva</dd>
+                                <dd data-campo="paciente">—</dd>
                             </div>
                             <div>
                                 <dt>Data de nascimento</dt>
-                                <dd><time datetime="1988-08-21">21/08/1988</time></dd>
+                                <dd data-campo="data_nascimento">—</dd>
                             </div>
                             <div>
                                 <dt>Idade</dt>
-                                <dd>38 anos</dd>
+                                <dd data-campo="idade">—</dd>
                             </div>
                             <div>
                                 <dt>Horário de chegada</dt>
-                                <dd><time datetime="13:40">13:40</time></dd>
+                                <dd data-campo="chegada">—</dd>
                             </div>
                             <div>
                                 <dt>Cadastro</dt>
-                                <dd><span class="status status-completo">Completo</span></dd>
+                                <dd data-campo="cadastro">—</dd>
                             </div>
                         </dl>
                     </section>
@@ -165,8 +127,8 @@
                     <section class="painel" aria-labelledby="titulo-ficha">
                         <h3 class="titulo-tabela" id="titulo-ficha">Ficha de triagem</h3>
                         <!-- A ficha usa o mesmo atendimento da recepção. O autor vem da sessão. -->
-                        <form id="form-triagem" action="/triagens/concluir" method="post">
-                            <input type="hidden" name="atendimento_id" value="4">
+                        <form id="form-triagem" method="post">
+                            <input type="hidden" name="atendimento_id" value="">
 
                             <fieldset>
                                 <legend>Sinais vitais</legend>
@@ -191,7 +153,7 @@
                                             type="number"
                                             id="temperatura"
                                             name="temperatura"
-                                            step="0.1"
+                                            min="0.1" max="99.9" step="0.1"
                                             required
                                         >
                                     </div>
@@ -201,7 +163,7 @@
                                             type="number"
                                             id="batimentos"
                                             name="batimentos_cardiacos"
-                                            min="0"
+                                            min="1" max="999"
                                             step="1"
                                             required
                                         >
@@ -243,7 +205,7 @@
                                         >
                                         <span>
                                             <strong>Vermelho</strong>
-                                            <small>Emergência</small>
+                                            <small>Emergência · imediato</small>
                                         </span>
                                     </label>
                                     <label class="opcao-risco risco-laranja">
@@ -255,7 +217,7 @@
                                         >
                                         <span>
                                             <strong>Laranja</strong>
-                                            <small>Muito urgente</small>
+                                            <small>Muito urgente · até 10 min</small>
                                         </span>
                                     </label>
                                     <label class="opcao-risco risco-amarelo">
@@ -267,7 +229,7 @@
                                         >
                                         <span>
                                             <strong>Amarelo</strong>
-                                            <small>Urgente</small>
+                                            <small>Urgente · até 60 min</small>
                                         </span>
                                     </label>
                                     <label class="opcao-risco risco-verde">
@@ -279,7 +241,7 @@
                                         >
                                         <span>
                                             <strong>Verde</strong>
-                                            <small>Pouco urgente</small>
+                                            <small>Pouco urgente · até 120 min</small>
                                         </span>
                                     </label>
                                     <label class="opcao-risco risco-azul">
@@ -291,7 +253,7 @@
                                         >
                                         <span>
                                             <strong>Azul</strong>
-                                            <small>Não urgente</small>
+                                            <small>Não urgente · até 240 min</small>
                                         </span>
                                     </label>
                                 </div>
@@ -313,5 +275,6 @@
                 </section>
             </div>
         </main>
+        <script src="/clinico/atendimento.js"></script>
     </body>
 </html>

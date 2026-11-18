@@ -16,7 +16,17 @@ async function atualizarBanco() {
             usado_em DATETIME NULL,
             FOREIGN KEY (usuario_id) REFERENCES usuario(id)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
-        console.log("Banco atualizado: campo RG e recuperação de senha disponíveis.");
+        // A reserva identifica quem pode concluir uma ficha; NULL libera o profissional.
+        const [reserva] = await banco.execute(
+            "SHOW COLUMNS FROM atendimento LIKE 'profissional_atual_id'",
+        );
+        if (!reserva.length)
+            await banco.query(
+                "ALTER TABLE atendimento ADD COLUMN profissional_atual_id INT NULL UNIQUE, ADD FOREIGN KEY (profissional_atual_id) REFERENCES usuario(id)",
+            );
+        console.log(
+            "Banco atualizado: RG, recuperação de senha e reserva de atendimento disponíveis.",
+        );
     } catch (erro) {
         console.error("Não foi possível atualizar o banco. Código:", erro.code);
         process.exitCode = 1;

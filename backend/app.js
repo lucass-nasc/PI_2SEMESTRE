@@ -68,6 +68,9 @@ function criarAplicacao(banco, configuracao) {
 
     app.use("/api/medico", autenticacao.exigirPerfil("medico"), require("./rotas/medico")(banco));
 
+    const criarFluxoClinico = require("./rotas/fluxo-clinico");
+    app.use("/api/triagem", autenticacao.exigirPerfil("enfermeiro"), criarFluxoClinico(banco, "triagem"));
+    app.use("/api/medico", autenticacao.exigirPerfil("medico"), criarFluxoClinico(banco, "medico"));
     const frontend = path.join(__dirname, "../frontend");
     app.use("/login", express.static(path.join(frontend, "login"), { index: "login.html" }));
     app.use(
@@ -75,7 +78,7 @@ function criarAplicacao(banco, configuracao) {
         autenticacao.exigirPerfil("recepcionista", true),
         express.static(path.join(frontend, "recepcao")),
     );
-    // Só controlo o acesso aos HTMLs existentes. Não implemento as ações clínicas do colega.
+    app.use("/clinico", express.static(path.join(frontend, "clinico")));
     app.use(
         "/triagem",
         autenticacao.exigirPerfil("enfermeiro", true),

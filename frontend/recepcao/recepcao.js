@@ -209,10 +209,16 @@ async function buscarPacientes() {
         (paciente) => {
             const acoes = document.createElement("div");
             acoes.append(criarBotao("Editar cadastro", () => carregarPaciente(paciente.id, false)));
-            if (atendimentoAtual)
+            if (atendimentoAtual) {
+                const selecionado = atendimentoAtual;
                 acoes.append(
-                    criarBotao("Usar na senha atual", () => carregarPaciente(paciente.id, true)),
+                    criarBotao("Selecionar para " + selecionado.senha, async () => {
+                        await atualizarFila();
+                        if (atendimentoAtual?.id !== selecionado.id) throw new Error("A senha mudou. Pesquise novamente.");
+                        await carregarPaciente(paciente.id, true);
+                    }),
                 );
+            }
             return [
                 paciente.nome_completo || "Não identificado",
                 paciente.cpf,

@@ -12,6 +12,7 @@ async function iniciarServidor() {
         // Confiro as duas alterações necessárias antes de aceitar cadastros na recepção.
         await banco.query("SELECT rg FROM paciente LIMIT 0");
         await banco.query("SELECT id FROM recuperacao_senha LIMIT 0");
+        await banco.query("SELECT profissional_atual_id FROM atendimento LIMIT 0");
         const app = criarAplicacao(banco, {
             segredoSessao: process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex"),
             enderecoPublico: (process.env.APP_URL || `http://127.0.0.1:${porta}`).replace(

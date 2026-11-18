@@ -71,6 +71,8 @@ CREATE TABLE atendimento ( -- alterar para prontuário
     id INT AUTO_INCREMENT PRIMARY KEY,
     paciente_id INT,
     recepcionista_id INT,
+    profissional_atual_id INT NULL UNIQUE,
+    FOREIGN KEY (profissional_atual_id) REFERENCES usuario(id),
     data_hora_chegada DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_hora_recepcao DATETIME,
     data_hora_finalizacao DATETIME,
