@@ -75,73 +75,9 @@
                                     <th scope="col">Ação</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="corpo-fila">
                                 <tr>
-                                    <td>AT0007</td>
-                                    <td>João Santos</td>
-                                    <td><time datetime="1975-03-12">12/03/1975</time></td>
-                                    <td>
-                                        <span class="status risco-laranja">
-                                            Laranja · Muito urgente
-                                        </span>
-                                    </td>
-                                    <td><time datetime="14:05">14:05</time></td>
-                                    <td>
-                                        <button
-                                            type="button"
-                                            class="botao-primario"
-                                            data-atendimento-id="7"
-                                            data-acao="iniciar-consulta"
-                                            aria-label="Iniciar atendimento de João Santos, AT0007"
-                                            disabled
-                                        >
-                                            Iniciar atendimento
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>AT0008</td>
-                                    <td>Pedro Lima</td>
-                                    <td><time datetime="1991-06-04">04/06/1991</time></td>
-                                    <td>
-                                        <span class="status risco-amarelo">Amarelo · Urgente</span>
-                                    </td>
-                                    <td><time datetime="14:10">14:10</time></td>
-                                    <td>
-                                        <button
-                                            type="button"
-                                            class="botao-primario"
-                                            data-atendimento-id="8"
-                                            data-acao="iniciar-consulta"
-                                            aria-label="Iniciar atendimento de Pedro Lima, AT0008"
-                                            disabled
-                                        >
-                                            Iniciar atendimento
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>AT0006</td>
-                                    <td>Ana Souza</td>
-                                    <td><time datetime="2000-02-10">10/02/2000</time></td>
-                                    <td>
-                                        <span class="status risco-verde">
-                                            Verde · Pouco urgente
-                                        </span>
-                                    </td>
-                                    <td><time datetime="13:55">13:55</time></td>
-                                    <td>
-                                        <button
-                                            type="button"
-                                            class="botao-primario"
-                                            data-atendimento-id="6"
-                                            data-acao="iniciar-consulta"
-                                            aria-label="Iniciar atendimento de Ana Souza, AT0006"
-                                            disabled
-                                        >
-                                            Iniciar atendimento
-                                        </button>
-                                    </td>
+                                    <td colspan="6">Carregando a fila…</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -156,7 +92,7 @@
                 >
                     <div class="cabecalho-atendimento">
                         <h2 id="titulo-atual">Atendimento atual</h2>
-                        <span class="status status-atendimento">Em atendimento</span>
+                        <span class="status status-atendimento" data-campo="status">—</span>
                     </div>
 
                     <section class="painel" aria-labelledby="titulo-paciente">
@@ -166,27 +102,27 @@
                         <dl class="dados-paciente">
                             <div>
                                 <dt>Atendimento</dt>
-                                <dd>AT0004</dd>
+                                <dd data-campo="senha">—</dd>
                             </div>
                             <div>
                                 <dt>Paciente</dt>
-                                <dd>Maria Silva</dd>
+                                <dd data-campo="paciente">—</dd>
                             </div>
                             <div>
                                 <dt>Data de nascimento</dt>
-                                <dd><time datetime="1988-08-21">21/08/1988</time></dd>
+                                <dd data-campo="data_nascimento">—</dd>
                             </div>
                             <div>
                                 <dt>Idade</dt>
-                                <dd>38 anos</dd>
+                                <dd data-campo="idade">—</dd>
                             </div>
                             <div>
                                 <dt>Horário de chegada</dt>
-                                <dd><time datetime="13:40">13:40</time></dd>
+                                <dd data-campo="chegada">—</dd>
                             </div>
                             <div>
                                 <dt>Cadastro</dt>
-                                <dd><span class="status status-completo">Completo</span></dd>
+                                <dd data-campo="cadastro">—</dd>
                             </div>
                         </dl>
                     </section>
@@ -195,28 +131,28 @@
                     <section class="painel" aria-labelledby="titulo-triagem">
                         <div class="cabecalho-painel">
                             <h3 class="titulo-tabela" id="titulo-triagem">Ficha de triagem</h3>
-                            <span class="status risco-amarelo">Amarelo · Urgente</span>
+                            <span class="status" data-campo="classificacao">—</span>
                         </div>
                         <dl class="dados-paciente">
                             <div>
                                 <dt>Pressão arterial</dt>
-                                <dd>120/80 mmHg</dd>
+                                <dd data-campo="pressao_arterial">—</dd>
                             </div>
                             <div>
                                 <dt>Temperatura</dt>
-                                <dd>36,7 °C</dd>
+                                <dd data-campo="temperatura">—</dd>
                             </div>
                             <div>
                                 <dt>Batimentos cardíacos</dt>
-                                <dd>82 bpm</dd>
+                                <dd data-campo="batimentos_cardiacos">—</dd>
                             </div>
                             <div class="dado-completo">
                                 <dt>Principais queixas</dt>
-                                <dd>Dor de cabeça desde a manhã.</dd>
+                                <dd data-campo="queixas">—</dd>
                             </div>
                             <div class="dado-completo">
                                 <dt>Observações da triagem</dt>
-                                <dd>—</dd>
+                                <dd data-campo="observacoes_triagem">—</dd>
                             </div>
                         </dl>
                     </section>
@@ -225,7 +161,7 @@
                         <h3 class="titulo-tabela" id="titulo-consulta">Registro da consulta</h3>
                         <!-- medico_id e horários vêm da sessão e do servidor, nunca de campos editáveis. -->
                         <form id="form-consulta" action="/consultas/concluir" method="post">
-                            <input type="hidden" name="atendimento_id" value="4">
+                            <input type="hidden" name="atendimento_id" id="atendimento-id" value="">
 
                             <div class="campo">
                                 <label for="diagnostico">Diagnóstico / avaliação médica</label>
@@ -268,5 +204,6 @@
                 </section>
             </div>
         </main>
+        <script src="fila.js"></script>
     </body>
 </html>
