@@ -10,6 +10,8 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
        >
         <script src="recepcao.js" defer></script>
+        <link rel="stylesheet" href="/equipe/minha-situacao.css">
+        <script src="/equipe/minha-situacao.js" defer></script>
     </head>
     <body>
         <aside class="barra-esquerda">
@@ -42,9 +44,14 @@
                     <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
                     <span>Atendimentos</span>
                 </a>
+                <a href="#funcionarios" class="item-menu menu-funcionarios">
+                    <i class="fa-solid fa-users" aria-hidden="true"></i>
+                    <span>Funcionários</span>
+                </a>
             </nav>
             <div class="rodape-menu">
                 <p id="nome-usuario">Recepcionista</p>
+                <button type="button" class="botao-secundario" id="abrir-situacao">Minha situação</button>
                 <button type="button" class="botao-secundario" id="sair">Sair</button>
             </div>
         </aside>
@@ -125,6 +132,25 @@
                             </table>
                         </div>
                     </section>
+                </section>
+                <section class="secao" id="funcionarios">
+                    <div class="cabecalho-secao">
+                        <h2>Funcionários</h2>
+                        <button id="atualizar-equipe" type="button" class="botao-secundario">Atualizar</button>
+                    </div>
+                    <div class="painel rolagem-tabela">
+                        <table class="tabela-atendimentos" aria-label="Situação atual da equipe">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Função</th>
+                                    <th scope="col">Situação atual</th>
+                                    <th scope="col">Até</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-equipe"></tbody>
+                        </table>
+                    </div>
                 </section>
                 <section class="secao" id="senhas">
                     <div class="cabecalho-secao">
@@ -452,5 +478,27 @@
                 </section>
             </div>
         </main>
+        <dialog id="janela-situacao" aria-labelledby="titulo-minha-situacao">
+            <form>
+                <h2 id="titulo-minha-situacao">Minha situação</h2>
+                <label>Situação atual
+                    <select name="situacao" required>
+                        <option value="">Selecione</option>
+                        <option value="plantao">Em plantão</option>
+                        <option value="almoco">Em horário de almoço</option>
+                        <option value="ferias">Em férias</option>
+                        <option value="folga">De folga</option>
+                    </select>
+                </label>
+                <label>Até quando?
+                    <input type="datetime-local" name="termino" required>
+                </label>
+                <p role="status"></p>
+                <div>
+                    <button type="submit" class="botao-primario">Salvar</button>
+                    <button type="button" class="botao-secundario" data-fechar>Fechar</button>
+                </div>
+            </form>
+        </dialog>
     </body>
 </html>

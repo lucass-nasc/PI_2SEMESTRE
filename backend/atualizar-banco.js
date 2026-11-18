@@ -24,8 +24,14 @@ async function atualizarBanco() {
             await banco.query(
                 "ALTER TABLE atendimento ADD COLUMN profissional_atual_id INT NULL UNIQUE, ADD FOREIGN KEY (profissional_atual_id) REFERENCES usuario(id)",
             );
+        await banco.query(`CREATE TABLE IF NOT EXISTS disponibilidade_funcionario (
+            usuario_id INT PRIMARY KEY,
+            situacao ENUM('plantao', 'almoco', 'ferias', 'folga') NOT NULL,
+            termino_utc DATETIME NOT NULL,
+            FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
         console.log(
-            "Banco atualizado: RG, recuperação de senha e reserva de atendimento disponíveis.",
+            "Banco atualizado: RG, recuperação de senha e reserva de atendimento e situação dos funcionários disponíveis.",
         );
     } catch (erro) {
         console.error("Não foi possível atualizar o banco. Código:", erro.code);

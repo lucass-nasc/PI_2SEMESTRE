@@ -2,7 +2,7 @@
 -- MySQL 8.0.16 ou superior (CHECK precisa ser aplicado pelo banco).
 -- Execute UMA VEZ em um schema NOVO e vazio selecionado no Workbench.
 -- Este script nao migra nem apaga um banco existente.
--- Seis tabelas. Prescricoes/documentos sao descritos, nao emitidos ou executados.
+-- Sete tabelas. Prescricoes/documentos sao descritos, nao emitidos ou executados.
 
 SET NAMES utf8mb4;
 
@@ -34,6 +34,13 @@ CREATE TABLE recuperacao_senha (
     token_hash CHAR(64) NOT NULL UNIQUE,
     expira_em DATETIME NOT NULL,
     usado_em DATETIME NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE disponibilidade_funcionario (
+    usuario_id INT PRIMARY KEY,
+    situacao ENUM('plantao', 'almoco', 'ferias', 'folga') NOT NULL,
+    termino_utc DATETIME NOT NULL,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

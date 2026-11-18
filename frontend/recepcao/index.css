@@ -439,7 +439,8 @@ body:not(:has(.secao:target)) .menu-visao-geral,
 body:has(#visao-geral:target) .menu-visao-geral,
 body:has(#senhas:target) .menu-senhas,
 body:has(#pacientes:target) .menu-pacientes,
-body:has(#atendimentos:target) .menu-atendimentos {
+body:has(#atendimentos:target) .menu-atendimentos,
+body:has(#funcionarios:target) .menu-funcionarios {
     background: #e3f0ff;
     color: #1c68b6;
     font-weight: bold;

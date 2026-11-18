@@ -154,6 +154,31 @@ test(
                 assert.equal((await recepcao.pedir("/medico/index.html")).status, 403);
                 assert.equal((await recepcao.pedir("/recepcao/index.html")).status, 200);
             });
+            await t.test("equipe mostra apenas contas ativas e respeita o prazo da situação", async () => {
+                const lista = "/api/recepcao/funcionarios";
+                const minha = "/api/minha-situacao";
+                assert.equal((await visitante.pedir(lista)).status, 401);
+                assert.equal((await medico.pedir(lista)).status, 403);
+                const equipe = (await recepcao.pedir(lista)).corpo;
+                assert.equal(equipe.length, 4);
+                assert.ok(equipe.every(p => p.situacao === null && !("senha_hash" in p)));
+                const termino = new Date(Date.now() + 3600000).toISOString();
+                for (const dados of [
+                    { situacao: "invalida", termino },
+                    { situacao: "ferias", termino: 17 },
+                    { situacao: "ferias", termino: "2020-01-01T00:00:00.000Z" },
+                ]) assert.equal((await medico.pedir(minha, "PUT", dados)).status, 400);
+                for (const situacao of ["plantao", "almoco", "ferias", "folga"]) {
+                    assert.equal((await medico.pedir(minha, "PUT", { situacao, termino })).status, 200);
+                    const pessoas = (await recepcao.pedir(lista)).corpo;
+                    assert.equal(pessoas.find(p => p.perfil === "medico").situacao, situacao);
+                    assert.equal(pessoas.filter(p => p.situacao !== null).length, 1);
+                    assert.equal((await enfermagem.pedir(minha)).corpo.situacao, null);
+                }
+                await banco.query("UPDATE disponibilidade_funcionario SET termino_utc = UTC_TIMESTAMP() - INTERVAL 1 MINUTE");
+                assert.equal((await medico.pedir(minha)).corpo.situacao, null);
+                assert.ok((await recepcao.pedir(lista)).corpo.every(p => p.termino === null));
+            });
             let atendimento1;
             let atendimento2;
             await t.test(

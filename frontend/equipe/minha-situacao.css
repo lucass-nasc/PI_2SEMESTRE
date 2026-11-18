@@ -1,0 +1,18 @@
+#janela-situacao {
+    width: min(25rem, 90vw);
+    margin: auto;
+    padding: 1.5rem;
+    border: 1px solid #d7e1ec;
+    border-radius: 12px;
+    color: #25374b;
+}
+#janela-situacao::backdrop { background: rgb(19 39 62 / 45%); }
+#janela-situacao form, #janela-situacao label { display: grid; gap: .5rem; }
+#janela-situacao form { gap: 1rem; }
+#janela-situacao select, #janela-situacao input {
+    font: inherit;
+    padding: .6rem;
+    border: 1px solid #aebdcd;
+    border-radius: 6px;
+}
+#abrir-situacao { margin-bottom: .5rem; }
