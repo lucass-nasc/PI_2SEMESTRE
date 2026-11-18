@@ -71,42 +71,36 @@ Digitalizar e organizar o atendimento hospitalar de emergência, garantindo que 
 
 As atividades detalhadas são acompanhadas no [Trello do Projeto Integrador](https://trello.com/b/6rn6A1Q0/projeto-integrador-2-semestre).
 
-## Estrutura planejada
 
-```text
-PI_2SEMESTRE/
-├── frontend/
-│   ├── inicio/
-│   ├── recepcao/
-│   ├── triagem/
-│   └── medico/
-├── backend/
-├── database/
-│   └── script.sql
-├── .gitignore
-├── CONTRIBUTING.md
-└── README.md
+
+## Organização
+
+- `frontend/login/`: HTML, CSS e JavaScript que rodam no navegador para acesso ao sistema.
+- `frontend/recepcao/`: uma página com as seções administrativas e seu JavaScript de cliente.
+- `frontend/triagem/` e `frontend/medico/`: telas clínicas; a fila médica usa a API protegida por perfil.
+- `backend/`: JavaScript executado pelo Node; autenticação, regras, validações e acesso ao MySQL.
+- `database/script.sql`: criação original das tabelas em um schema vazio.
+- `docs/guia_backend_login_recepcao.md`: instalação, explicação dos arquivos, testes e roteiro para a banca.
+
+## Como executar
+
+1. Inicie o serviço do MySQL. Se ainda não tem as tabelas, crie um schema vazio no Workbench e execute `database/script.sql` uma única vez.
+2. Preserve seu `backend/.env` existente. Se não tiver um, copie `.env.example` para `.env` e preencha os dados da sua conexão.
+3. No terminal, dentro de `backend`, execute:
+
+```powershell
+npm ci
+npm run preparar-banco
+npm start
 ```
 
-As pastas serão adicionadas à `main` conforme os respectivos módulos forem revisados e aprovados.
+Abra **http://127.0.0.1:3000**. O mesmo servidor entrega o frontend e a API; não use Live Server nem abra o HTML pelo arquivo local.
 
-## Como executar o projeto
+`preparar-banco` adiciona o campo RG e a tabela de recuperação de senha sem apagar registros. Não execute novamente o SQL de criação sobre as tabelas existentes.
 
-### 1. Clonar o repositório
+Para cadastrar um funcionário, defina `SAPS_SENHA_INICIAL` no `.env` e execute `npm run cadastrar-usuario` em outro terminal dentro de `backend`. Use no login o e-mail e a senha desse funcionário. Não existe usuário/senha padrão no código.
 
-```bash
-git clone https://github.com/lucass-nasc/PI_2SEMESTRE.git
-cd PI_2SEMESTRE
-```
-
-### 2. Preparar o banco de dados
-
-1. Abra o MySQL Workbench;
-2. crie um schema para o projeto, por exemplo `saps`;
-3. defina esse schema como padrão com **Set as Default Schema**;
-4. abra e execute o arquivo `database/script.sql`.
-
-> A aplicação ainda está em desenvolvimento. Os comandos para iniciar o front-end e o back-end serão acrescentados quando os módulos forem integrados ao repositório.
+Leia o [guia completo de login e recepção](docs/guia_backend_login_recepcao.md) antes de executar ou integrar os módulos. Ele explica também como rodar `npm test` e os testes opcionais com banco temporário.
 
 ## Como contribuir
 
