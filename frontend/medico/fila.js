@@ -99,7 +99,7 @@ function mostrarMensagemFila(mensagem) {
 
 async function carregarFila() {
     try {
-        const resposta = await fetch("/medico/fila");
+        const resposta = await fetch("/api/medico/fila");
         if (!resposta.ok) {
             throw new Error(`Resposta ${resposta.status}`);
         }
@@ -123,7 +123,7 @@ function preencher(nome, texto) {
 
 async function carregarFicha(id) {
     try {
-        const resposta = await fetch(`/medico/atendimentos/${id}`);
+        const resposta = await fetch(`/api/medico/atendimentos/${id}`);
         if (!resposta.ok) {
             throw new Error(`Resposta ${resposta.status}`);
         }
@@ -165,3 +165,4 @@ async function carregarFicha(id) {
 }
 
 carregarFila();
+
