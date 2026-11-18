@@ -9,6 +9,8 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         >
+        <link rel="stylesheet" href="/equipe/minha-situacao.css">
+        <script src="/equipe/minha-situacao.js" defer></script>
     </head>
     <body>
         <aside class="barra-esquerda">
@@ -43,6 +45,7 @@
                     <br>
                     <span id="crm-medico">CRM: —</span>
                 </p>
+                <button type="button" class="botao-secundario" id="abrir-situacao">Minha situação</button>
                 <button type="button" class="botao-secundario" id="sair">Sair</button>
             </div>
         </aside>
@@ -212,6 +215,28 @@
         
         <script src="fila.js"></script>
         <script src="/clinico/atendimento.js"></script>
+        <dialog id="janela-situacao" aria-labelledby="titulo-minha-situacao">
+            <form>
+                <h2 id="titulo-minha-situacao">Minha situação</h2>
+                <label>Situação atual
+                    <select name="situacao" required>
+                        <option value="">Selecione</option>
+                        <option value="plantao">Em plantão</option>
+                        <option value="almoco">Em horário de almoço</option>
+                        <option value="ferias">Em férias</option>
+                        <option value="folga">De folga</option>
+                    </select>
+                </label>
+                <label>Até quando?
+                    <input type="datetime-local" name="termino" required>
+                </label>
+                <p role="status"></p>
+                <div>
+                    <button type="submit" class="botao-primario">Salvar</button>
+                    <button type="button" class="botao-secundario" data-fechar>Fechar</button>
+                </div>
+            </form>
+        </dialog>
     </body>
 </html>
 

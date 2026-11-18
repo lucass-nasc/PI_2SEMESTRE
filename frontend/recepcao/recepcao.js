@@ -410,6 +410,30 @@ for (const [id, deslocamento] of [
 }
 formularioPaciente.elements.cadastro_completo.addEventListener("change", ajustarObrigatorios);
 
+async function atualizarEquipe() {
+    const equipe = await consultarServidor("/api/recepcao/funcionarios");
+    const situacoes = { plantao: "Em plantão", almoco: "Em horário de almoço", ferias: "Em férias", folga: "De folga" };
+    const perfis = { medico: "Médico", enfermeiro: "Enfermeiro", recepcionista: "Recepcionista" };
+    preencherTabela("lista-equipe", equipe, (pessoa) => [
+        pessoa.nome_completo,
+        perfis[pessoa.perfil],
+        situacoes[pessoa.situacao] || "Não informada",
+        pessoa.termino ? new Date(pessoa.termino).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "—",
+    ], 4);
+}
+
+async function atualizarEquipeVisivel() {
+    if (!usuario || location.hash !== "#funcionarios") return;
+    try {
+        await atualizarEquipe();
+    } catch (erro) {
+        mostrarMensagem(erro.message, true);
+    }
+}
+aoClicar("atualizar-equipe", atualizarEquipe);
+window.addEventListener("hashchange", atualizarEquipeVisivel);
+document.addEventListener("situacao-atualizada", atualizarEquipeVisivel);
+
 async function iniciarRecepcao() {
     try {
         const sessao = await consultarServidor("/api/sessao");
@@ -422,12 +446,13 @@ async function iniciarRecepcao() {
         formularioPaciente.elements.data_nascimento.max = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}-${String(hoje.getDate()).padStart(2, "0")}`;
         formularioPaciente.elements.data_nascimento.min = "1900-01-01";
         await atualizarDados();
+        await atualizarEquipeVisivel();
         ajustarObrigatorios();
         // Atualizo os números sem substituir o formulário que está sendo preenchido.
         setInterval(async () => {
             if (document.hidden) return;
             try {
-                await Promise.all([atualizarPainel(), atualizarFila()]);
+                await Promise.all([atualizarPainel(), atualizarFila(), atualizarEquipeVisivel()]);
             } catch (erro) {
                 mostrarMensagem(erro.message, true);
             }

@@ -4,6 +4,7 @@
     "description": "",
     "main": "servidor.js",
     "scripts": {
+        "iniciar:mailpit": "node iniciar-com-mailpit.js",
         "start": "node servidor.js",
         "preparar-banco": "node atualizar-banco.js",
         "cadastrar-usuario": "node cadastrar-usuario.js",

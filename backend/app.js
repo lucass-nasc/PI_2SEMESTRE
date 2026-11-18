@@ -64,6 +64,7 @@ function criarAplicacao(banco, configuracao) {
     );
     app.use(autenticacao.carregarUsuario);
     app.use("/api", autenticacao.rotas);
+    app.use("/api", require("./rotas/disponibilidade")(banco, autenticacao.exigirPerfil));
     app.use("/api/recepcao", autenticacao.exigirPerfil("recepcionista"), criarRotasRecepcao(banco));
 
     app.use("/api/medico", autenticacao.exigirPerfil("medico"), require("./rotas/medico")(banco));
@@ -78,6 +79,7 @@ function criarAplicacao(banco, configuracao) {
         autenticacao.exigirPerfil("recepcionista", true),
         express.static(path.join(frontend, "recepcao")),
     );
+    app.use("/equipe", express.static(path.join(frontend, "equipe")));
     app.use("/clinico", express.static(path.join(frontend, "clinico")));
     app.use(
         "/triagem",

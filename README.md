@@ -19,7 +19,8 @@ Digitalizar e organizar o atendimento hospitalar de emergência, garantindo que 
 - Cadastro e consulta dos dados do paciente;
 - geração automática do número de atendimento, como `AT0001`;
 - inclusão, alteração, consulta e cancelamento de atendimentos enquanto não finalizados pelo médico;
-- encaminhamento do paciente para a triagem.
+- encaminhamento do paciente para a triagem;
+- consulta da situação atual dos funcionários. Cada profissional informa em **Minha situação** se está em plantão, almoço, férias ou folga, com um horário de término. Depois disso a recepção vê **Não informada**.
 
 ### 2. Triagem
 
@@ -97,7 +98,7 @@ npm start
 
 Abra **http://127.0.0.1:3000**. O mesmo servidor entrega o frontend e a API; não use Live Server nem abra o HTML pelo arquivo local.
 
-`preparar-banco` adiciona o que faltar: RG, recuperação de senha e profissional responsável pelo atendimento em andamento sem apagar registros. Não execute novamente o SQL de criação sobre as tabelas existentes.
+`preparar-banco` adiciona o que faltar: situação da equipe, RG, recuperação de senha e profissional responsável pelo atendimento em andamento sem apagar registros. Não execute novamente o SQL de criação sobre as tabelas existentes.
 
 Para cadastrar um funcionário, defina `SAPS_SENHA_INICIAL` no `.env` e execute `npm run cadastrar-usuario` em outro terminal dentro de `backend`. Use no login o e-mail e a senha desse funcionário. Não existe usuário/senha padrão no código.
 
@@ -120,3 +121,5 @@ Leia o [guia de contribuição](CONTRIBUTING.md) antes de começar uma tarefa.
 Se o banco já existia, rode `npm run preparar-banco` dentro de `backend` antes de iniciar esta versão. A coluna `atendimento.profissional_atual_id` guarda quem assumiu a ficha e é liberada ao concluir ou cancelar. Abrir a página de novo recupera a ficha em andamento; campos ainda não enviados não são persistidos.
 
 As credenciais da demonstração são distribuídas separadamente. A recuperação de senha com entrega real depende da configuração SMTP e de uma caixa de e-mail acessível.
+
+Para testar **Esqueci minha senha** com as contas da apresentação, siga o [passo a passo da caixa de e-mail local](docs/guia_backend_login_recepcao.md#caixa-local-no-windows).
