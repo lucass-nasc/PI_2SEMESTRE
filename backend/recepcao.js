@@ -313,7 +313,7 @@ function criarRotasRecepcao(banco) {
             if (confirmacoes.length)
                 throw erroDeValidacao("Este atendimento já foi confirmado pelo médico.", 409);
             await conexao.execute(
-                "UPDATE atendimento SET status = 'cancelado', motivo_cancelamento = ? WHERE id = ?",
+                "UPDATE atendimento SET status = 'cancelado', profissional_atual_id = NULL, motivo_cancelamento = ? WHERE id = ?",
                 [motivo, id],
             );
             await conexao.commit();

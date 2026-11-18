@@ -97,7 +97,7 @@ npm start
 
 Abra **http://127.0.0.1:3000**. O mesmo servidor entrega o frontend e a API; não use Live Server nem abra o HTML pelo arquivo local.
 
-`preparar-banco` adiciona o campo RG e a tabela de recuperação de senha sem apagar registros. Não execute novamente o SQL de criação sobre as tabelas existentes.
+`preparar-banco` adiciona o que faltar: RG, recuperação de senha e profissional responsável pelo atendimento em andamento sem apagar registros. Não execute novamente o SQL de criação sobre as tabelas existentes.
 
 Para cadastrar um funcionário, defina `SAPS_SENHA_INICIAL` no `.env` e execute `npm run cadastrar-usuario` em outro terminal dentro de `backend`. Use no login o e-mail e a senha desse funcionário. Não existe usuário/senha padrão no código.
 
@@ -108,3 +108,15 @@ Leia o [guia completo de login e recepção](docs/guia_backend_login_recepcao.md
 As alterações devem ser feitas em uma branch própria e enviadas por Pull Request para a `main`.
 
 Leia o [guia de contribuição](CONTRIBUTING.md) antes de começar uma tarefa.
+
+## Roteiro de atendimento
+
+1. Na recepção, gere e chame a senha, selecione ou cadastre o paciente e encaminhe à triagem. Um cadastro provisório também pode prosseguir.
+2. Entre como enfermeiro, atualize a fila e inicie a primeira triagem. Registre os sinais vitais, as queixas e a classificação. Ao concluir, o paciente passa para a fila médica.
+3. Entre como médico e atualize a fila. A prioridade é a classificação de risco, seguida pela chegada. É possível ler a ficha antes de iniciar; só o médico que assumir a consulta pode concluí-la.
+4. Em **Atendimento atual**, consulte o histórico de consultas anteriores, registre a avaliação e a conduta, se houver. A conduta pode reunir medicamentos (nome, dose e horário), orientações, atestado ou pedido de exame em texto. O sistema não emite documentos nem administra medicação.
+5. Confirme e finalize. O painel da recepção conta o atendimento e o prontuário conserva triagem e consulta. Cancelamentos anteriores à confirmação permanecem no histórico administrativo.
+
+Se o banco já existia, rode `npm run preparar-banco` dentro de `backend` antes de iniciar esta versão. A coluna `atendimento.profissional_atual_id` guarda quem assumiu a ficha e é liberada ao concluir ou cancelar. Abrir a página de novo recupera a ficha em andamento; campos ainda não enviados não são persistidos.
+
+As credenciais da demonstração são distribuídas separadamente. A recuperação de senha com entrega real depende da configuração SMTP e de uma caixa de e-mail acessível.

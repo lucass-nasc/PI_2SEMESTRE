@@ -43,7 +43,7 @@
                     <br>
                     <span id="crm-medico">CRM: —</span>
                 </p>
-                <button type="button" class="botao-secundario" id="sair" disabled>Sair</button>
+                <button type="button" class="botao-secundario" id="sair">Sair</button>
             </div>
         </aside>
 
@@ -54,9 +54,11 @@
             </header>
 
             <div class="area-conteudo">
+                <p id="mensagem" role="status" hidden></p>
                 <section class="painel secao" id="fila" tabindex="-1" aria-labelledby="titulo-fila">
                     <h2 class="titulo-tabela" id="titulo-fila">Fila de atendimento</h2>
 
+                    <button id="atualizar-fila" type="button" class="botao-secundario">Atualizar fila</button>
                     <!-- O backend envia apenas aguardando_medico, ordenados por risco e chegada. -->
                     <div
                         class="rolagem-tabela"
@@ -157,15 +159,18 @@
                         </dl>
                     </section>
 
+                    <section class="painel" id="prontuario" hidden>
+                        <h3>Consultas anteriores</h3><div id="historico"></div>
+                    </section>
                     <section class="painel" aria-labelledby="titulo-consulta">
                         <h3 class="titulo-tabela" id="titulo-consulta">Registro da consulta</h3>
                         <!-- medico_id e horários vêm da sessão e do servidor, nunca de campos editáveis. -->
-                        <form id="form-consulta" action="/consultas/concluir" method="post">
+                        <form id="form-consulta" method="post">
                             <input type="hidden" name="atendimento_id" id="atendimento-id" value="">
 
                             <div class="campo">
                                 <label for="diagnostico">Diagnóstico / avaliação médica</label>
-                                <textarea id="diagnostico" name="diagnostico" rows="4"></textarea>
+                                <textarea required id="diagnostico" name="diagnostico" rows="4"></textarea>
                             </div>
                             <div class="campo">
                                 <label for="observacoes">Observações da consulta</label>
@@ -204,6 +209,9 @@
                 </section>
             </div>
         </main>
+        
         <script src="fila.js"></script>
+        <script src="/clinico/atendimento.js"></script>
     </body>
 </html>
+

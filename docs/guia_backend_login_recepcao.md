@@ -18,11 +18,11 @@ npm run preparar-banco
 npm start
 ```
 
-`npm ci` instala as bibliotecas nas versões do `package-lock.json`. `preparar-banco` acrescenta apenas o campo RG e a tabela de recuperação de senha; pode ser executado novamente e não apaga cadastros. `npm start` mantém o servidor ligado: deixe o terminal aberto.
+`npm ci` instala as bibliotecas nas versões do `package-lock.json`. `preparar-banco` atualiza RG, recuperação de senha e a reserva de atendimento clínico; pode ser executado novamente e não apaga cadastros. `npm start` mantém o servidor ligado: deixe o terminal aberto.
 
 Abra **http://127.0.0.1:3000**. Use esse endereço para o projeto inteiro. Abrir o HTML por duplo clique ou pelo Live Server inicia outra origem e não é o modo de executar esta versão.
 
-**Se você ainda não criou as tabelas:** primeiro crie um schema vazio no Workbench, selecione-o e execute `database/script.sql` uma única vez. O script atual já inclui RG e recuperação; pule o comando `npm run preparar-banco`. Quem já tem as tabelas não deve executar novamente o script inicial.
+**Se você ainda não criou as tabelas:** primeiro crie um schema vazio no Workbench, selecione-o e execute `database/script.sql` uma única vez. O script atual já inclui RG, recuperação e reserva clínica; pule o comando `npm run preparar-banco`. Quem já tem as tabelas não deve executar novamente o script inicial.
 
 ## 2. Qual usuário e senha usar?
 
@@ -135,21 +135,11 @@ O link dura 30 minutos, tem um token aleatório, e o banco guarda somente seu re
 
 Sem configuração SMTP, o sistema informa que a recuperação está indisponível. Não mostra um link secreto na tela nem afirma ter enviado um e-mail. O envio a uma caixa postal real depende da configuração do seu provedor e deve ser conferido localmente.
 
-## 8. Limites entre sua parte e a do colega
+## 8. Integração clínica
 
-O login é compartilhado: permite entrar como recepcionista, enfermeiro ou médico e protege a pasta correta. Isso não implementa o trabalho clínico.
+A recepção encaminha o atendimento para a enfermagem. As rotas em `backend/rotas/fluxo-clinico.js` reservam a ficha para um profissional, validam o preenchimento e registram a conclusão em transação. A enfermagem escolhe a classificação; o médico recebe a fila ordenada e a ficha da triagem. A leitura do histórico usa a view `prontuario`.
 
-A recepção altera apenas `paciente` e os campos administrativos de `atendimento`. A consulta de confirmação médica é somente leitura. As leituras da fila e da ficha já estão ligadas ao frontend médico. Não há rotas de gravação de sinais vitais, Manchester, consulta, diagnóstico, conduta, receita ou finalização médica nesta entrega.
-
-Para integrar o módulo do colega:
-
-1. Ele pode reutilizar `banco.js` e `autenticacao.exigirPerfil` no `app.js`, antes da resposta final de endereço inexistente. A requisição autenticada já tem `requisicao.usuario` com `id`, `nome` e `perfil`.
-2. O JavaScript da triagem/médico deve obter o `tokenFormulario` em `GET /api/sessao` e enviá-lo no cabeçalho `X-CSRF-Token` das alterações, como a recepção faz.
-3. A triagem recebe atendimentos em `aguardando_triagem`. Ela deve assumir e registrar sua própria atividade; a recepção não cria uma ficha de triagem vazia.
-4. Para mudar a situação ou finalizar, o módulo clínico deve iniciar transação, bloquear **primeiro o mesmo registro de atendimento** com `SELECT ... FOR UPDATE`, verificar a situação e só depois gravar os dados clínicos. Deve recusar atendimento cancelado/finalizado. Essa ordem evita uma finalização simultânea a um cancelamento.
-5. Identificar o profissional pela sessão, nunca confiar em um ID de médico/enfermeiro enviado pelo navegador.
-
-Os testes criam algumas linhas clínicas apenas em um banco descartável para verificar a regra de bloqueio de cancelamento. Isso não adiciona backend clínico nem mexe nos dados do seu banco.
+Os botões das telas clínicas estão em `frontend/clinico/atendimento.js`. A apresentação da ficha e das linhas da fila médica permanece em `frontend/medico/fila.js`. O README contém o roteiro para testar com os três perfis.
 
 ## 9. Testes e demonstração
 
@@ -170,7 +160,7 @@ Remove-Item Env:TESTE_DB_PASSWORD
 
 Se a sua conexão tem senha, coloque a senha local no lugar do valor vazio. Não publique esse valor. A verificação de e-mail no teste captura o link dentro do processo; não envia mensagens externas.
 
-Na preparação desta entrega, passaram 21 verificações automatizadas de validação e integração em MariaDB 11.8 compatível com o SQL usado. Também foi exercitado o JavaScript dos formulários em DOM simulado com HTTP, cookies e banco reais. Isso não substitui a conferência visual no seu navegador nem a execução no seu MySQL 9.6.
+Na preparação desta entrega, passaram 22 verificações automatizadas de validação e integração em MariaDB 11.8 compatível com o SQL usado. Também foi exercitado o JavaScript dos formulários em DOM simulado com HTTP, cookies e banco reais. Isso não substitui a conferência visual no seu navegador nem a execução no seu MySQL 9.6.
 
 Roteiro manual: entrar com recepcionista → gerar senha → chamar → cadastrar provisório → salvar → buscar e completar → encaminhar → consultar atendimento. Depois testar uma senha errada, um CPF inválido, busca sem resultado, cancelamento sem motivo e acesso a uma área de outro perfil.
 

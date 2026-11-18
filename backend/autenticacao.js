@@ -25,7 +25,7 @@ function criarAutenticacao(banco, enviarEmail, enderecoPublico) {
         requisicao.usuario = null;
         if (requisicao.session.usuarioId) {
             const [usuarios] = await banco.execute(
-                "SELECT id, nome_completo, perfil, ativo, senha_hash FROM usuario WHERE id = ?",
+                "SELECT id, nome_completo, perfil, registro_profissional, ativo, senha_hash FROM usuario WHERE id = ?",
                 [requisicao.session.usuarioId],
             );
             const usuario = usuarios[0];
@@ -35,6 +35,7 @@ function criarAutenticacao(banco, enviarEmail, enderecoPublico) {
                     id: usuario.id,
                     nome: usuario.nome_completo,
                     perfil: usuario.perfil,
+                    registro: usuario.registro_profissional,
                 };
             } else {
                 delete requisicao.session.usuarioId;

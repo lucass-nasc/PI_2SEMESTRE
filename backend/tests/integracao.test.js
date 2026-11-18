@@ -370,6 +370,109 @@ test(
                 },
             );
             await t.test(
+                "triagem e consulta: prioridade, autoria, cancelamento e histórico",
+                async () => {
+                    const outro = criarCliente();
+                    await banco.execute(
+                        "INSERT INTO usuario(nome_completo,email,perfil,senha_hash,registro_profissional) VALUES ('Outra Enfermeira','outra@saps.local','enfermeiro',?,'COREN-SP 888')",
+                        [hash],
+                    );
+                    await outro.entrar("outra@saps.local");
+                    const tri = {
+                        pressao_arterial: "120/80",
+                        temperatura: "36.5",
+                        batimentos_cardiacos: "70",
+                        classificacao: "verde",
+                        queixas: "Dor",
+                    };
+                    const consulta = { diagnostico: "Avaliação concluída", confirmacao: true };
+                    async function criarSenha() {
+                        const [a] = await banco.execute(
+                            "INSERT INTO atendimento(paciente_id,status) VALUES (?,'aguardando_triagem')",
+                            [pacienteId],
+                        );
+                        return a.insertId;
+                    }
+                    const chamar = (c, area, id) =>
+                        c.pedir("/api/" + area + "/atendimentos/" + id + "/iniciar", "POST", {});
+                    const concluir = (c, area, id, d) =>
+                        c.pedir("/api/" + area + "/atendimentos/" + id + "/concluir", "POST", d);
+                    const cancelar = (id) =>
+                        recepcao.pedir("/api/recepcao/atendimentos/" + id + "/cancelar", "POST", {
+                            motivo: "Desistência",
+                            confirmacao: true,
+                        });
+                    const verde = await criarSenha(),
+                        vermelho = await criarSenha();
+                    assert.equal((await chamar(enfermagem, "triagem", verde)).status, 200);
+                    assert.equal((await concluir(outro, "triagem", verde, tri)).status, 403);
+                    for (const invalido of [
+                        { temperatura: "-2" },
+                        { batimentos_cardiacos: "70a" },
+                        { pressao_arterial: "00/00" },
+                        { classificacao: "roxo" },
+                        { queixas: "" },
+                    ])
+                        assert.equal(
+                            (await concluir(enfermagem, "triagem", verde, { ...tri, ...invalido }))
+                                .status,
+                            400,
+                        );
+                    assert.equal((await concluir(enfermagem, "triagem", verde, tri)).status, 200);
+                    assert.equal((await chamar(enfermagem, "triagem", vermelho)).status, 200);
+                    assert.equal(
+                        (
+                            await concluir(enfermagem, "triagem", vermelho, {
+                                ...tri,
+                                classificacao: "vermelho",
+                            })
+                        ).status,
+                        200,
+                    );
+                    assert.equal(
+                        (await medico.pedir("/api/medico/fila")).corpo[0].atendimento_id,
+                        vermelho,
+                    );
+                    assert.equal((await chamar(medico, "medico", verde)).status, 409);
+                    assert.equal((await chamar(medico, "medico", vermelho)).status, 200);
+                    assert.equal(
+                        (await medico.pedir("/api/medico/atual")).corpo.atendimento.id,
+                        vermelho,
+                    );
+                    assert.equal(
+                        (
+                            await concluir(medico, "medico", vermelho, {
+                                ...consulta,
+                                confirmacao: false,
+                            })
+                        ).status,
+                        400,
+                    );
+                    assert.equal(
+                        (await concluir(medico, "medico", vermelho, consulta)).status,
+                        200,
+                    );
+                    assert.equal(
+                        (await concluir(medico, "medico", vermelho, consulta)).status,
+                        409,
+                    );
+                    assert.equal((await cancelar(vermelho)).status, 409);
+                    assert.equal((await chamar(medico, "medico", verde)).status, 200);
+                    const historico = (await medico.pedir("/api/medico/prontuario-atual")).corpo;
+                    assert.ok(
+                        historico.some(
+                            (h) =>
+                                h.atendimento_id === vermelho &&
+                                h.diagnostico === consulta.diagnostico &&
+                                h.conduta === null,
+                        ),
+                    );
+                    assert.equal((await cancelar(verde)).status, 200);
+                    assert.equal((await concluir(medico, "medico", verde, consulta)).status, 409);
+                    assert.equal((await medico.pedir("/api/medico/atual")).corpo.atendimento, null);
+                },
+            );
+            await t.test(
                 "recuperação usa token único, muda senha e encerra sessões antigas",
                 async () => {
                     assert.equal(
