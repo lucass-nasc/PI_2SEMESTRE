@@ -90,6 +90,7 @@ As atividades detalhadas são acompanhadas no [Trello do Projeto Integrador](htt
 
 ```powershell
 npm ci
+# Apenas se o banco foi criado com o script antigo:
 npm run preparar-banco
 npm start
 ```

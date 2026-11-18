@@ -1,6 +1,6 @@
 # Guia do backend — login e recepção
 
-Esta entrega implementa a parte de login e recepção do Lucas. O README do repositório e o descritivo do projeto foram usados como referência. Triagem e consulta médica continuam com o colega: as leituras da fila e da ficha médica já usam a sessão do médico em /api/medico. O SQL original foi preservado.
+Esta entrega implementa a parte de login e recepção do Lucas. O README do repositório e o descritivo do projeto foram usados como referência. Triagem e consulta médica continuam com o colega: as leituras da fila e da ficha médica já usam a sessão do médico em /api/medico.
 
 ## 1. Comece por aqui
 
@@ -13,6 +13,7 @@ Esta entrega implementa a parte de login e recepção do Lucas. O README do repo
 ```powershell
 cd backend
 npm ci
+# Apenas se o banco foi criado com o script antigo:
 npm run preparar-banco
 npm start
 ```
@@ -21,7 +22,7 @@ npm start
 
 Abra **http://127.0.0.1:3000**. Use esse endereço para o projeto inteiro. Abrir o HTML por duplo clique ou pelo Live Server inicia outra origem e não é o modo de executar esta versão.
 
-**Se você ainda não criou as tabelas:** primeiro crie um schema vazio no Workbench, selecione-o e execute `database/script.sql` uma única vez. Depois faça `npm run preparar-banco`. Quem já tem as tabelas não deve executar novamente o script inicial.
+**Se você ainda não criou as tabelas:** primeiro crie um schema vazio no Workbench, selecione-o e execute `database/script.sql` uma única vez. O script atual já inclui RG e recuperação; pule o comando `npm run preparar-banco`. Quem já tem as tabelas não deve executar novamente o script inicial.
 
 ## 2. Qual usuário e senha usar?
 
