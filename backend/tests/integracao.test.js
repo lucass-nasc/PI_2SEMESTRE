@@ -59,13 +59,8 @@ test(
                     "INSERT INTO usuario (nome_completo,email,senha_hash,perfil,registro_profissional,ativo) VALUES (?,?,?,?,?,?)",
                     [nome, email, hash, perfil, registro, ativo],
                 );
-            let linkRecuperacao;
             const app = criarAplicacao(banco, {
                 segredoSessao: crypto.randomBytes(32).toString("hex"),
-                enderecoPublico: "http://127.0.0.1",
-                enviarEmail: async (email, link) => {
-                    linkRecuperacao = link;
-                },
             });
             servidor = app.listen(0, "127.0.0.1");
             await new Promise((resolver) => servidor.once("listening", resolver));
@@ -497,46 +492,16 @@ test(
                     assert.equal((await medico.pedir("/api/medico/atual")).corpo.atendimento, null);
                 },
             );
-            await t.test(
-                "recuperação usa token único, muda senha e encerra sessões antigas",
-                async () => {
-                    assert.equal(
-                        (
-                            await visitante.pedir("/api/recuperar-senha", "POST", {
-                                email: "r1@saps.local",
-                            })
-                        ).status,
-                        200,
-                    );
-                    const token = linkRecuperacao.split("redefinir=")[1];
-                    const resposta = await visitante.pedir("/api/redefinir-senha", "POST", {
-                        token,
-                        senha: "OutraSenha123!",
-                        confirmacao: "OutraSenha123!",
-                    });
-                    assert.equal(resposta.status, 200);
-                    assert.equal(
-                        (
-                            await visitante.pedir("/api/redefinir-senha", "POST", {
-                                token,
-                                senha: "OutraSenha123!",
-                                confirmacao: "OutraSenha123!",
-                            })
-                        ).status,
-                        400,
-                    );
-                    assert.equal((await recepcao.pedir("/api/recepcao/painel")).status, 401);
-                    assert.equal(
-                        (
-                            await visitante.pedir("/api/login", "POST", {
-                                email: "r1@saps.local",
-                                senha: "OutraSenha123!",
-                            })
-                        ).status,
-                        200,
-                    );
-                },
-            );
+            await t.test("login mostra o contato da TI e não aceita redefinição pública", async () => {
+                const pagina = await visitante.pedir("/login/login.html");
+                assert.equal(pagina.status, 200);
+                assert.match(pagina.corpo, /Esqueci minha senha/);
+                assert.match(pagina.corpo, /ramal 7773/);
+                await visitante.pedir("/api/sessao");
+                for (const rota of ["/api/recuperar-senha", "/api/redefinir-senha"]) {
+                    assert.equal((await visitante.pedir(rota, "POST", {})).status, 404);
+                }
+            });
             await t.test("logout encerra o acesso", async () => {
                 assert.equal((await segundaRecepcao.pedir("/api/sair", "POST", {})).status, 200);
                 assert.equal((await segundaRecepcao.pedir("/api/recepcao/painel")).status, 401);

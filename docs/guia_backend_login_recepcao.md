@@ -18,11 +18,11 @@ npm run preparar-banco
 npm start
 ```
 
-`npm ci` instala as bibliotecas nas versões do `package-lock.json`. `preparar-banco` atualiza RG, recuperação de senha e a reserva de atendimento clínico; pode ser executado novamente e não apaga cadastros. `npm start` mantém o servidor ligado: deixe o terminal aberto.
+`npm ci` instala as bibliotecas nas versões do `package-lock.json`. `preparar-banco` atualiza RG, a reserva de atendimento clínico e a disponibilidade dos funcionários; pode ser executado novamente e não apaga cadastros. `npm start` mantém o servidor ligado: deixe o terminal aberto.
 
 Abra **http://127.0.0.1:3000**. Use esse endereço para o projeto inteiro. Abrir o HTML por duplo clique ou pelo Live Server inicia outra origem e não é o modo de executar esta versão.
 
-**Se você ainda não criou as tabelas:** primeiro crie um schema vazio no Workbench, selecione-o e execute `database/script.sql` uma única vez. O script atual já inclui RG, recuperação e reserva clínica; pule o comando `npm run preparar-banco`. Quem já tem as tabelas não deve executar novamente o script inicial.
+**Se você ainda não criou as tabelas:** primeiro crie um schema vazio no Workbench, selecione-o e execute `database/script.sql` uma única vez. O script atual já inclui RG, reserva clínica e disponibilidade dos funcionários; pule o comando `npm run preparar-banco`. Quem já tem as tabelas não deve executar novamente o script inicial.
 
 ## 2. Qual usuário e senha usar?
 
@@ -42,7 +42,7 @@ O cadastro só valida o formato do registro profissional; não consulta o consel
 
 - Login com e-mail/senha, sessão, logout e destino por perfil.
 - Bloqueio da API e da página de recepção para quem não é recepcionista.
-- Recuperação de senha por link temporário, quando o envio de e-mail estiver configurado.
+- Orientação de contato com o departamento de TI na tela de login.
 - Painel com contagens e atendimentos recentes lidos do banco.
 - Geração automática de número de atendimento: `AT0001`, `AT0002` e assim por diante.
 - Fila de chegada, chamada do próximo e uma senha atual por recepcionista.
@@ -61,15 +61,14 @@ A recepção atende pela ordem de chegada. A prioridade Manchester pertence à t
 
 | Arquivo | Responsabilidade |
 |---|---|
-| `frontend/login/login.js` | Interação dos formulários de login e recuperação; envia HTTP e mostra o resultado. |
+| `frontend/login/login.js` | Envia o formulário de login e mostra o resultado. |
 | `frontend/recepcao/recepcao.js` | Botões, formulários, tabelas e mensagens da recepção. |
 | `backend/servidor.js` | Confere banco/configuração e liga o servidor. |
 | `backend/app.js` | Configura Express, sessão, proteção, páginas, rotas e tratamento geral de erros. |
 | `backend/banco.js` | Abre um conjunto de conexões com MySQL usando o `.env`. |
-| `backend/autenticacao.js` | Login, sessão, perfis, logout e recuperação de senha. |
+| `backend/autenticacao.js` | Login, sessão, perfis e logout. |
 | `backend/recepcao.js` | Regras da recepção e consultas SQL administrativas. |
 | `backend/validacoes.js` | Regras reutilizáveis de tipo, formato, tamanho e obrigatoriedade. |
-| `backend/enviar-email.js` | Envia o link usando o servidor de e-mail configurado. |
 | `backend/cadastrar-usuario.js` | Cadastro de funcionários pelo responsável no terminal. |
 | `backend/atualizar-banco.js` | Atualização pequena e repetível do banco existente. |
 | `backend/tests/` | Verificação automática das validações e do fluxo de login/recepção. |
@@ -123,17 +122,11 @@ A validação do HTML ajuda a pessoa a preencher; a validação do backend é ob
 - `resposta.json`: devolve dados ao frontend. `resposta.status`: define o resultado HTTP.
 - `tokenFormulario`: protege os pedidos que alteram dados, vinculando-os à sessão que abriu o formulário. Não é a senha do usuário.
 
-Erros de preenchimento usam `400`; ausência de login, `401`; falta de permissão, `403`; registro inexistente, `404`; conflito, `409`; excesso de tentativas, `429`; indisponibilidade de e-mail, `503`. Erros inesperados recebem uma mensagem geral, sem mostrar SQL ou senha ao usuário. O terminal mostra o código técnico para investigação.
+Erros de preenchimento usam `400`; ausência de login, `401`; falta de permissão, `403`; registro inexistente, `404`; conflito, `409`; excesso de tentativas, `429`. Erros inesperados recebem uma mensagem geral, sem mostrar SQL ou senha ao usuário. O terminal mostra o código técnico para investigação.
 
 ## 7. Recuperação de senha
 
-O código está pronto, mas o envio real precisa de um servidor de e-mail. Preencha no `.env` os valores fornecidos pelo seu provedor: `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD` e `EMAIL_REMETENTE`. Reinicie o Node depois de alterar o `.env`.
-
-`APP_URL` é o endereço que será colocado no link. Para testar no mesmo computador use `http://127.0.0.1:3000` e abra o e-mail nesse computador. Esse endereço não abre o SAPS em outro computador ou no celular.
-
-O link dura 30 minutos, tem um token aleatório, e o banco guarda somente seu resumo SHA-256. Usar o link altera o hash da senha e inutiliza os links anteriores. As sessões com a senha antiga deixam de ser aceitas na próxima requisição.
-
-Sem configuração SMTP, o sistema informa que a recuperação está indisponível. Não mostra um link secreto na tela nem afirma ter enviado um e-mail. O envio a uma caixa postal real depende da configuração do seu provedor e deve ser conferido localmente.
+Na tela de login, **Esqueci minha senha** mostra o contato do departamento de TI: **ramal 7773**. O funcionário não precisa informar o e-mail para consultar o ramal. O atendimento é feito por telefone, fora do SAPS.
 
 ## 8. Integração clínica
 
@@ -158,9 +151,7 @@ Remove-Item Env:TESTAR_INTEGRACAO
 Remove-Item Env:TESTE_DB_PASSWORD
 ```
 
-Se a sua conexão tem senha, coloque a senha local no lugar do valor vazio. Não publique esse valor. A verificação de e-mail no teste captura o link dentro do processo; não envia mensagens externas.
-
-Na preparação desta entrega, passaram 22 verificações automatizadas de validação e integração em MariaDB 11.8 compatível com o SQL usado. Também foi exercitado o JavaScript dos formulários em DOM simulado com HTTP, cookies e banco reais. Isso não substitui a conferência visual no seu navegador nem a execução no seu MySQL 9.6.
+Se a sua conexão tem senha, coloque a senha local no lugar do valor vazio. Não publique esse valor.
 
 Roteiro manual: entrar com recepcionista → gerar senha → chamar → cadastrar provisório → salvar → buscar e completar → encaminhar → consultar atendimento. Depois testar uma senha errada, um CPF inválido, busca sem resultado, cancelamento sem motivo e acesso a uma área de outro perfil.
 
@@ -178,17 +169,5 @@ Roteiro manual: entrar com recepcionista → gerar senha → chamar → cadastra
 | Login não reconhece o cadastro | Use o e-mail do funcionário e a senha cadastrada em hash; não use o login do MySQL. |
 
 As sessões ficam na memória para a apresentação local. Reiniciar o servidor encerra os logins, mas os pacientes e atendimentos continuam no banco. O servidor escuta somente no próprio computador. Publicação na internet exigiria outra configuração, inclusive HTTPS e armazenamento persistente de sessões.
-
-### Caixa local no Windows
-
-1. Pare o SAPS (Ctrl+C). Dentro do backend novo, preserve o seu arquivo .env, rode `npm ci` e `npm run preparar-banco`. A atualização mantém as contas existentes.
-2. Baixe o ZIP do [Mailpit para Windows](https://github.com/axllent/mailpit/releases/latest) correspondente ao seu computador (normalmente windows-amd64). Extraia e, no PowerShell aberto na pasta de mailpit.exe, execute:
-   ```powershell
-   .\mailpit.exe --listen 127.0.0.1:8025 --smtp 127.0.0.1:1025
-   ```
-3. Deixe esse terminal aberto. Em outro terminal, na pasta backend, execute `npm run iniciar:mailpit`. Não é preciso preencher senha de e-mail. Use APP_URL=http://127.0.0.1:3000 no .env se essa for a porta do SAPS.
-4. Abra http://127.0.0.1:3000, clique em **Esqueci minha senha** e informe o e-mail de uma conta ativa, como medico1@saps.test se ela já estiver cadastrada. O SAPS envia o link por SMTP; a caixa de teste captura a mensagem antes que ela saia do computador.
-5. Em http://127.0.0.1:8025 abra a mensagem mais recente, siga o link, digite uma nova senha com pelo menos oito caracteres e confirme. Entre no SAPS com a senha nova. O link só vale uma vez por até 30 minutos. A senha anterior deixa de funcionar.
-6. Se não chegar mensagem, confira se os dois terminais estão abertos, se o SAPS foi iniciado com iniciar:mailpit e se a conta está ativa nesse banco. Para entrega em e-mail real, use uma conta SAPS com endereço real, configure os dados SMTP do provedor no .env e reinicie com `npm start`. Não compartilhe o .env.
 
 **Funcionários:** no menu de qualquer perfil, use **Minha situação**, escolha a situação atual, informe até quando ela vale e salve. Em outra sessão, entre na recepção e abra **Funcionários**. O botão **Atualizar** consulta o banco imediatamente; enquanto a aba estiver aberta, a lista também atualiza a cada 30 segundos. A informação é operacional: ela não bloqueia o login nem altera a fila dos pacientes.
