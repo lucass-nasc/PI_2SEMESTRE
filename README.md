@@ -79,7 +79,7 @@ Quando aparecer **Servidor disponível em…**, abra o endereço indicado no nav
 
 Deixe o terminal aberto enquanto usar o sistema. Para encerrar, pressione **Ctrl+C**. **Nas próximas vezes**, com o MySQL ligado e a mesma versão já configurada, basta abrir a pasta do projeto, entrar em `backend`, executar `npm start` e acessar o endereço no navegador.
 
-**Recuperação de senha (opcional):** para receber o link de redefinição por e-mail, configure o remetente e os dados SMTP do provedor no `.env` e reinicie o servidor. Essa configuração não é necessária para abrir o sistema e entrar com uma conta cadastrada.
+**Esqueci minha senha:** na tela de login, essa opção orienta o funcionário a ligar para o departamento de TI no **ramal 7773**.
 
 ## Como o código está dividido
 
@@ -87,14 +87,14 @@ Deixe o terminal aberto enquanto usar o sistema. Para encerrar, pressione **Ctrl
 | --- | --- |
 | Cliente (navegador) | [frontend/](frontend/): HTML, CSS e JavaScript das telas. O JS lê os formulários, envia os dados à API e mostra a resposta. O formulário de disponibilidade é compartilhado em [frontend/equipe/](frontend/equipe/). |
 | Servidor (Node.js e Express) | [backend/](backend/): recebe requisições, confere sessão e perfil, valida os campos, aplica as regras e consulta o MySQL. O navegador não executa SQL. |
-| Dados (MySQL) | [database/script.sql](database/script.sql): sete tabelas — `usuario`, `paciente`, `atendimento`, `triagem`, `consulta`, `recuperacao_senha` e `disponibilidade_funcionario`. A visão `prontuario` reúne os registros de atendimento, triagem e consulta para consultar o histórico. |
+| Dados (MySQL) | [database/script.sql](database/script.sql): seis tabelas — `usuario`, `paciente`, `atendimento`, `triagem`, `consulta` e `disponibilidade_funcionario`. A visão `prontuario` reúne os registros de atendimento, triagem e consulta para consultar o histórico. |
 
 **Exemplo para a banca:** ao pesquisar um paciente, [recepcao.js no cliente](frontend/recepcao/recepcao.js) envia o termo à API. As [rotas da recepção no servidor](backend/recepcao.js) consultam o banco e devolvem os resultados em JSON. Se a consulta não achar ninguém, a tela mostra “Nenhum registro encontrado”. Já um CPF inválido em um cadastro é erro de preenchimento: o [validador do servidor](backend/validacoes.js) rejeita o dado antes da gravação e a tela mostra a mensagem ao funcionário.
 
 ## Como verificar
 
 - **Validações:** em `backend`, rode `npm test`. Sem habilitar a integração, os testes de validação rodam e o teste que precisa do banco é ignorado.
-- **Integração:** siga o [guia de testes](docs/guia_backend_login_recepcao.md) para configurar o banco temporário. A suíte verifica, entre outros casos, sessão e permissão, dados inválidos, senha de atendimento única, cancelamento, ordem da fila, finalização e recuperação de senha.
+- **Integração:** siga o [guia de testes](docs/guia_backend_login_recepcao.md) para configurar o banco temporário. A suíte verifica, entre outros casos, sessão e permissão, dados inválidos, senha de atendimento única, cancelamento, ordem da fila, finalização e orientação de acesso pelo ramal da TI.
 - **Demonstração:** acompanhe o mesmo número de atendimento em três sessões: gere e encaminhe na recepção, classifique na enfermagem e finalize como médico. Volte à recepção e confira a situação final. Para demonstrar **Funcionários**, altere **Minha situação** em outra sessão e atualize a lista na recepção.
 
 ## Integrantes
@@ -111,4 +111,4 @@ Deixe o terminal aberto enquanto usar o sistema. Para encerrar, pressione **Ctrl
 
 ## Colaboração
 
-O [Trello](https://trello.com/b/6rn6A1Q0/projeto-integrador-2-semestre) acompanha as tarefas. As mudanças no repositório seguem por branch e pull request, conforme o [guia de contribuição](CONTRIBUTING.md). Para consultar a evolução do fluxo: [fila e ficha médica (#12)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/12), [integração da tela médica (#14)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/14), [login e recepção (#15)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/15), [fluxo clínico e prontuário (#16)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/16) e [funcionários e recuperação local (#17)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/17).
+O [Trello](https://trello.com/b/6rn6A1Q0/projeto-integrador-2-semestre) acompanha as tarefas. As mudanças no repositório seguem por branch e pull request, conforme o [guia de contribuição](CONTRIBUTING.md). Para consultar a evolução do fluxo: [fila e ficha médica (#12)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/12), [integração da tela médica (#14)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/14), [login e recepção (#15)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/15), [fluxo clínico e prontuário (#16)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/16) e [disponibilidade dos funcionários (#17)](https://github.com/lucass-nasc/PI_2SEMESTRE/pull/17).

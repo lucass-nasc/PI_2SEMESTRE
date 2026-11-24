@@ -1,7 +1,6 @@
 const crypto = require("node:crypto");
 const banco = require("./banco");
 const criarAplicacao = require("./app");
-const criarEnvioDeEmail = require("./enviar-email");
 
 async function iniciarServidor() {
     try {
@@ -9,19 +8,13 @@ async function iniciarServidor() {
         if (!Number.isInteger(porta) || porta < 1 || porta > 65535)
             throw new Error("PORT_INVALIDA");
         const [linhas] = await banco.query("SELECT DATABASE() AS banco_atual");
-        // Confiro as duas alterações necessárias antes de aceitar cadastros na recepção.
+        // Confiro a estrutura usada pela recepção e pelas telas clínicas.
         await banco.query("SELECT rg FROM paciente LIMIT 0");
-        await banco.query("SELECT id FROM recuperacao_senha LIMIT 0");
         await banco.query("SELECT profissional_atual_id FROM atendimento LIMIT 0");
         await banco.query("SELECT termino_utc FROM disponibilidade_funcionario LIMIT 0");
         const app = criarAplicacao(banco, {
             segredoSessao: process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex"),
-            enderecoPublico: (process.env.APP_URL || `http://127.0.0.1:${porta}`).replace(
-                /\/$/,
-                "",
-            ),
             https: process.env.COOKIE_SECURE === "true",
-            enviarEmail: criarEnvioDeEmail(),
         });
         const servidor = app.listen(porta, "127.0.0.1", () => {
             console.log("Conectado ao banco:", linhas[0].banco_atual);

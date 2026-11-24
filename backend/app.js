@@ -57,11 +57,7 @@ function criarAplicacao(banco, configuracao) {
     });
 
     // Middleware é uma função executada antes da rota: aqui verifico quem está conectado.
-    const autenticacao = criarAutenticacao(
-        banco,
-        configuracao.enviarEmail,
-        configuracao.enderecoPublico,
-    );
+    const autenticacao = criarAutenticacao(banco);
     app.use(autenticacao.carregarUsuario);
     app.use("/api", autenticacao.rotas);
     app.use("/api", require("./rotas/disponibilidade")(banco, autenticacao.exigirPerfil));

@@ -8,14 +8,6 @@ async function atualizarBanco() {
         );
         if (!colunas.length)
             await banco.query("ALTER TABLE paciente ADD COLUMN rg VARCHAR(20) NULL AFTER cpf");
-        await banco.query(`CREATE TABLE IF NOT EXISTS recuperacao_senha (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            usuario_id INT NOT NULL,
-            token_hash CHAR(64) NOT NULL UNIQUE,
-            expira_em DATETIME NOT NULL,
-            usado_em DATETIME NULL,
-            FOREIGN KEY (usuario_id) REFERENCES usuario(id)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
         // A reserva identifica quem pode concluir uma ficha; NULL libera o profissional.
         const [reserva] = await banco.execute(
             "SHOW COLUMNS FROM atendimento LIKE 'profissional_atual_id'",
@@ -31,7 +23,7 @@ async function atualizarBanco() {
             FOREIGN KEY (usuario_id) REFERENCES usuario(id)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
         console.log(
-            "Banco atualizado: RG, recuperação de senha e reserva de atendimento e situação dos funcionários disponíveis.",
+            "Banco atualizado: RG, reserva de atendimento e disponibilidade dos funcionários.",
         );
     } catch (erro) {
         console.error("Não foi possível atualizar o banco. Código:", erro.code);

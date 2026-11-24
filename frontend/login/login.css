@@ -232,7 +232,22 @@ body {
     }
 }
 
-/* Os três formulários ocupam o mesmo cartão, um de cada vez. */
 [hidden] { display: none !important; }
-.link-login { border: 0; background: none; color: #165b9f; text-decoration: underline; cursor: pointer; font: inherit; font-size: 14px; }
+
+.ajuda-acesso {
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.ajuda-acesso summary {
+    color: #165b9f;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ajuda-acesso p {
+    margin: 8px 0 0;
+    line-height: 1.5;
+}
+
 #mensagem-acesso { margin-top: 16px; }

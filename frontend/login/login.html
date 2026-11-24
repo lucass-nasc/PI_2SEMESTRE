@@ -63,54 +63,12 @@
                 </div>
 
                 <button class="botao-entrar" type="submit">Entrar</button>
-                <button class="link-login" id="abrir-recuperacao" type="button">
-                    Esqueci minha senha
-                </button>
             </form>
 
-            <form id="form-recuperacao" class="formulario-login" hidden>
-                <div class="campo">
-                    <label for="email-recuperacao">E-mail cadastrado</label>
-                    <input
-                        type="email"
-                        id="email-recuperacao"
-                        name="email"
-                        maxlength="150"
-                        required
-                        autocomplete="email"
-                   >
-                </div>
-                <button class="botao-entrar" type="submit">Enviar link</button>
-                <button class="link-login voltar-login" type="button">Voltar ao login</button>
-            </form>
-            <form id="form-redefinicao" class="formulario-login" hidden>
-                <div class="campo">
-                    <label for="nova-senha">Nova senha</label>
-                    <input
-                        type="password"
-                        id="nova-senha"
-                        name="senha"
-                        minlength="8"
-                        maxlength="72"
-                        autocomplete="new-password"
-                        required
-                   >
-                </div>
-                <div class="campo">
-                    <label for="confirmacao-senha">Confirme a senha</label>
-                    <input
-                        type="password"
-                        id="confirmacao-senha"
-                        name="confirmacao"
-                        minlength="8"
-                        maxlength="72"
-                        autocomplete="new-password"
-                        required
-                   >
-                </div>
-                <button class="botao-entrar" type="submit">Salvar nova senha</button>
-                <button class="link-login voltar-login" type="button">Voltar ao login</button>
-            </form>
+            <details class="ajuda-acesso">
+                <summary>Esqueci minha senha</summary>
+                <p>Para recuperar sua senha, entre em contato com o departamento de TI pelo <strong>ramal 7773</strong>.</p>
+            </details>
             <p id="mensagem-acesso" class="mensagem-login" role="status" hidden></p>
             <footer class="rodape-login">
                 <p class="nota-academica">Projeto Integrador · PUC-Campinas</p>

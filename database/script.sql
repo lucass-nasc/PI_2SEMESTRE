@@ -2,7 +2,7 @@
 -- MySQL 8.0.16 ou superior (CHECK precisa ser aplicado pelo banco).
 -- Execute UMA VEZ em um schema NOVO e vazio selecionado no Workbench.
 -- Este script nao migra nem apaga um banco existente.
--- Sete tabelas. Prescricoes/documentos sao descritos, nao emitidos ou executados.
+-- Seis tabelas. Prescricoes/documentos sao descritos, nao emitidos ou executados.
 
 SET NAMES utf8mb4;
 
@@ -27,15 +27,6 @@ CREATE TABLE usuario (
 -- Guardar conselho, UF e numero, por exemplo CRM-SP 123456.
 -- O CHECK exige preenchimento; o back-end valida formato e conselho do perfil.
 -- senha_hash guarda o hash produzido pelo back-end, nunca a senha em texto puro.
--- O link temporario identifica um pedido de recuperacao; guardamos apenas o hash.
-CREATE TABLE recuperacao_senha (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    token_hash CHAR(64) NOT NULL UNIQUE,
-    expira_em DATETIME NOT NULL,
-    usado_em DATETIME NULL,
-    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE disponibilidade_funcionario (
     usuario_id INT PRIMARY KEY,
