@@ -65,7 +65,7 @@ CREATE TABLE paciente (
 -- CPF e demais dados podem nao estar disponiveis, mesmo ao concluir o cadastro.
 -- CPF: somente 11 digitos; o back-end valida e converte campo vazio em NULL.
 
-CREATE TABLE atendimento ( -- alterar para prontuário
+CREATE TABLE atendimento (
     id INT AUTO_INCREMENT PRIMARY KEY,
     paciente_id INT,
     recepcionista_id INT,
@@ -160,17 +160,8 @@ JOIN atendimento a ON a.paciente_id = p.id
 LEFT JOIN triagem t ON t.atendimento_id = a.id
 LEFT JOIN consulta c ON c.atendimento_id = a.id;
 
--- RELACIONAMENTOS PARA O DER (nomes descritivos, em vez de repetir "possui"):
--- Usuario cadastra paciente: usuario 1 -> paciente 0..N; paciente tem 1 autor.
--- Paciente recebe prontuário: paciente 1 -> prontuário 0..N;
---   prontuário tem 0..1 paciente antes do cadastro e 1 apos a recepcao.
--- Recepcionista registra prontuário: usuario 1 -> prontuário 0..N;
---   prontuário tem 0..1 recepcionista antes de ser assumido.
--- Prontuário passa por triagem: prontuário 1 -> triagem 0..1.
--- Enfermeiro realiza triagem: usuario 1 -> triagem 0..N.
--- Prontuário origina consulta: prontuário 1 -> consulta 0..1.
--- Medico realiza consulta: usuario 1 -> consulta 0..N.
--- Prontuario e uma VIEW, nao uma nova entidade armazenada.
+-- MER, DER, cardinalidades e fluxo: database/diagramas/README.md.
+-- As FKs de triagem e consulta apontam para atendimento, nao para a VIEW prontuario.
 
 -- REGRAS DO BACK-END (nao implementadas somente por estas FKs/CHECKs):
 -- 1. Autenticar pelo hash, exigir conta ativa e validar o perfil em cada acao.

@@ -16,6 +16,8 @@ O painel da recepção mostra as filas e os atendimentos recentes. Um cadastro p
 
 **Funcionários:** cada profissional registra em **Minha situação** se está em plantão, almoço, férias ou folga e informa até quando. Em **Recepção → Funcionários**, a recepção vê as contas ativas e a situação vigente. Quando o prazo termina, a situação aparece como **Não informada**. Isso não bloqueia o login nem muda a prioridade da fila.
 
+**Modelagem do banco:** [MER (conceitual)](database/diagramas/MER.svg) · [DER (tabelas e chaves)](database/diagramas/DER.svg) · [Fluxo da senha ao prontuário](database/diagramas/README.md).
+
 ## Como executar no Windows
 
 **Pré-requisitos:** Node.js com npm, MySQL Server em execução e um navegador. Este roteiro usa o Visual Studio Code para abrir o projeto e o MySQL Workbench para preparar o banco.
