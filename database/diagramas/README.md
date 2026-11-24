@@ -1,5 +1,7 @@
 # Modelagem do banco · SAPS
 
+**Imagens em PNG:** [MER](MER.png) · [DER](DER.png). Abra a imagem no GitHub e use o botão de download para salvar no computador.
+
 ![MER: entidades, papéis e cardinalidades](MER.svg)
 
 ![DER: tabelas MySQL, tipos, chaves e relacionamentos](DER.svg)
