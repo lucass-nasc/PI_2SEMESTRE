@@ -1,35 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1960" height="1680" viewBox="0 0 1960 1680" role="img" aria-labelledby="titulo descricao"><title id="titulo">DER • SAPS</title><desc id="descricao">Seis tabelas MySQL com colunas, tipos, chaves e nove relacionamentos. A visão prontuario é explicada fora das tabelas.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1960" height="1185" viewBox="0 150 1960 1185" role="img" aria-labelledby="titulo descricao"><title id="titulo">DER • SAPS</title><desc id="descricao">Tabelas, chaves e cardinalidades do SAPS.</desc>
 <rect width="1960" height="1680" fill="white"/>
-<text x="50" y="44" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#00685e">SAPS   /   ESTRUTURA MYSQL</text>
-<text x="48" y="98" font-family="DejaVu Sans, sans-serif" font-size="43" font-weight="700" text-anchor="start" fill="#152f42">DER · Tabelas e chaves do banco</text>
-<text x="50" y="135" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" text-anchor="start" fill="#354e60">Cada linha R1–R9 corresponde a uma chave estrangeira. As cardinalidades e a leitura das ligações estão na legenda abaixo.</text>
 <polyline points="705,210 40,210 40,1010 105,1010" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="228.7890625" y="191.95" width="252.421875" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="355" y="212" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R6 · realiza a triagem</text>
+<rect x="252.9296875" y="191.95" width="204.140625" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="355" y="212" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">realiza a triagem</text>
 <polyline points="1255,210 1920,210 1920,1010 1855,1010" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="1450.2734375" y="191.95" width="259.453125" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="1580" y="212" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R8 · realiza a consulta</text>
+<rect x="1474.4140625" y="191.95" width="211.171875" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="1580" y="212" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">realiza a consulta</text>
 <polyline points="705,292 380,292 380,490" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="420.3046875" y="273.95" width="163.390625" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="502" y="294" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R2 · cadastra</text>
+<rect x="444.4453125" y="273.95" width="115.109375" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="502" y="294" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">cadastra</text>
 <polyline points="1255,292 1580,292 1580,490" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="1365.1796875" y="273.95" width="153.640625" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="1442" y="294" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R1 · informa</text>
+<rect x="1389.3203125" y="273.95" width="105.359375" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="1442" y="294" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">informa</text>
 <polyline points="842,435 842,568" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="748.2578125" y="442.95" width="187.484375" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="842" y="463" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R4 · recepciona</text>
+<rect x="772.3984375" y="477.95" width="139.203125" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="842" y="498" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">recepciona</text>
 <polyline points="1107,435 1107,568" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="992.1484375" y="488.95" width="229.703125" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="1107" y="509" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R5 · assume a ficha</text>
+<rect x="1016.2890625" y="488.95" width="181.421875" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="1107" y="509" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">assume a ficha</text>
 <polyline points="480,896 480,930 794,930 794,870" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="532.921875" y="911.95" width="224.15625" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="645" y="932" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R3 · é atendido em</text>
+<rect x="557.0625" y="911.95" width="175.875" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="645" y="932" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">é atendido em</text>
 <polyline points="913,870 913,950 579,950 579,973" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="817.6640625" y="931.95" width="62.671875" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="849" y="952" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R7</text>
+<rect x="773.75" y="931.95" width="126.5" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="837" y="952" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">passa por</text>
 <polyline points="1132,870 1132,922 1580,922 1580,973" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
-<rect x="1338.28125" y="903.95" width="63.4375" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="1370" y="924" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">R9</text>
+<rect x="1295.15625" y="903.95" width="149.6875" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
+<text x="1370" y="924" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">dá origem a</text>
 <rect x="705" y="185" width="550" height="250" rx="8" fill="white" stroke="#698493" stroke-width="2"/>
 <rect x="706" y="186" width="548" height="39" rx="0" fill="#102f46" stroke="none" stroke-width="2"/>
 <text x="719" y="213" font-family="DejaVu Sans Mono, monospace" font-size="22" font-weight="700" text-anchor="start" fill="white">usuario</text>
@@ -243,23 +240,25 @@
 <text x="1319" y="1239" font-family="DejaVu Sans Mono, monospace" font-size="16" font-weight="400" text-anchor="start" fill="#152f42">data_hora_finalizacao</text>
 <text x="1600" y="1239" font-family="DejaVu Sans Mono, monospace" font-size="16" font-weight="400" text-anchor="start" fill="#152f42">DATETIME</text>
 <text x="1727" y="1239" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="700" text-anchor="start" fill="#174d72">NULL</text>
-<rect x="705" y="1010" width="550" height="188" rx="10" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="727" y="1044" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" text-anchor="start" fill="#00685e">prontuario  /  VIEW</text>
-<text x="727" y="1078" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#152f42">Uma linha por atendimento vinculado a paciente.</text>
-<text x="727" y="1108" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#152f42">JOIN: paciente + atendimento.</text>
-<text x="727" y="1138" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#152f42">LEFT JOIN: triagem e consulta, quando existirem.</text>
-<text x="727" y="1168" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="start" fill="#152f42">Não é tabela e não recebe chave estrangeira.</text>
-<rect x="50" y="1335" width="1860" height="307" rx="10" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="76" y="1372" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#152f42">Como ler as nove ligações</text>
-<text x="76" y="1405" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" text-anchor="start" fill="#152f42">Em cada linha: quantidade de registros à esquerda ↔ quantidade à direita. Ex.: R3 permite que uma senha nova ainda não tenha paciente.</text>
-<text x="76" y="1439" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R1   usuario  1  ↔  0..1  disponibilidade_funcionario</text>
-<text x="76" y="1470" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R2   usuario  1  ↔  0..N  paciente  (criado_por)</text>
-<text x="76" y="1501" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R3   paciente  0..1  ↔  0..N  atendimento</text>
-<text x="76" y="1532" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R4   usuario  0..1  ↔  0..N  atendimento  (recepcionista_id)</text>
-<text x="76" y="1563" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R5   usuario  0..1  ↔  0..1  atendimento  (profissional_atual_id)</text>
-<text x="1045" y="1439" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R6   usuario  1  ↔  0..N  triagem  (enfermeiro_id)</text>
-<text x="1045" y="1470" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R7   atendimento  1  ↔  0..1  triagem</text>
-<text x="1045" y="1501" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R8   usuario  1  ↔  0..N  consulta  (medico_id)</text>
-<text x="1045" y="1532" font-family="DejaVu Sans Mono, monospace" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">R9   atendimento  1  ↔  0..1  consulta</text>
-<text x="76" y="1612" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" text-anchor="start" fill="#152f42">PK: chave primária    •    FK: chave estrangeira    •    UQ: único    •    NULL: opcional; demais campos obrigatórios    •    Par único: usuario (perfil, registro_profissional).</text>
+<text x="685" y="201" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">1</text>
+<text x="1274" y="201" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">1</text>
+<text x="72" y="998" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..N</text>
+<text x="1889" y="998" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..N</text>
+<text x="685" y="284" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">1</text>
+<text x="1274" y="284" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">1</text>
+<text x="345" y="479" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..N</text>
+<text x="1615" y="479" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
+<text x="807" y="456" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
+<text x="1073" y="456" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
+<text x="807" y="556" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..N</text>
+<text x="1073" y="556" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
+<text x="442" y="919" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
+<text x="755" y="895" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..N</text>
+<text x="892" y="895" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">1</text>
+<text x="545" y="967" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
+<text x="1152" y="894" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">1</text>
+<text x="1618" y="964" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
+<text x="1238" y="211" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" text-anchor="end" fill="white">UQ (perfil, registro_profissional)</text>
+<rect x="785" y="1057" width="390" height="68" rx="8" fill="#edf5f7" stroke="#698493" stroke-width="2"/>
+<text x="980" y="1099" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700" text-anchor="middle" fill="#00685e">prontuario  /  VIEW</text>
 </svg>

@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1110" viewBox="0 0 1680 1110" role="img" aria-labelledby="titulo descricao"><title id="titulo">MER • SAPS</title><desc id="descricao">Modelo conceitual. Os números junto às entidades indicam quantas ocorrências são admitidas em cada relação.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="750" viewBox="0 150 1680 750" role="img" aria-labelledby="titulo descricao"><title id="titulo">MER • SAPS</title><desc id="descricao">Modelo conceitual do SAPS.</desc>
 <rect width="1680" height="1110" fill="white"/>
-<text x="50" y="44" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#00685e">SAPS   /   MODELO CONCEITUAL</text>
-<text x="48" y="98" font-family="DejaVu Sans, sans-serif" font-size="43" font-weight="700" text-anchor="start" fill="#152f42">MER · Quem participa de cada atendimento</text>
-<text x="50" y="135" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" text-anchor="start" fill="#354e60">Leia cada ligação pelo verbo. Os números junto às pontas indicam quantos registros daquele lado podem participar.</text>
 <polyline points="630,207 58,207 58,830 132,830" fill="none" stroke="#355667" stroke-width="3" stroke-linejoin="round"/>
 <rect x="223.9296875" y="188.95" width="204.140625" height="29.45" rx="7" fill="#edf5f7" stroke="none" stroke-width="2"/>
 <text x="326" y="209" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#102f46">realiza a triagem</text>
@@ -49,26 +46,15 @@
 <text x="295" y="776" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
 <text x="1386" y="776" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#00685e">0..1</text>
 <rect x="630" y="184" width="420" height="86" rx="12" fill="#f1f8fa" stroke="#668898" stroke-width="2"/>
-<text x="840.0" y="222" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Funcionário</text>
-<text x="840.0" y="253" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#152f42">Perfis: recepcionista, enfermeiro ou médico</text>
+<text x="840.0" y="237" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Funcionário</text>
 <rect x="132" y="377" width="396" height="86" rx="12" fill="#f1f8fa" stroke="#668898" stroke-width="2"/>
-<text x="330.0" y="415" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Paciente</text>
-<text x="330.0" y="446" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#152f42">Cadastro provisório ou completo</text>
+<text x="330.0" y="430" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Paciente</text>
 <rect x="1152" y="377" width="396" height="86" rx="12" fill="#f1f8fa" stroke="#668898" stroke-width="2"/>
-<text x="1350.0" y="415" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Disponibilidade</text>
-<text x="1350.0" y="446" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#152f42">Situação informada e prazo de término</text>
+<text x="1350.0" y="430" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Disponibilidade</text>
 <rect x="630" y="560" width="420" height="86" rx="12" fill="#102f46" stroke="#102f46" stroke-width="2"/>
-<text x="840.0" y="598" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="white">Atendimento</text>
-<text x="840.0" y="629" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="white">Um registro por chegada; senha AT0001…</text>
+<text x="840.0" y="613" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="white">Atendimento</text>
 <rect x="132" y="786" width="396" height="86" rx="12" fill="#f1f8fa" stroke="#668898" stroke-width="2"/>
-<text x="330.0" y="824" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Triagem</text>
-<text x="330.0" y="855" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#152f42">Queixa, sinais vitais e Manchester</text>
+<text x="330.0" y="839" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Triagem</text>
 <rect x="1152" y="786" width="396" height="86" rx="12" fill="#f1f8fa" stroke="#668898" stroke-width="2"/>
-<text x="1350.0" y="824" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Consulta</text>
-<text x="1350.0" y="855" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" text-anchor="middle" fill="#152f42">Avaliação médica e conduta opcional</text>
-<rect x="50" y="913" width="1580" height="153" rx="10" fill="#edf5f7" stroke="none" stroke-width="2"/>
-<text x="74" y="949" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" text-anchor="start" fill="#152f42">Como ler o modelo</text>
-<text x="74" y="983" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" text-anchor="start" fill="#152f42">1 = exatamente um     •     0..1 = nenhum ou um     •     0..N = nenhum ou vários</text>
-<text x="74" y="1016" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" text-anchor="start" fill="#152f42">Exemplo: um paciente pode voltar várias vezes. Uma senha recém-gerada ainda não precisa estar ligada a um paciente.</text>
-<text x="74" y="1047" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" text-anchor="start" fill="#152f42">Prontuário: histórico consultado a partir desses registros. Triagem e consulta se encontram pelo mesmo atendimento.</text>
+<text x="1350.0" y="839" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#102f46">Consulta</text>
 </svg>

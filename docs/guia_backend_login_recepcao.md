@@ -153,8 +153,6 @@ Remove-Item Env:TESTE_DB_PASSWORD
 
 Se a sua conexão tem senha, coloque a senha local no lugar do valor vazio. Não publique esse valor.
 
-Na preparação desta entrega, passaram 22 verificações automatizadas de validação e integração em MariaDB 11.8 compatível com o SQL usado. Também foi exercitado o JavaScript dos formulários em DOM simulado com HTTP, cookies e banco reais. Isso não substitui a conferência visual no seu navegador nem a execução no seu MySQL 9.6.
-
 Roteiro manual: entrar com recepcionista → gerar senha → chamar → cadastrar provisório → salvar → buscar e completar → encaminhar → consultar atendimento. Depois testar uma senha errada, um CPF inválido, busca sem resultado, cancelamento sem motivo e acesso a uma área de outro perfil.
 
 ## 10. Se algo não abrir
